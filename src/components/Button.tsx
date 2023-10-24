@@ -1,13 +1,13 @@
 import React from 'react';
-import { Text, StyleSheet, Pressable } from 'react-native';
+import {Text, StyleSheet, Pressable, TouchableOpacity} from 'react-native';
 import {colors} from "../theme/colors";
 
 export default function Button(props) {
     const { onPress, title = 'Save', backgroundColor = true } = props;
     return (
-        <Pressable style={[styles.button,{backgroundColor: backgroundColor?colors.primary:colors.transparent}]} onPress={onPress}>
+        <TouchableOpacity style={[styles.button,{backgroundColor: backgroundColor?colors.primary:colors.transparent}]} onPress={onPress}>
             <Text style={[styles.text,{color:backgroundColor? colors.white : colors.primary, fontWeight: backgroundColor?'bold': 'normal',}]}>{title}</Text>
-        </Pressable>
+        </TouchableOpacity>
     );
 }
 

@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import {screenStyles, typography} from "../../theme/globalStyles";
 import WelcomeScreenBanner from "../../assets/welcomeScreenBanner.svg"
 import Button from "../../components/Button";
-import {colors} from "../../theme/colors";
+
+import { useNavigation } from '@react-navigation/native';
 
 const {width} = Dimensions.get('window');
 
 export function WelcomeScreen() {
+    const navigation = useNavigation();
 
     return (
         <View style={screenStyles.container}>
@@ -28,8 +30,8 @@ export function WelcomeScreen() {
                 </Text>
             </View>
 
-            <View style={[screenStyles.centerContainer,{position:'absolute',bottom:70,height:118,justifyContent: 'space-between',}]}>
-               <Button title={'Sign up'}/>
+            <View style={[screenStyles.centerContainer,{position:'absolute',bottom:70,height:130,justifyContent: 'space-between',}]}>
+               <Button onPress={()=>navigation.push('SignIn')} title={'Sign up'}/>
                <Button backgroundColor={false} title={'Skip'}/>
             </View>
 
