@@ -1,12 +1,9 @@
 export const colors = {
-    primary: '#0a91c7',
-    primaryBlack: '#009ece',
-    secondary: '#353535',
-    tertiary: '#35C6BF',
-    gray: '#898A8D',
-    ice: '#F9F9F9',
+    primary: '#5667FD',
+    secondary: '#F4F5F9',
+    gray: '#EDEDED',
     white: '#fff',
-    danger: '#FF0058',
-    warning: '#FFC700',
-    dark: '#000',
+    black: '#000',
+    subTitle: '#636D77',
+    transparent: 'transparent',
 };

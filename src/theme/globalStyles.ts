@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import { colors } from './colors';
+const {width} = Dimensions.get('window');
+import { DefaultTheme } from '@react-navigation/native';
 
 export const typography = StyleSheet.create({
     h1: {
@@ -7,7 +9,7 @@ export const typography = StyleSheet.create({
     },
     h2: {
         fontSize: 22,
-        color: colors.primaryBlack,
+        color: colors.black,
         fontFamily: 'Inter_600SemiBold',
     },
     h3: {
@@ -17,21 +19,21 @@ export const typography = StyleSheet.create({
     paragraph: {
         fontSize: 16,
         fontFamily: 'Inter_400Regular',
-        color: colors.secondary,
+        color: colors.black,
         marginTop: 8,
     },
     titleClean: {
-        fontSize: 32,
+        fontSize: 20,
         fontFamily: 'Inter_700Bold',
-        color: colors.white,
+        color: colors.black,
         textAlign: 'center',
     },
     subTitleClean: {
-        fontSize: 16,
+        fontSize: 18,
         fontFamily: 'Inter_400Regular',
-        color: colors.white,
+        color: colors.subTitle,
         textAlign: 'center',
-        marginTop: 8,
+        marginTop: 15,
     },
 });
 
@@ -43,7 +45,7 @@ export const formStyles = StyleSheet.create({
         marginBottom: 8,
         fontFamily: 'Inter_400Regular',
         fontSize: 16,
-        color: colors.primaryBlack,
+        color: colors.black,
         borderBottomWidth: 1,
         borderBottomColor: colors.primary,
     },
@@ -92,4 +94,18 @@ export const screenStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    centerContainer: {
+      width:width,
+        alignItems:'center',
+        justifyContent: 'center',
+
+    },
 })
+
+export const NavigationTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: colors.white
+    },
+};
