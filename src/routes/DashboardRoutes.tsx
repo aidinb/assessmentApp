@@ -4,6 +4,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Explore} from "../screens/tabs/Explore";
 import {ClassWork} from "../screens/tabs/ClassWork";
 import {Stream} from "../screens/tabs/Stream";
+import {GradeSelection} from "../screens/userInformation/GradeSelection";
+import {ProvinceSelection} from "../screens/userInformation/ProvinceSelection";
 
 const Tab = createBottomTabNavigator();
 const MyTabs = () => {
@@ -21,11 +23,13 @@ const Stack = createNativeStackNavigator();
 export function DashboardRoutes() {
     return (
         <Stack.Navigator
-            screenOptions={{
-                headerShown: false,
-            }}
-            initialRouteName="Explore"
+            initialRouteName="GradeSelection"
         >
+
+            <Stack.Screen options={{
+                title: 'Grade Selection',}} name="GradeSelection" component={GradeSelection} />
+            <Stack.Screen options={{
+                title: 'Province Selection',}} name="ProvinceSelection" component={ProvinceSelection} />
             <Stack.Screen
                 name="MyTabs"
                 component={MyTabs}

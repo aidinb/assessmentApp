@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { AuthRoutes } from './AuthRoutes';
+import { DashboardRoutes } from './DashboardRoutes';
 import {colors} from "../theme/colors";
 import {NavigationTheme} from "../theme/globalStyles";
+import {useAuthenticate} from "../hooks/useAuthenticate";
 
 
 export function Routes() {
+    const isAuthenticated = useAuthenticate()
+
     return (
         <NavigationContainer theme={NavigationTheme}>
-            <AuthRoutes />
+            {isAuthenticated ?
+                <DashboardRoutes /> : <AuthRoutes />}
         </NavigationContainer>
     );
 }

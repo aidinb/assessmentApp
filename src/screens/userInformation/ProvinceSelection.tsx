@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import ScrollView = Animated.ScrollView;
 import {colors} from "../../theme/colors";
 import PickerItem from "../../components/PickerItem";
-
 export function ProvinceSelection() {
     const navigation = useNavigation();
     const [selectedProvince, setSelectedProvince] = useState('');
@@ -22,6 +21,8 @@ export function ProvinceSelection() {
         {name: 'Uva'},
         {name: 'Western'},
     ]
+
+
 
     return (
         <View style={screenStyles.container}>
@@ -70,7 +71,7 @@ export function ProvinceSelection() {
             </ScrollView>
 
             <View style={screenStyles.bottomButtons}>
-                <Button onPress={() => navigation.push('GradeSelection')} title={'Next'}/>
+                <Button onPress={() => navigation.push('MyTabs')} title={'Next'}/>
                 <Button backgroundColor={false} title={'Skip'}/>
             </View>
         </View>
