@@ -1,20 +1,17 @@
 import React, {useState} from 'react';
 import {
-    FlatList,
-    ScrollView,
     View,
-    StyleSheet,
-    Image,
-    Text,
-    TextInput,
-    TouchableOpacity, Platform,KeyboardAvoidingView
+     Platform,KeyboardAvoidingView
 } from 'react-native';
-import {screenStyles, typography} from "../../theme/globalStyles";
+import {screenStyles} from "../../theme/globalStyles";
 import SignUpBanner from "../../assets/signUpBanner.svg";
 import Button from "../../components/Button";
 import InputWithLabel from "../../components/InputWithLabel";
+import { useNavigation } from '@react-navigation/native';
 
 export function SignUp() {
+    const navigation = useNavigation();
+
     const [name, onChangeName] = useState('');
     const [email, onChangeEmail] = useState('');
     const [pasword, onChangePassword] = useState('');
@@ -33,8 +30,8 @@ export function SignUp() {
           <InputWithLabel title='Password' onChangeText={onChangePassword} value={pasword} secureKeyboard/>
 
 
-        <View style={[screenStyles.centerContainer,{position:'absolute',bottom:70,height:130,justifyContent: 'space-between',}]}>
-          <Button onPress={()=>alert('s')} title={'Sign up'}/>
+        <View style={screenStyles.bottomButtons}>
+          <Button onPress={()=>navigation.push('GradeSelection')} title={'Sign up'}/>
           <Button backgroundColor={false} title={'You have account? Sign in'}/>
         </View>
 

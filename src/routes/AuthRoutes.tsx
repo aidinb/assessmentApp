@@ -6,6 +6,7 @@ import {
 import {WelcomeScreen} from "../screens/auth/WelcomeScreen";
 import {SignIn} from "../screens/auth/SignIn";
 import {SignUp} from "../screens/auth/SignUp";
+import {GradeSelection} from "../screens/auth/GradeSelection";
 
 type AuthRoutes = {
     WelcomeScreen: undefined;
@@ -26,6 +27,8 @@ export function AuthRoutes() {
                 title: 'Sign In',}} name="SignIn" component={SignIn} />
             <Stack.Screen options={{
                 title: 'Sign Up',}} name="SignUp" component={SignUp} />
+            <Stack.Screen options={{
+                title: 'Picker Selection',}} name="GradeSelection" component={GradeSelection} />
         </Stack.Navigator>
     );
 }

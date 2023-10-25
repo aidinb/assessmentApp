@@ -1,12 +1,9 @@
-import {Dimensions, View, Text, Touchable, TouchableOpacityBase} from "react-native";
-import React, { useState } from 'react';
+import { View, Text } from "react-native";
+import React from 'react';
 import {screenStyles, typography} from "../../theme/globalStyles";
 import WelcomeScreenBanner from "../../assets/welcomeScreenBanner.svg"
 import Button from "../../components/Button";
-
 import { useNavigation } from '@react-navigation/native';
-
-const {width} = Dimensions.get('window');
 
 export function WelcomeScreen() {
     const navigation = useNavigation();
@@ -30,11 +27,10 @@ export function WelcomeScreen() {
                 </Text>
             </View>
 
-            <View style={[screenStyles.centerContainer,{position:'absolute',bottom:70,height:130,justifyContent: 'space-between',}]}>
+            <View style={screenStyles.bottomButtons}>
                <Button onPress={()=>navigation.push('SignIn')} title={'Sign up'}/>
                <Button backgroundColor={false} title={'Skip'}/>
             </View>
-
 
         </View>
     );

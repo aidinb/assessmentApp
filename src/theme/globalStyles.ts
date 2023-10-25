@@ -72,6 +72,14 @@ export const screenStyles = StyleSheet.create({
         justifyContent: 'center',
 
     },
+    bottomButtons:{
+        position:'absolute',bottom:0,height:160,justifyContent: 'space-between',
+        width:width,
+        alignItems:'center',
+        backgroundColor:colors.secondary,
+        paddingVertical:15,
+        paddingBottom:50
+    }
 })
 
 export const NavigationTheme = {
