@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   ScrollView,
@@ -8,20 +8,58 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+    KeyboardAvoidingView,
+    Platform
 } from 'react-native';
-import {screenStyles, typography} from "../../theme/globalStyles";
+import {formStyles, screenStyles, typography} from "../../theme/globalStyles";
 import SignInBanner from "../../assets/signInBanner.svg";
 import Button from "../../components/Button";
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
+import {colors} from "../../theme/colors";
 
 export function SignIn() {
     const navigation = useNavigation();
-
+    const [email, onChangeEmail] = useState('');
+    const [password, onChangePassword] = useState('');
     return (
-      <View style={screenStyles.container}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={screenStyles.container}
+        >
         <View style={screenStyles.centerContainer}>
           <SignInBanner/>
         </View>
+
+            <View style={formStyles.inputWrapper}>
+                <Text style={formStyles.label}>
+                    Email address
+                </Text>
+
+
+                <TextInput
+                    style={formStyles.input}
+                    onChangeText={onChangeEmail}
+                    keyboardType="email-address"
+                    placeholder="E-mail"
+                    value={email}
+                />
+            </View>
+
+            <View style={formStyles.inputWrapper}>
+                <Text style={formStyles.label}>
+                    Password
+                </Text>
+
+
+                <TextInput
+                    style={formStyles.input}
+                    onChangeText={onChangePassword}
+                    placeholder="Password"
+                    value={password}
+                    secureTextEntry={true}
+                />
+            </View>
 
 
 
@@ -31,7 +69,7 @@ export function SignIn() {
         </View>
 
 
-      </View>
+        </KeyboardAvoidingView>
   );
 }
 

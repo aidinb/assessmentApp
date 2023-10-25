@@ -19,13 +19,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 12,
         elevation: 3,
-        width:267,
+        minWidth:267,
         height: 61
     },
     text: {
         fontSize: 16,
         lineHeight: 21,
-
         letterSpacing: 0.25,
         color: 'white',
     },
