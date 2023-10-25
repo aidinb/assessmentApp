@@ -8,20 +8,16 @@ import SignUpBanner from "../../assets/signUpBanner.svg";
 import Button from "../../components/Button";
 import InputWithLabel from "../../components/InputWithLabel";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 import { NativeModules } from "react-native";
 export function SignUp() {
+    const navigation = useNavigation();
+
     const [name, onChangeName] = useState('');
     const [email, onChangeEmail] = useState('');
     const [pasword, onChangePassword] = useState('');
-    const saveUser = async () =>{
-        try {
-            await AsyncStorage.setItem('user', 'test');
-            NativeModules.DevSettings.reload()
-        } catch (e) {
-            // send error to analytics
-        }
-    }
+
     return (
       <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -37,7 +33,7 @@ export function SignUp() {
 
 
         <View style={screenStyles.bottomButtons}>
-          <Button onPress={saveUser} title={'Sign up'}/>
+          <Button onPress={navigation.push('ProvinceSelection')} title={'Sign up'}/>
           <Button backgroundColor={false} title={'You have account? Sign in'}/>
         </View>
 

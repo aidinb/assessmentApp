@@ -1,4 +1,4 @@
-import {View, Text, Animated,} from "react-native";
+import {View, Text, Animated, NativeModules,} from "react-native";
 import React, { useState } from 'react';
 import {screenStyles, typography} from "../../theme/globalStyles";
 import Button from "../../components/Button";
@@ -6,6 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import ScrollView = Animated.ScrollView;
 import {colors} from "../../theme/colors";
 import PickerItem from "../../components/PickerItem";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export function ProvinceSelection() {
     const navigation = useNavigation();
     const [selectedProvince, setSelectedProvince] = useState('');
@@ -22,7 +24,14 @@ export function ProvinceSelection() {
         {name: 'Western'},
     ]
 
-
+    const saveUser = async () =>{
+        try {
+            await AsyncStorage.setItem('user', 'test');
+            NativeModules.DevSettings.reload()
+        } catch (e) {
+            // send error to analytics
+        }
+    }
 
     return (
         <View style={screenStyles.container}>
@@ -71,7 +80,7 @@ export function ProvinceSelection() {
             </ScrollView>
 
             <View style={screenStyles.bottomButtons}>
-                <Button onPress={() => navigation.push('MyTabs')} title={'Next'}/>
+                <Button onPress={saveUser} title={'Next'}/>
                 <Button backgroundColor={false} title={'Skip'}/>
             </View>
         </View>

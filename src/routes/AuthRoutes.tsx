@@ -28,6 +28,10 @@ export function AuthRoutes() {
                 title: 'Sign In',}} name="SignIn" component={SignIn} />
             <Stack.Screen options={{
                 title: 'Sign Up',}} name="SignUp" component={SignUp} />
+            <Stack.Screen options={{
+                title: 'Grade Selection',}} name="GradeSelection" component={GradeSelection} />
+            <Stack.Screen options={{
+                title: 'Province Selection',}} name="ProvinceSelection" component={ProvinceSelection} />
         </Stack.Navigator>
     );
 }
