@@ -1,10 +1,8 @@
-import {Dimensions, View, Text, Animated,} from "react-native";
+import {View, Text, Animated,} from "react-native";
 import React, { useState } from 'react';
 import {screenStyles, typography} from "../../theme/globalStyles";
 import Button from "../../components/Button";
-
 import { useNavigation } from '@react-navigation/native';
-
 import Grade from "../../components/Grade";
 import Arts from "../../assets/arts.svg";
 import ScienceIcon from "../../assets/scienceIcon.svg";
@@ -75,7 +73,7 @@ export function GradeSelection() {
             </ScrollView>
 
             <View style={screenStyles.bottomButtons}>
-                <Button onPress={() => navigation.push('GradeSelection')} title={'Next'}/>
+                <Button onPress={() => navigation.push('ProvinceSelection')} title={'Next'}/>
                 <Button backgroundColor={false} title={'Skip'}/>
             </View>
         </View>

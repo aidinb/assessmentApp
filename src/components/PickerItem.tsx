@@ -22,7 +22,7 @@ export default function PickerItem(props) {
                 marginTop:15
 
             }}>
-            {icon()}
+            {icon ? icon() : null}
             <Text style={{
                 textAlign: 'center',
                 color: selected ? colors.white : colors.subTitle,

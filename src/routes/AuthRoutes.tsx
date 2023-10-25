@@ -7,6 +7,7 @@ import {WelcomeScreen} from "../screens/auth/WelcomeScreen";
 import {SignIn} from "../screens/auth/SignIn";
 import {SignUp} from "../screens/auth/SignUp";
 import {GradeSelection} from "../screens/auth/GradeSelection";
+import {ProvinceSelection} from "../screens/auth/ProvinceSelection";
 
 type AuthRoutes = {
     WelcomeScreen: undefined;
@@ -28,7 +29,9 @@ export function AuthRoutes() {
             <Stack.Screen options={{
                 title: 'Sign Up',}} name="SignUp" component={SignUp} />
             <Stack.Screen options={{
-                title: 'Picker Selection',}} name="GradeSelection" component={GradeSelection} />
+                title: 'Grade Selection',}} name="GradeSelection" component={GradeSelection} />
+            <Stack.Screen options={{
+                title: 'Province Selection',}} name="ProvinceSelection" component={ProvinceSelection} />
         </Stack.Navigator>
     );
 }
