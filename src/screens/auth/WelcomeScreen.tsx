@@ -15,13 +15,13 @@ export function WelcomeScreen() {
             </View>
 
             <View style={screenStyles.centerContainer}>
-                <Text style={typography.titleClean}>
+                <Text style={typography.title}>
                     Let's find the "A" with us
                 </Text>
             </View>
 
             <View style={screenStyles.centerContainer}>
-                <Text style={typography.subTitleClean}>
+                <Text style={typography.subTitle}>
                     Please Sign in to view personalized
                     recommendations
                 </Text>

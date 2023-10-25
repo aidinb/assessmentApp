@@ -8,12 +8,16 @@ export const typography = StyleSheet.create({
         fontSize: 28,
     },
     h2: {
-        fontSize: 22,
-        color: colors.black,
+        fontSize: 20,
+        color: colors.subTitle,
         fontFamily: 'Inter_600SemiBold',
     },
     h3: {
         fontSize: 18,
+        fontFamily: 'Inter_600SemiBold',
+    },
+    h4: {
+        fontSize: 16,
         fontFamily: 'Inter_600SemiBold',
     },
     paragraph: {
@@ -22,13 +26,13 @@ export const typography = StyleSheet.create({
         color: colors.black,
         marginTop: 8,
     },
-    titleClean: {
+    title: {
         fontSize: 20,
         fontFamily: 'Inter_700Bold',
         color: colors.black,
         textAlign: 'center',
     },
-    subTitleClean: {
+    subTitle: {
         fontSize: 18,
         fontFamily: 'Inter_400Regular',
         color: colors.subTitle,
@@ -57,7 +61,16 @@ export const formStyles = StyleSheet.create({
         backgroundColor:colors.white,
         height:50,
         borderRadius:8,
-        paddingLeft:10
+        paddingLeft:10,
+        shadowOffset: {
+            width: 1,
+            height: 2,
+        },
+        shadowOpacity: 0.3,
+        shadowColor: colors.shadow,
+        shadowRadius: 3,
+        elevation: 7, // Android-specific elevation for a shadow effect
+
 
     },
 

@@ -8,4 +8,6 @@ export const colors = {
     black: '#000',
     subTitle: '#636D77',
     transparent: 'transparent',
+    lightPink: '#E8DBDB',
+    shadow: 'rgba(0, 0, 0, 0.5)',
 };
