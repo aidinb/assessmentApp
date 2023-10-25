@@ -17,6 +17,7 @@ import Button from "../../components/Button";
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 import {colors} from "../../theme/colors";
+import InputWithLabel from "../../components/InputWithLabel";
 
 export function SignIn() {
     const navigation = useNavigation();
@@ -27,49 +28,26 @@ export function SignIn() {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={screenStyles.container}
         >
-        <View style={screenStyles.centerContainer}>
-          <SignInBanner/>
-        </View>
-
-            <View style={formStyles.inputWrapper}>
-                <Text style={formStyles.label}>
-                    Email address
-                </Text>
-
-
-                <TextInput
-                    style={formStyles.input}
-                    onChangeText={onChangeEmail}
-                    keyboardType="email-address"
-                    placeholder="E-mail"
-                    value={email}
-                />
+            <View style={screenStyles.centerContainer}>
+                <SignInBanner/>
             </View>
 
-            <View style={formStyles.inputWrapper}>
-                <Text style={formStyles.label}>
-                    Password
-                </Text>
+            <InputWithLabel title='Email' onChangeText={onChangeEmail} value={email}/>
+            <InputWithLabel title='Password' onChangeText={onChangePassword} value={password} secureKeyboard/>
 
 
-                <TextInput
-                    style={formStyles.input}
-                    onChangeText={onChangePassword}
-                    placeholder="Password"
-                    value={password}
-                    secureTextEntry={true}
-                />
+            <View style={[screenStyles.centerContainer, {
+                position: 'absolute',
+                bottom: 70,
+                height: 130,
+                justifyContent: 'space-between',
+            }]}>
+                <Button onPress={() => navigation.push('SignUp')} title={'Sign in'}/>
+                <Button backgroundColor={false} title={'Dont have account? Sign Up'}/>
             </View>
-
-
-
-        <View style={[screenStyles.centerContainer,{position:'absolute',bottom:70,height:130,justifyContent: 'space-between',}]}>
-          <Button onPress={()=>navigation.push('SignUp')} title={'Sign in'}/>
-          <Button backgroundColor={false} title={'Dont have account? Sign Up'}/>
-        </View>
 
 
         </KeyboardAvoidingView>
-  );
+    );
 }
 
