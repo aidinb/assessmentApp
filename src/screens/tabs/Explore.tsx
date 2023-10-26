@@ -85,14 +85,14 @@ export function Explore(): JSX.Element {
 
     const onChangeText = (text)=>{
         setSearch(text);
-        if (text === '') {
+        if (text === '' && opacity.__getValue() === 0) {
             fadeInHeader(Easing.exp)
             setSearchQuery('')
         }
     }
 
     const pressSearch = () =>{
-        if(search !== ''){
+        if(search !== '' && opacity.__getValue() === 1){
             setSearchQuery(search)
             fadeOutHeader(Easing.exp)
         }

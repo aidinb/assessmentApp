@@ -8,8 +8,6 @@ import SignUpBanner from "../../assets/signUpBanner.svg";
 import Button from "../../components/Button";
 import InputWithLabel from "../../components/InputWithLabel";
 import { useNavigation } from '@react-navigation/native';
-
-import { NativeModules } from "react-native";
 export function SignUp() {
     const navigation = useNavigation();
 

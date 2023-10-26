@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import {NativeModules, Text, TouchableOpacity} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Explore } from '../screens/tabs/Explore';
@@ -12,6 +12,8 @@ import ClassWorkTabDisable from '../assets/classWorkTabDisable.svg';
 import ClassWorkTab from '../assets/classWorkTab.svg';
 import ExploreTabDisable from '../assets/exploreTabDisable.svg';
 import { colors } from '../theme/colors';
+import {Ionicons} from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +30,21 @@ const MyTabs = () => {
                     tabBarLabel: ({ focused }) => (
                         <Text style={{ color: focused ? colors.primary : colors.primaryDark, fontSize: 12 }}>Explore</Text>
                     ),
+                    headerRight: props => (
+                        <TouchableOpacity onPress={async ()=>{
+                            await AsyncStorage.setItem('user', '');
+                            NativeModules.DevSettings.reload();
+                        }}
+                            activeOpacity={0.6} style={{flexDirection: 'row', paddingRight: 10}}>
+                            <Ionicons
+                                name={'log-out-outline'}
+                                size={30}
+                                color={colors.primary}
+                            />
+                        </TouchableOpacity>
+                    )
                 }}
+
             />
             <Tab.Screen
                 name="Stream"

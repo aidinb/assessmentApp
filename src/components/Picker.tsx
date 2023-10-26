@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    Animated,
+    EasingFunction,
+    Easing
+} from 'react-native';
 import { colors } from '../theme/colors';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -11,11 +19,46 @@ interface PickerProps {
 const Picker: React.FC<PickerProps> = ({ title, children }: PickerProps) => {
     const [open, setOpen] = useState(false);
 
+    const [opacity, setOpacity] = useState(new Animated.Value(0));
+
+    const fadeIn = (easing: EasingFunction) => {
+        opacity.setValue(0);
+        Animated.timing(opacity, {
+            toValue: 1,
+            duration: 600,
+            easing,
+            useNativeDriver:false
+        }).start();
+    };
+
+    const fadeOut = (easing: EasingFunction) => {
+        opacity.setValue(1);
+        Animated.timing(opacity, {
+            toValue: 0,
+            duration: 600,
+            easing,
+            useNativeDriver:false
+        }).start();
+    };
+    const size = opacity.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 110],
+    });
+
+    const onPress = () =>{
+        if(open) {
+            fadeOut(Easing.exp)
+        }else {
+            fadeIn(Easing.exp)
+        }
+        setOpen(!open)
+    }
+
     return (
         <View style={styles.container}>
             <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => setOpen(!open)}
+                onPress={onPress}
                 style={styles.header}>
                 <Text style={styles.title}>{title}</Text>
                 <Ionicons
@@ -24,7 +67,9 @@ const Picker: React.FC<PickerProps> = ({ title, children }: PickerProps) => {
                     color={colors.subTitle}
                 />
             </TouchableOpacity>
-            {open ? children : null}
+            <Animated.View style={[styles.containerStyle, {opacity: opacity, height: size}]}>
+                {children}
+            </Animated.View>
         </View>
     );
 };
@@ -39,6 +84,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
+    },
+    containerStyle:{
+        paddingHorizontal: 10,
+        width: '100%',
+        flexDirection: 'row',
+        marginBottom: 15,
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        marginTop: -10,
     },
     header: {
         paddingHorizontal: 10,

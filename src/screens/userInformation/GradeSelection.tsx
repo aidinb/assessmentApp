@@ -82,7 +82,7 @@ export function GradeSelection() {
 
             <View style={screenStyles.bottomButtons}>
                 <Button onPress={() => navigation.push('ProvinceSelection')} title="Next" />
-                <Button backgroundColor={false} title="Skip" />
+                <Button onPress={() => navigation.push('ProvinceSelection')} backgroundColor={false} title="Skip" />
             </View>
         </View>
     );

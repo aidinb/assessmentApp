@@ -45,7 +45,7 @@ export function ProvinceSelection() {
             </ScrollView>
             <View style={screenStyles.bottomButtons}>
                 <Button onPress={saveUser} title="Next" />
-                <Button backgroundColor={false} title="Skip" />
+                <Button onPress={saveUser} backgroundColor={false} title="Skip" />
             </View>
         </View>
     );
