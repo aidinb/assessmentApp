@@ -42,3 +42,17 @@ export const teachers = [
 ];
 
 
+export const areas = [
+    'Island',
+    'Province',
+    'Districts',
+]
+
+export const subjects = [
+    'All Subjects',
+    'Biology',
+    'Chemistry',
+    'Physics',
+    'Science for Technology',
+]
+

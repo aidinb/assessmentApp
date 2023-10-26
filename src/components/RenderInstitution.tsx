@@ -8,7 +8,7 @@ export default function RenderInstitution(props) {
     const item = props.item
     return (
         <TouchableOpacity onPress={props.onPress} style={{
-            marginTop: 20,
+            marginBottom: 20,
             backgroundColor: colors.white,
             borderRadius: 12,
             padding: 10,
@@ -39,9 +39,7 @@ export default function RenderInstitution(props) {
                 <Text style={{fontSize: 12,color:colors.subTitle,marginTop:5}}>
                     {item.description}
                 </Text>
-
             </View>
-
         </TouchableOpacity>
     )
 }

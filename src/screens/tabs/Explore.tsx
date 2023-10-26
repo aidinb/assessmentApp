@@ -13,25 +13,30 @@ import {formStyles, screenStyles, typography} from "../../theme/globalStyles";
 import {colors} from "../../theme/colors";
 import ProPic from "../../assets/proPic.svg"
 import PipeIcon from "../../assets/pipeIcon.svg"
+import PipeOn from "../../assets/pipeOn.svg"
 import FilterIcon from "../../assets/filterIcon.svg"
 import SearchIcon from "../../assets/searchIcon"
 import ScrollView = Animated.ScrollView;
 import { FlashList } from "@shopify/flash-list";
 import RenderInstitution from "../../components/RenderInstitution";
 import RenderTeachers from "../../components/RenderTeachers";
-import {institutions, teachers} from "../../utils/data";
+import {areas, institutions, subjects, teachers} from "../../utils/data";
+import RenderTeacherFilter from "../../components/RenderTeacherFilter";
 
 // Get the width of the device's window
 const {width} = Dimensions.get('window');
 
 export function Explore() {
     const [search, setSearch] = useState('');
+    const [teacherFilter, setTeacherFilter] = useState(false);
+    const [areaFilter, setAreaFilter] = useState('');
+    const [subjectFilter, setSubjectFilterr] = useState('');
 
     const RowWrapper = (props)=>{
         return (
             <View style={{
                 padding: 20,
-                width: '100%',
+                width: width,
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -64,7 +69,7 @@ export function Explore() {
             showsVerticalScrollIndicator={false}
             style={screenStyles.container} contentContainerStyle={{paddingBottom:100}}>
             <RowWrapper>
-                <View style={{width: '70%'}}>
+                <View style={{width: '80%'}}>
                     <Text style={typography.h1}>
                         Good evening!
                     </Text>
@@ -111,12 +116,18 @@ export function Explore() {
                         Popular Teachers
                     </Text>
                 </View>
-                <TouchableOpacity activeOpacity={0.5}
+                <TouchableOpacity onPress={()=>{
+                    setTeacherFilter(!teacherFilter)
+                }}  activeOpacity={0.5}
                                   style={{width: '20%', alignItems: 'center', justifyContent: 'center'}}>
-                <PipeIcon/>
+                    {teacherFilter ? <PipeOn/>:<PipeIcon/>}
                 </TouchableOpacity>
-            </RowWrapper>
 
+            </RowWrapper>
+            {teacherFilter ? <View>
+                <RenderTeacherFilter onPress={(item)=>setAreaFilter(item)} selected={areaFilter} title='Area' items={areas}/>
+                <RenderTeacherFilter onPress={(item)=>setSubjectFilterr(item)} selected={subjectFilter} title='Subject' items={subjects}/>
+            </View> : null}
 
             <FlashList
                 data={teachers}
@@ -146,7 +157,6 @@ export function Explore() {
                 data={institutions}
                 keyboardDismissMode="on-drag" // Automatically dismiss keyboard on scroll
                 keyboardShouldPersistTaps={'handled'}
-                contentContainerStyle={{paddingVertical:10}}
                 renderItem={renderInstitution}
                 estimatedItemSize={width-20}
                 keyExtractor={item => 'Institutions-' + item.name}
