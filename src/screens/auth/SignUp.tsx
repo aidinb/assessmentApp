@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
-    View,
-    Platform, KeyboardAvoidingView, Text
+    View, Text
 } from 'react-native';
 import {screenStyles} from "../../theme/globalStyles";
 import SignUpBanner from "../../assets/signUpBanner.svg";

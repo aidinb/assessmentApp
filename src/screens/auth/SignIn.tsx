@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import {
-    View,
-    KeyboardAvoidingView,
-    Platform, Text, ScrollView, Dimensions
+    View, Text,
 } from 'react-native';
 import { screenStyles} from "../../theme/globalStyles";
 import SignInBanner from "../../assets/signInBanner.svg";
 import Button from "../../components/Button";
 import { useNavigation } from '@react-navigation/native';
 import InputWithLabel from "../../components/InputWithLabel";
-const { height } = Dimensions.get('window');
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export function SignIn() {

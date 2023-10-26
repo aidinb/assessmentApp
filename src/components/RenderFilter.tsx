@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: 3,
         marginBottom: 15,
+        paddingRight:20
     },
     title: {
         ...typography.subTitle,

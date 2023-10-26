@@ -9,27 +9,21 @@ export function WelcomeScreen() {
     const navigation = useNavigation();
 
     return (
-        <View style={screenStyles.container}>
-            <View style={screenStyles.centerContainer}>
-                <WelcomeScreenBanner/>
-            </View>
+        <View style={[screenStyles.container, {alignItems: 'center'}]}>
+            <WelcomeScreenBanner/>
 
-            <View style={screenStyles.centerContainer}>
-                <Text style={typography.title}>
-                    Let's find the "A" with us
-                </Text>
-            </View>
+            <Text style={typography.title}>
+                Let's find the "A" with us
+            </Text>
 
-            <View style={screenStyles.centerContainer}>
-                <Text style={typography.subTitle}>
-                    Please Sign in to view personalized
-                    recommendations
-                </Text>
-            </View>
+            <Text style={typography.subTitle}>
+                Please Sign in to view personalized
+                recommendations
+            </Text>
 
             <View style={screenStyles.bottomButtons}>
-                <Button onPress={()=>navigation.push('SignIn')} title={'Sign up'}/>
-                <Button backgroundColor={false} title={'Skip'}/>
+                <Button onPress={() => navigation.push('SignIn')} title={'Sign up'}/>
+                <Button onPress={() => navigation.push('GradeSelection')} backgroundColor={false} title={'Skip'}/>
             </View>
 
         </View>

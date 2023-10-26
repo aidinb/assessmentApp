@@ -81,17 +81,18 @@ export function Explore(): JSX.Element {
     return (
         <Animated.ScrollView
             keyboardDismissMode="on-drag"
-                             keyboardShouldPersistTaps={'handled'} showsVerticalScrollIndicator={false} style={styles.container}
-                             contentContainerStyle={{paddingBottom: 100}}>
-                <Animated.View style={[styles.rowContainer,{opacity:opacityHeader,height:sizeHeader,paddingBottom: 0}]}>
-                    <View style={styles.userInfoContainer}>
-                        <Text style={typography.h1}>Good evening!</Text>
-                        <Text style={[typography.h2, {marginTop: 7}]}>Hardline Scott</Text>
-                    </View>
-                    <View style={styles.profilePicContainer}>
-                        <ProPic/>
-                    </View>
-                </Animated.View>
+            keyboardShouldPersistTaps={'handled'} showsVerticalScrollIndicator={false} style={styles.container}
+            contentContainerStyle={{paddingBottom: 100}}>
+            <Animated.View
+                style={[styles.rowContainer, {opacity: opacityHeader, height: sizeHeader, paddingBottom: 0}]}>
+                <View style={styles.userInfoContainer}>
+                    <Text style={typography.h1}>Good evening!</Text>
+                    <Text style={[typography.h2, {marginTop: 7}]}>Hardline Scott</Text>
+                </View>
+                <View style={styles.profilePicContainer}>
+                    <ProPic/>
+                </View>
+            </Animated.View>
 
             <View style={styles.rowContainer}>
                 <View style={{width: '80%', flexDirection: 'row', alignItems: 'center', marginTop: -10}}>
@@ -121,9 +122,9 @@ export function Explore(): JSX.Element {
                 <Text style={typography.h3}>Popular Teachers</Text>
                 <TouchableOpacity
                     onPress={() => {
-                        if(teacherFilter) {
+                        if (teacherFilter) {
                             fadeOutTeacherFilter()
-                        }else {
+                        } else {
                             fadeInTeacherFilter()
                         }
                         setTeacherFilter(!teacherFilter)
@@ -135,17 +136,19 @@ export function Explore(): JSX.Element {
                 </TouchableOpacity>
             </View>
 
-                <Animated.View
-                    style={[styles.rowContainer,
-                        {opacity:opacityTeacherFilter,height:sizeTeacherFilter,paddingVertical: 0,
-                            backgroundColor: colors.secondary}]}>
-                    <View>
+            <Animated.View
+                style={[styles.rowContainer,
+                    {
+                        opacity: opacityTeacherFilter, height: sizeTeacherFilter, paddingVertical: 0,
+                        backgroundColor: colors.secondary
+                    }]}>
+                <View>
                     <RenderFilter onPress={(item) => setAreaFilter(item)} selected={areaFilter} title="Area"
                                   items={areas}/>
                     <RenderFilter onPress={(item) => setSubjectFilter(item)} selected={subjectFilter} title="Subject"
                                   items={subjects}/>
-                    </View>
-                </Animated.View>
+                </View>
+            </Animated.View>
 
             <FlashList
                 data={searchQuery !== '' ? teachers.filter((teacher) => teacher.name.toLowerCase().includes(searchQuery.toLowerCase())) : teachers}
@@ -156,8 +159,7 @@ export function Explore(): JSX.Element {
                 keyExtractor={(item) => 'Teachers-' + item.name}
                 horizontal
                 estimatedItemSize={142}
-                estimatedListSize={{ height: 176, width: 126 }}
-
+                estimatedListSize={{height: 176, width: 126}}
                 showsHorizontalScrollIndicator={false}
                 ListEmptyComponent={renderEmptyContainer}
             />
@@ -166,9 +168,9 @@ export function Explore(): JSX.Element {
                 <Text style={typography.h3}>Popular Institutions</Text>
                 <TouchableOpacity
                     onPress={() => {
-                        if(institutionsFilter) {
+                        if (institutionsFilter) {
                             fadeOutInstitutionsFilter()
-                        }else {
+                        } else {
                             fadeInInstitutionsFilter()
                         }
                         setInstitutionsFilter(!institutionsFilter);
@@ -180,16 +182,16 @@ export function Explore(): JSX.Element {
                 </TouchableOpacity>
             </View>
 
-                <Animated.View
-                    style={[styles.rowContainer,
-                        {opacity:opacityInstitutionsFilter,height:sizeInstitutionsFilter,paddingVertical: 0}]}>
-                    <RenderFilter
-                        onPress={(item) => setAreaInstitutionsFilter(item)}
-                        selected={areaInstitutionsFilter}
-                        title="Area"
-                        items={areas}
-                    />
-                </Animated.View>
+            <Animated.View
+                style={[styles.rowContainer,
+                    {opacity: opacityInstitutionsFilter, height: sizeInstitutionsFilter, paddingVertical: 0}]}>
+                <RenderFilter
+                    onPress={(item) => setAreaInstitutionsFilter(item)}
+                    selected={areaInstitutionsFilter}
+                    title="Area"
+                    items={areas}
+                />
+            </Animated.View>
 
             <FlashList
                 data={searchQuery !== '' ? institutions.filter((institution) => institution.name.toLowerCase().includes(searchQuery.toLowerCase())) : institutions}
@@ -197,7 +199,7 @@ export function Explore(): JSX.Element {
                 keyboardShouldPersistTaps={'handled'}
                 renderItem={renderInstitution}
                 estimatedItemSize={184}
-                estimatedListSize={{ height: 184, width: width-40 }}
+                estimatedListSize={{height: 184, width: width - 40}}
                 keyExtractor={(item) => 'Institutions-' + item.name}
                 showsVerticalScrollIndicator={false}
                 ListEmptyComponent={renderEmptyContainer}
