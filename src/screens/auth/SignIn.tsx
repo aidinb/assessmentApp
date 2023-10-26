@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View,
+    View,
     KeyboardAvoidingView,
     Platform
 } from 'react-native';
@@ -28,7 +28,7 @@ export function SignIn() {
 
             <View style={screenStyles.bottomButtons}>
 
-            <Button onPress={() => navigation.push('SignUp')} title={'Sign in'}/>
+                <Button onPress={() => navigation.push('SignUp')} title={'Sign in'}/>
                 <Button backgroundColor={false} title={'Dont have account? Sign Up'}/>
             </View>
 

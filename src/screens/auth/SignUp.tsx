@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {
     View,
-     Platform,KeyboardAvoidingView
+    Platform,KeyboardAvoidingView
 } from 'react-native';
 import {screenStyles} from "../../theme/globalStyles";
 import SignUpBanner from "../../assets/signUpBanner.svg";
@@ -18,26 +18,26 @@ export function SignUp() {
     const [pasword, onChangePassword] = useState('');
 
     return (
-      <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={screenStyles.container}
-      >
-        <View style={screenStyles.centerContainer}>
-          <SignUpBanner/>
-        </View>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={screenStyles.container}
+        >
+            <View style={screenStyles.centerContainer}>
+                <SignUpBanner/>
+            </View>
 
-          <InputWithLabel title='Name' onChangeText={onChangeName} value={name}/>
-          <InputWithLabel title='Email' onChangeText={onChangeEmail} value={email}/>
-          <InputWithLabel title='Password' onChangeText={onChangePassword} value={pasword} secureKeyboard/>
-
-
-        <View style={screenStyles.bottomButtons}>
-          <Button onPress={navigation.push('ProvinceSelection')} title={'Sign up'}/>
-          <Button backgroundColor={false} title={'You have account? Sign in'}/>
-        </View>
+            <InputWithLabel title='Name' onChangeText={onChangeName} value={name}/>
+            <InputWithLabel title='Email' onChangeText={onChangeEmail} value={email}/>
+            <InputWithLabel title='Password' onChangeText={onChangePassword} value={pasword} secureKeyboard/>
 
 
-      </KeyboardAvoidingView>
-  );
+            <View style={screenStyles.bottomButtons}>
+                <Button onPress={()=>navigation.push('GradeSelection')} title={'Sign up'}/>
+                <Button backgroundColor={false} title={'You have account? Sign in'}/>
+            </View>
+
+
+        </KeyboardAvoidingView>
+    );
 }
 

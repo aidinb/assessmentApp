@@ -1,11 +1,22 @@
-import React from 'react'
-import { ActivityIndicator, View } from 'react-native';
-import {colors} from "../theme/colors";
+import React from 'react';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { colors } from '../theme/colors';
 
-export default function Loading() {
+const Loading: React.FC = () => {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:colors.transparent }}>
-            <ActivityIndicator color={"#7c3aed"} />
+        <View style={styles.container}>
+            <ActivityIndicator color="#7c3aed" />
         </View>
-    )
-}
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.transparent,
+    },
+});
+
+export default Loading;

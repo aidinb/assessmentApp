@@ -1,15 +1,24 @@
-import React from 'react'
+import React from 'react';
 import { Text, TextInput, View} from 'react-native';
-import {formStyles} from "../theme/globalStyles";
+import { formStyles } from '../theme/globalStyles';
 
-export default function InputWithLabel(props) {
-    const { title,onChangeText, value, secureKeyboard = false } = props;
+interface InputWithLabelProps {
+    title: string;
+    onChangeText: (text: string) => void;
+    value: string;
+    secureKeyboard?: boolean;
+}
+
+const InputWithLabel: React.FC<InputWithLabelProps> = ({
+                                                           title,
+                                                           onChangeText,
+                                                           value,
+                                                           secureKeyboard = false,
+                                                       }: InputWithLabelProps) => {
 
     return (
         <View style={formStyles.inputWrapper}>
-            <Text style={formStyles.label}>
-                {title}
-            </Text>
+            <Text style={formStyles.label}>{title}</Text>
             <TextInput
                 style={formStyles.input}
                 onChangeText={onChangeText}
@@ -18,5 +27,7 @@ export default function InputWithLabel(props) {
                 secureTextEntry={secureKeyboard}
             />
         </View>
-    )
-}
+    );
+};
+
+export default InputWithLabel;

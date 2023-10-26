@@ -1,15 +1,31 @@
 import React from 'react';
-import {Text, StyleSheet, Pressable, TouchableOpacity} from 'react-native';
-import {colors} from "../theme/colors";
+import { Text, StyleSheet, TouchableOpacity, ViewStyle, TextStyle } from 'react-native';
+import { colors } from '../theme/colors';
 
-export default function Button(props) {
-    const { onPress, title = 'Save', backgroundColor = true } = props;
+interface ButtonProps {
+    onPress: () => void;
+    title?: string;
+    backgroundColor?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = React.memo(({ onPress, title = 'Next', backgroundColor = true }: ButtonProps) => {
+    const buttonStyle: ViewStyle = {
+        ...styles.button,
+        backgroundColor: backgroundColor ? colors.primary : colors.transparent,
+    };
+
+    const textStyle: TextStyle = {
+        ...styles.text,
+        color: backgroundColor ? colors.white : colors.primary,
+        fontWeight: backgroundColor ? 'bold' : 'normal',
+    };
+
     return (
-        <TouchableOpacity style={[styles.button,{backgroundColor: backgroundColor?colors.primary:colors.transparent}]} onPress={onPress}>
-            <Text style={[styles.text,{color:backgroundColor? colors.white : colors.primary, fontWeight: backgroundColor?'bold': 'normal',}]}>{title}</Text>
+        <TouchableOpacity style={buttonStyle} onPress={onPress}>
+            <Text style={textStyle}>{title}</Text>
         </TouchableOpacity>
     );
-}
+});
 
 const styles = StyleSheet.create({
     button: {
@@ -19,8 +35,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 12,
         elevation: 3,
-        minWidth:267,
-        height: 61
+        minWidth: 267,
+        height: 61,
     },
     text: {
         fontSize: 16,
@@ -29,3 +45,5 @@ const styles = StyleSheet.create({
         color: 'white',
     },
 });
+
+export default Button;

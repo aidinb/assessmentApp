@@ -28,8 +28,8 @@ export function WelcomeScreen() {
             </View>
 
             <View style={screenStyles.bottomButtons}>
-               <Button onPress={()=>navigation.push('SignIn')} title={'Sign up'}/>
-               <Button backgroundColor={false} title={'Skip'}/>
+                <Button onPress={()=>navigation.push('SignIn')} title={'Sign up'}/>
+                <Button backgroundColor={false} title={'Skip'}/>
             </View>
 
         </View>

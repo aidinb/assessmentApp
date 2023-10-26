@@ -2,17 +2,15 @@ import React from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { AuthRoutes } from './AuthRoutes';
 import { DashboardRoutes } from './DashboardRoutes';
-import {NavigationTheme} from "../theme/globalStyles";
-import {useAuthenticate} from "../hooks/useAuthenticate";
-
+import { NavigationTheme } from '../theme/globalStyles';
+import { useAuthenticate } from '../hooks/useAuthenticate';
 
 export function Routes() {
-    const isAuthenticated = useAuthenticate()
+    const isAuthenticated = useAuthenticate();
 
     return (
         <NavigationContainer theme={NavigationTheme}>
-            {isAuthenticated ?
-                <DashboardRoutes /> : <AuthRoutes />}
+            {isAuthenticated ? <DashboardRoutes /> : <AuthRoutes />}
         </NavigationContainer>
     );
 }
