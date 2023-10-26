@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Animated,
     StyleSheet,
-    Easing
+    Easing, Keyboard
 } from 'react-native';
 import { formStyles, typography } from '../../theme/globalStyles';
 import { colors } from '../../theme/colors';
@@ -72,6 +72,7 @@ export function Explore(): JSX.Element {
     }
 
     const pressSearch = () =>{
+        Keyboard.dismiss()
         if(search !== '' && opacityHeader.__getValue() === 1){
             setSearchQuery(search)
             fadeOutHeader(Easing.exp)

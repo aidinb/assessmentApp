@@ -8,6 +8,8 @@ import SignUpBanner from "../../assets/signUpBanner.svg";
 import Button from "../../components/Button";
 import InputWithLabel from "../../components/InputWithLabel";
 import { useNavigation } from '@react-navigation/native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 export function SignUp() {
     const navigation = useNavigation();
 
@@ -16,29 +18,31 @@ export function SignUp() {
     const [pasword, onChangePassword] = useState('');
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={screenStyles.container}
-        >
-            <View style={screenStyles.centerContainer}>
+        <View style={screenStyles.container}>
+            <KeyboardAwareScrollView
+                style={screenStyles.container}
+                keyboardShouldPersistTaps="handled"
+                keyboardDismissMode="none"
+                showsVerticalScrollIndicator={false}
+                extraScrollHeight={20}
+                contentContainerStyle={{
+                    alignItems: 'center', justifyContent: 'center'
+                }}
+            >
                 <SignUpBanner/>
-            </View>
-
-            <InputWithLabel title='Name' onChangeText={onChangeName} value={name}/>
-            <InputWithLabel title='Email' onChangeText={onChangeEmail} value={email}/>
-            <InputWithLabel title='Password' onChangeText={onChangePassword} value={pasword} secureKeyboard/>
-
-
+                <InputWithLabel title='Name' onChangeText={onChangeName} value={name}/>
+                <InputWithLabel title='Email' onChangeText={onChangeEmail} value={email}/>
+                <InputWithLabel title='Password' onChangeText={onChangePassword} value={pasword} secureKeyboard/>
+            </KeyboardAwareScrollView>
             <View style={screenStyles.bottomButtons}>
-                <Button onPress={()=>navigation.push('GradeSelection')} title={'Sign up'}/>
-                <View style={{flexDirection:'row',width:200,alignItems:'center',alignSelf:'center'}}>
+                <Button onPress={() => navigation.push('GradeSelection')} title={'Sign up'}/>
+                <View style={{flexDirection: 'row', width: 200, alignItems: 'center', alignSelf: 'center'}}>
                     <Text>You have account?</Text>
-                    <Button style={{minWidth:30,paddingHorizontal:3}} onPress={() => navigation.push('SignIn')} backgroundColor={false} title={'Sign in'}/>
+                    <Button style={{minWidth: 30, paddingHorizontal: 3}} onPress={() => navigation.push('SignIn')}
+                            backgroundColor={false} title={'Sign in'}/>
                 </View>
             </View>
-
-
-        </KeyboardAvoidingView>
+        </View>
     );
 }
 
