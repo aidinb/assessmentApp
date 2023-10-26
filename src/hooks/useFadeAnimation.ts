@@ -15,7 +15,7 @@ const useFadeAnimation = (initiateOpacity,boxSize=110): UseFadeAnimationResult =
         opacity.setValue(0);
         Animated.timing(opacity, {
             toValue: 1,
-            duration: 600,
+            duration: 500,
             easing,
             useNativeDriver: false,
         }).start();
@@ -25,7 +25,7 @@ const useFadeAnimation = (initiateOpacity,boxSize=110): UseFadeAnimationResult =
         opacity.setValue(1);
         Animated.timing(opacity, {
             toValue: 0,
-            duration: 600,
+            duration: 500,
             easing,
             useNativeDriver: false,
         }).start();
