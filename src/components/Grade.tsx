@@ -12,7 +12,7 @@ interface GradeProps {
 
 const Grade: React.FC<GradeProps> = ({ selectedGrade, setSelectedGrade, title, items = [] }: GradeProps) => {
     return (
-        <Picker title={title}>
+        <Picker title={title} animationSize={items.length * 30}>
             <View style={styles.containerStyle}>
                 {items.length > 0 ? (
                     items.map((item) => (

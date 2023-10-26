@@ -15,7 +15,7 @@ interface RenderFilterProps {
 
 const RenderFilter: React.FC<RenderFilterProps> = ({ title, items, onPress, selected }: RenderFilterProps) => {
     return (
-        <View style={styles.container}>
+        <Animated.View style={styles.container}>
             <AnimatedText style={styles.title}>{title}</AnimatedText>
             <View style={styles.itemsContainer}>
                 {items.length > 0
@@ -33,7 +33,7 @@ const RenderFilter: React.FC<RenderFilterProps> = ({ title, items, onPress, sele
                     ))
                     : null}
             </View>
-        </View>
+        </Animated.View>
     );
 };
 
@@ -42,8 +42,7 @@ const styles = StyleSheet.create({
         width: width,
         alignItems: 'flex-start',
         justifyContent: 'center',
-        paddingHorizontal: 20,
-        marginTop: -10,
+        paddingHorizontal: 3,
         marginBottom: 15,
     },
     title: {

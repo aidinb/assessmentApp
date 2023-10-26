@@ -21,12 +21,13 @@ import RenderInstitution from '../../components/RenderInstitution';
 import RenderTeachers from '../../components/RenderTeachers';
 import { areas, institutions, subjects, teachers } from '../../utils/data';
 import RenderFilter from '../../components/RenderFilter';
-import type {EasingFunction} from 'react-native';
+import useFadeAnimation from "../../hooks/useFadeAnimation";
 
 const { width } = Dimensions.get('window');
 
 
 export function Explore(): JSX.Element {
+
     const [search, setSearch] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [teacherFilter, setTeacherFilter] = useState(false);
@@ -34,7 +35,11 @@ export function Explore(): JSX.Element {
     const [areaFilter, setAreaFilter] = useState('');
     const [areaInstitutionsFilter, setAreaInstitutionsFilter] = useState('');
     const [subjectFilter, setSubjectFilter] = useState('');
-    const [opacity, setOpacity] = useState(new Animated.Value(1));
+    const { opacity:opacityHeader, size: sizeHeader, fadeIn: fadeInHeader, fadeOut: fadeOutHeader } = useFadeAnimation(1);
+    const { opacity:opacityTeacherFilter, size: sizeTeacherFilter,
+        fadeIn: fadeInTeacherFilter, fadeOut: fadeOutTeacherFilter } = useFadeAnimation(0,areas.length + subjects.length *40);
+    const { opacity:opacityInstitutionsFilter, size: sizeInstitutionsFilter,
+        fadeIn: fadeInInstitutionsFilter, fadeOut: fadeOutInstitutionsFilter } = useFadeAnimation(0,areas.length *30);
 
     const renderTeachers = React.useCallback(
         ({ item }: { item: any }) => {
@@ -58,41 +63,16 @@ export function Explore(): JSX.Element {
         );
     };
 
-    const fadeOutHeader = (easing: EasingFunction) => {
-        opacity.setValue(1);
-        Animated.timing(opacity, {
-            toValue: 0,
-            duration: 600,
-            easing,
-            useNativeDriver:false
-        }).start();
-    };
-
-    const fadeInHeader = (easing: EasingFunction) => {
-        opacity.setValue(0);
-        Animated.timing(opacity, {
-            toValue: 1,
-            duration: 600,
-            easing,
-            useNativeDriver:false
-        }).start();
-    };
-
-    const size = opacity.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 110],
-    });
-
     const onChangeText = (text)=>{
         setSearch(text);
-        if (text === '' && opacity.__getValue() === 0) {
+        if (text === '' && opacityHeader.__getValue() === 0) {
             fadeInHeader(Easing.exp)
             setSearchQuery('')
         }
     }
 
     const pressSearch = () =>{
-        if(search !== '' && opacity.__getValue() === 1){
+        if(search !== '' && opacityHeader.__getValue() === 1){
             setSearchQuery(search)
             fadeOutHeader(Easing.exp)
         }
@@ -102,7 +82,7 @@ export function Explore(): JSX.Element {
             keyboardDismissMode="on-drag"
                              keyboardShouldPersistTaps={'handled'} showsVerticalScrollIndicator={false} style={styles.container}
                              contentContainerStyle={{paddingBottom: 100}}>
-                <Animated.View style={[styles.rowContainer,{opacity:opacity,height:size,paddingBottom: 0}]}>
+                <Animated.View style={[styles.rowContainer,{opacity:opacityHeader,height:sizeHeader,paddingBottom: 0}]}>
                     <View style={styles.userInfoContainer}>
                         <Text style={typography.h1}>Good evening!</Text>
                         <Text style={[typography.h2, {marginTop: 7}]}>Hardline Scott</Text>
@@ -140,7 +120,12 @@ export function Explore(): JSX.Element {
                 <Text style={typography.h3}>Popular Teachers</Text>
                 <TouchableOpacity
                     onPress={() => {
-                        setTeacherFilter(!teacherFilter);
+                        if(teacherFilter) {
+                            fadeOutTeacherFilter()
+                        }else {
+                            fadeInTeacherFilter()
+                        }
+                        setTeacherFilter(!teacherFilter)
                     }}
                     activeOpacity={0.5}
                     style={styles.filterIconContainer}
@@ -149,14 +134,17 @@ export function Explore(): JSX.Element {
                 </TouchableOpacity>
             </View>
 
-            {teacherFilter ? (
-                <View>
+                <Animated.View
+                    style={[styles.rowContainer,
+                        {opacity:opacityTeacherFilter,height:sizeTeacherFilter,paddingVertical: 0,
+                            backgroundColor: colors.secondary}]}>
+                    <View>
                     <RenderFilter onPress={(item) => setAreaFilter(item)} selected={areaFilter} title="Area"
                                   items={areas}/>
                     <RenderFilter onPress={(item) => setSubjectFilter(item)} selected={subjectFilter} title="Subject"
                                   items={subjects}/>
-                </View>
-            ) : null}
+                    </View>
+                </Animated.View>
 
             <FlashList
                 data={searchQuery !== '' ? teachers.filter((teacher) => teacher.name.toLowerCase().includes(searchQuery.toLowerCase())) : teachers}
@@ -177,6 +165,11 @@ export function Explore(): JSX.Element {
                 <Text style={typography.h3}>Popular Institutions</Text>
                 <TouchableOpacity
                     onPress={() => {
+                        if(institutionsFilter) {
+                            fadeOutInstitutionsFilter()
+                        }else {
+                            fadeInInstitutionsFilter()
+                        }
                         setInstitutionsFilter(!institutionsFilter);
                     }}
                     activeOpacity={0.5}
@@ -186,16 +179,16 @@ export function Explore(): JSX.Element {
                 </TouchableOpacity>
             </View>
 
-            {institutionsFilter ? (
-                <View>
+                <Animated.View
+                    style={[styles.rowContainer,
+                        {opacity:opacityInstitutionsFilter,height:sizeInstitutionsFilter,paddingVertical: 0}]}>
                     <RenderFilter
                         onPress={(item) => setAreaInstitutionsFilter(item)}
                         selected={areaInstitutionsFilter}
                         title="Area"
                         items={areas}
                     />
-                </View>
-            ) : null}
+                </Animated.View>
 
             <FlashList
                 data={searchQuery !== '' ? institutions.filter((institution) => institution.name.toLowerCase().includes(searchQuery.toLowerCase())) : institutions}
@@ -223,6 +216,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        backgroundColor: colors.secondary,
+        paddingBottom:10
     },
     userInfoContainer: {
         width: '80%',

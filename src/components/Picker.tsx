@@ -10,40 +10,17 @@ import {
 } from 'react-native';
 import { colors } from '../theme/colors';
 import { Ionicons } from '@expo/vector-icons';
+import useFadeAnimation from "../hooks/useFadeAnimation";
 
 interface PickerProps {
     title: string;
     children: React.ReactNode;
+    animationSize: number;
 }
 
-const Picker: React.FC<PickerProps> = ({ title, children }: PickerProps) => {
+const Picker: React.FC<PickerProps> = ({ title, children, animationSize }: PickerProps) => {
     const [open, setOpen] = useState(false);
-
-    const [opacity, setOpacity] = useState(new Animated.Value(0));
-
-    const fadeIn = (easing: EasingFunction) => {
-        opacity.setValue(0);
-        Animated.timing(opacity, {
-            toValue: 1,
-            duration: 600,
-            easing,
-            useNativeDriver:false
-        }).start();
-    };
-
-    const fadeOut = (easing: EasingFunction) => {
-        opacity.setValue(1);
-        Animated.timing(opacity, {
-            toValue: 0,
-            duration: 600,
-            easing,
-            useNativeDriver:false
-        }).start();
-    };
-    const size = opacity.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 110],
-    });
+    const { opacity, size, fadeIn, fadeOut } = useFadeAnimation(0,animationSize);
 
     const onPress = () =>{
         if(open) {
@@ -67,7 +44,7 @@ const Picker: React.FC<PickerProps> = ({ title, children }: PickerProps) => {
                     color={colors.subTitle}
                 />
             </TouchableOpacity>
-            <Animated.View style={[styles.containerStyle, {opacity: opacity, height: size}]}>
+            <Animated.View style={[styles.containerStyle, {opacity, height: size}]}>
                 {children}
             </Animated.View>
         </View>
