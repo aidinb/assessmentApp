@@ -7,7 +7,6 @@ import {screenStyles} from "../../theme/globalStyles";
 import SignUpBanner from "../../assets/signUpBanner.svg";
 import Button from "../../components/Button";
 import InputWithLabel from "../../components/InputWithLabel";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 import { NativeModules } from "react-native";

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import {
     Dimensions,
-    RefreshControl,
-    StyleSheet,
     TextInput,
     View,
     Text,
-    Image,
     TouchableOpacity, Animated
 } from 'react-native';
 import {formStyles, screenStyles, typography} from "../../theme/globalStyles";
@@ -21,33 +18,19 @@ import { FlashList } from "@shopify/flash-list";
 import RenderInstitution from "../../components/RenderInstitution";
 import RenderTeachers from "../../components/RenderTeachers";
 import {areas, institutions, subjects, teachers} from "../../utils/data";
-import RenderTeacherFilter from "../../components/RenderTeacherFilter";
+import RenderFilter from "../../components/RenderFilter";
 
 // Get the width of the device's window
 const {width} = Dimensions.get('window');
 
 export function Explore() {
     const [search, setSearch] = useState('');
+    const [searchQuery, setSearchQeury] = useState('');
     const [teacherFilter, setTeacherFilter] = useState(false);
+    const [institutionsFilter, setInstitutionsFilter] = useState(false);
     const [areaFilter, setAreaFilter] = useState('');
+    const [areaInstitutionsFilter, setAreaInstitutionsFilter] = useState('');
     const [subjectFilter, setSubjectFilterr] = useState('');
-
-    const RowWrapper = (props)=>{
-        return (
-            <View style={{
-                padding: 20,
-                width: width,
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-            }}>
-                {props.children}
-            </View>
-        )
-    }
-
-
-
 
 
     const renderTeachers = React.useCallback(
@@ -64,11 +47,25 @@ export function Explore() {
         [],
     );
 
+    const renderEmptyContainer= () =>{
+        return (
+            <View style={{width:width,alignItems:'center',justifyContent:'center'}}>
+                <Text style={typography.h4}>No Result.</Text>
+            </View>
+        )
+    }
+
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
             style={screenStyles.container} contentContainerStyle={{paddingBottom:100}}>
-            <RowWrapper>
+            {searchQuery === '' ? <View style={{
+                padding: 20,
+                width: width,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}>
                 <View style={{width: '80%'}}>
                     <Text style={typography.h1}>
                         Good evening!
@@ -80,17 +77,26 @@ export function Explore() {
                 <View style={{backgroundColor: colors.lightPink, borderRadius: 20}}>
                     <ProPic/>
                 </View>
-            </RowWrapper>
+            </View>: null}
 
-            <RowWrapper>
+            <View style={{
+                padding: 20,
+                width: width,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}>
                 <View style={{width: '80%', flexDirection: 'row', alignItems: 'center',marginTop:-10}}>
                     <TextInput
                         style={formStyles.input}
-                        onChangeText={setSearch}
+                        onChangeText={(text)=>{
+                            if(text === ''){setSearchQeury('')}
+                            setSearch(text)
+                        }}
                         placeholder={'Search'}
                         value={search}
                     />
-                    <TouchableOpacity activeOpacity={0.7} style={{
+                    <TouchableOpacity onPress={()=>setSearchQeury(search)} activeOpacity={0.7} style={{
                         marginLeft: -50,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -108,9 +114,15 @@ export function Explore() {
                                   style={{width: '20%', alignItems: 'center', justifyContent: 'center'}}>
                     <FilterIcon/>
                 </TouchableOpacity>
-            </RowWrapper>
+            </View>
 
-            <RowWrapper>
+            <View style={{
+                padding: 20,
+                width: width,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}>
                 <View style={{width: '70%'}}>
                     <Text style={typography.h3}>
                         Popular Teachers
@@ -123,14 +135,16 @@ export function Explore() {
                     {teacherFilter ? <PipeOn/>:<PipeIcon/>}
                 </TouchableOpacity>
 
-            </RowWrapper>
+            </View>
             {teacherFilter ? <View>
-                <RenderTeacherFilter onPress={(item)=>setAreaFilter(item)} selected={areaFilter} title='Area' items={areas}/>
-                <RenderTeacherFilter onPress={(item)=>setSubjectFilterr(item)} selected={subjectFilter} title='Subject' items={subjects}/>
+                <RenderFilter onPress={(item)=>setAreaFilter(item)} selected={areaFilter} title='Area' items={areas}/>
+                <RenderFilter onPress={(item)=>setSubjectFilterr(item)} selected={subjectFilter} title='Subject' items={subjects}/>
             </View> : null}
 
             <FlashList
-                data={teachers}
+                data={searchQuery !== '' ? teachers.filter(teacher =>
+                    teacher.name.toLowerCase().includes(searchQuery.toLowerCase()),
+                ) : teachers}
                 keyboardDismissMode="on-drag" // Automatically dismiss keyboard on scroll
                 keyboardShouldPersistTaps={'handled'}
                 contentContainerStyle={{paddingVertical:10}}
@@ -139,28 +153,43 @@ export function Explore() {
                 horizontal
                 estimatedItemSize={100}
                 showsHorizontalScrollIndicator={false}
+                ListEmptyComponent={renderEmptyContainer}
             />
 
-            <RowWrapper>
+            <View style={{
+                padding: 20,
+                width: width,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}>
                 <View style={{width: '70%'}}>
                     <Text style={typography.h3}>
                         Popular Institutions
                     </Text>
                 </View>
-                <TouchableOpacity activeOpacity={0.5}
+                <TouchableOpacity onPress={()=>{
+                    setInstitutionsFilter(!institutionsFilter)
+                }}  activeOpacity={0.5}
                                   style={{width: '20%', alignItems: 'center', justifyContent: 'center'}}>
-                    <PipeIcon/>
+                    {institutionsFilter ? <PipeOn/>:<PipeIcon/>}
                 </TouchableOpacity>
-            </RowWrapper>
-
+            </View>
+            {institutionsFilter ? <View>
+                <RenderFilter onPress={(item)=>setAreaInstitutionsFilter(item)} selected={areaInstitutionsFilter} title='Area' items={areas}/>
+            </View> : null}
             <FlashList
-                data={institutions}
+                data={searchQuery !== '' ? institutions.filter(institution =>
+                    institution.name.toLowerCase().includes(searchQuery.toLowerCase()),
+                ) : institutions}
                 keyboardDismissMode="on-drag" // Automatically dismiss keyboard on scroll
                 keyboardShouldPersistTaps={'handled'}
                 renderItem={renderInstitution}
                 estimatedItemSize={width-20}
                 keyExtractor={item => 'Institutions-' + item.name}
                 showsVerticalScrollIndicator={false}
+                ListEmptyComponent={renderEmptyContainer}
+
             />
         </ScrollView>
     );

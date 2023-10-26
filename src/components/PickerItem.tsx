@@ -1,5 +1,5 @@
 import React from 'react'
-import {ActivityIndicator, TouchableOpacity, View, Text} from 'react-native';
+import {TouchableOpacity, View, Text} from 'react-native';
 import {colors} from "../theme/colors";
 
 export default function PickerItem(props) {

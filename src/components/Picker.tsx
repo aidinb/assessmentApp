@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { ActivityIndicator, View, Text,TouchableOpacity } from 'react-native';
+import { View, Text,TouchableOpacity } from 'react-native';
 import {colors} from "../theme/colors";
 import { Ionicons } from '@expo/vector-icons';
 export default function Picker(props) {

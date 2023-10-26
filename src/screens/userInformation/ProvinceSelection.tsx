@@ -7,22 +7,13 @@ import ScrollView = Animated.ScrollView;
 import {colors} from "../../theme/colors";
 import PickerItem from "../../components/PickerItem";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {sriLanka} from "../../utils/data";
 
 export function ProvinceSelection() {
     const navigation = useNavigation();
     const [selectedProvince, setSelectedProvince] = useState('');
 
-    const sriLanka = [
-        {name: 'Central'},
-        {name: 'Eastern'},
-        {name: 'North Central'},
-        {name: 'Northern'},
-        {name: 'North Western'},
-        {name: 'Sabaragamuwa'},
-        {name: 'Southern'},
-        {name: 'Uva'},
-        {name: 'Western'},
-    ]
+
 
     const saveUser = async () =>{
         try {

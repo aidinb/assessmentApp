@@ -56,3 +56,15 @@ export const subjects = [
     'Science for Technology',
 ]
 
+export const sriLanka = [
+    {name: 'Central'},
+    {name: 'Eastern'},
+    {name: 'North Central'},
+    {name: 'Northern'},
+    {name: 'North Western'},
+    {name: 'Sabaragamuwa'},
+    {name: 'Southern'},
+    {name: 'Uva'},
+    {name: 'Western'},
+]
+

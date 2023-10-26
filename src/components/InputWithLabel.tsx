@@ -1,6 +1,5 @@
 import React from 'react'
-import {ActivityIndicator, Text, TextInput, View} from 'react-native';
-import {colors} from "../theme/colors";
+import { Text, TextInput, View} from 'react-native';
 import {formStyles} from "../theme/globalStyles";
 
 export default function InputWithLabel(props) {

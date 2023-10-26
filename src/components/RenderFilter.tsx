@@ -1,11 +1,11 @@
 import React from 'react'
 import {TouchableOpacity, Animated, Dimensions, View} from 'react-native';
 import {colors} from "../theme/colors";
-import {screenStyles, typography} from "../theme/globalStyles";
+import {typography} from "../theme/globalStyles";
 import Text = Animated.Text;
 const {width} = Dimensions.get('window');
 
-export default function RenderTeacherFilter(props) {
+export default function RenderFilter(props) {
     const {title, items,onPress,
         selected } = props
 
