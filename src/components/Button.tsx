@@ -6,9 +6,10 @@ interface ButtonProps {
     onPress: () => void;
     title?: string;
     backgroundColor?: boolean;
+    style?: object;
 }
 
-const Button: React.FC<ButtonProps> = React.memo(({ onPress, title = 'Next', backgroundColor = true }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = React.memo(({ style, onPress, title = 'Next', backgroundColor = true }: ButtonProps) => {
     const buttonStyle: ViewStyle = {
         ...styles.button,
         backgroundColor: backgroundColor ? colors.primary : colors.transparent,
@@ -21,7 +22,7 @@ const Button: React.FC<ButtonProps> = React.memo(({ onPress, title = 'Next', bac
     };
 
     return (
-        <TouchableOpacity style={buttonStyle} onPress={onPress}>
+        <TouchableOpacity style={[buttonStyle,{...style}]} onPress={onPress}>
             <Text style={textStyle}>{title}</Text>
         </TouchableOpacity>
     );

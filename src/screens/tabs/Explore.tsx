@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Animated,
     StyleSheet,
+    Easing
 } from 'react-native';
 import { formStyles, typography } from '../../theme/globalStyles';
 import { colors } from '../../theme/colors';
@@ -20,6 +21,7 @@ import RenderInstitution from '../../components/RenderInstitution';
 import RenderTeachers from '../../components/RenderTeachers';
 import { areas, institutions, subjects, teachers } from '../../utils/data';
 import RenderFilter from '../../components/RenderFilter';
+import type {EasingFunction} from 'react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -32,6 +34,7 @@ export function Explore(): JSX.Element {
     const [areaFilter, setAreaFilter] = useState('');
     const [areaInstitutionsFilter, setAreaInstitutionsFilter] = useState('');
     const [subjectFilter, setSubjectFilter] = useState('');
+    const [opacity, setOpacity] = useState(new Animated.Value(1));
 
     const renderTeachers = React.useCallback(
         ({ item }: { item: any }) => {
@@ -55,42 +58,77 @@ export function Explore(): JSX.Element {
         );
     };
 
+    const fadeOutHeader = (easing: EasingFunction) => {
+        opacity.setValue(1);
+        Animated.timing(opacity, {
+            toValue: 0,
+            duration: 600,
+            easing,
+            useNativeDriver:false
+        }).start();
+    };
+
+    const fadeInHeader = (easing: EasingFunction) => {
+        opacity.setValue(0);
+        Animated.timing(opacity, {
+            toValue: 1,
+            duration: 600,
+            easing,
+            useNativeDriver:false
+        }).start();
+    };
+
+    const size = opacity.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 110],
+    });
+
+    const onChangeText = (text)=>{
+        setSearch(text);
+        if (text === '') {
+            fadeInHeader(Easing.exp)
+            setSearchQuery('')
+        }
+    }
+
+    const pressSearch = () =>{
+        if(search !== ''){
+            setSearchQuery(search)
+            fadeOutHeader(Easing.exp)
+        }
+    }
     return (
-        <Animated.ScrollView showsVerticalScrollIndicator={false} style={styles.container} contentContainerStyle={{ paddingBottom: 100 }}>
-            {searchQuery === '' ? (
-                <View style={styles.headerContainer}>
+        <Animated.ScrollView
+            keyboardDismissMode="on-drag"
+                             keyboardShouldPersistTaps={'handled'} showsVerticalScrollIndicator={false} style={styles.container}
+                             contentContainerStyle={{paddingBottom: 100}}>
+                <Animated.View style={[styles.rowContainer,{opacity:opacity,height:size,paddingBottom: 0}]}>
                     <View style={styles.userInfoContainer}>
                         <Text style={typography.h1}>Good evening!</Text>
-                        <Text style={[typography.h2, { marginTop: 7 }]}>Hardline Scott</Text>
+                        <Text style={[typography.h2, {marginTop: 7}]}>Hardline Scott</Text>
                     </View>
                     <View style={styles.profilePicContainer}>
-                        <ProPic />
+                        <ProPic/>
                     </View>
-                </View>
-            ) : null}
+                </Animated.View>
 
-            <View style={styles.searchContainer}>
-                <View style={{width: '80%', flexDirection: 'row', alignItems: 'center',marginTop:-10}}>
+            <View style={styles.rowContainer}>
+                <View style={{width: '80%', flexDirection: 'row', alignItems: 'center', marginTop: -10}}>
 
-                <TextInput
-                    style={formStyles.input}
-                    onChangeText={(text) => {
-                        if (text === '') {
-                            setSearchQuery('');
-                        }
-                        setSearch(text);
-                    }}
-                    placeholder={'Search'}
-                    value={search}
-                />
+                    <TextInput
+                        style={formStyles.input}
+                        onChangeText={(text) => onChangeText(text)}
+                        placeholder={'Search'}
+                        value={search}
+                    />
 
-                <TouchableOpacity
-                    onPress={() => setSearchQuery(search)}
-                    activeOpacity={0.7}
-                    style={styles.searchButtonContainer}
-                >
-                    <SearchIcon />
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={pressSearch}
+                        activeOpacity={0.7}
+                        style={styles.searchButtonContainer}
+                    >
+                        <SearchIcon/>
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity activeOpacity={0.5}
                                   style={styles.filterIconContainer}>
@@ -98,7 +136,7 @@ export function Explore(): JSX.Element {
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.filterContainer}>
+            <View style={styles.rowContainer}>
                 <Text style={typography.h3}>Popular Teachers</Text>
                 <TouchableOpacity
                     onPress={() => {
@@ -107,14 +145,16 @@ export function Explore(): JSX.Element {
                     activeOpacity={0.5}
                     style={styles.filterIconContainer}
                 >
-                    {teacherFilter ? <PipeOn /> : <PipeIcon />}
+                    {teacherFilter ? <PipeOn/> : <PipeIcon/>}
                 </TouchableOpacity>
             </View>
 
             {teacherFilter ? (
                 <View>
-                    <RenderFilter onPress={(item) => setAreaFilter(item)} selected={areaFilter} title="Area" items={areas} />
-                    <RenderFilter onPress={(item) => setSubjectFilter(item)} selected={subjectFilter} title="Subject" items={subjects} />
+                    <RenderFilter onPress={(item) => setAreaFilter(item)} selected={areaFilter} title="Area"
+                                  items={areas}/>
+                    <RenderFilter onPress={(item) => setSubjectFilter(item)} selected={subjectFilter} title="Subject"
+                                  items={subjects}/>
                 </View>
             ) : null}
 
@@ -126,12 +166,14 @@ export function Explore(): JSX.Element {
                 renderItem={renderTeachers}
                 keyExtractor={(item) => 'Teachers-' + item.name}
                 horizontal
-                estimatedItemSize={100}
+                estimatedItemSize={142}
+                estimatedListSize={{ height: 176, width: 126 }}
+
                 showsHorizontalScrollIndicator={false}
                 ListEmptyComponent={renderEmptyContainer}
             />
 
-            <View style={styles.filterContainer}>
+            <View style={styles.rowContainer}>
                 <Text style={typography.h3}>Popular Institutions</Text>
                 <TouchableOpacity
                     onPress={() => {
@@ -140,7 +182,7 @@ export function Explore(): JSX.Element {
                     activeOpacity={0.5}
                     style={styles.filterIconContainer}
                 >
-                    {institutionsFilter ? <PipeOn /> : <PipeIcon />}
+                    {institutionsFilter ? <PipeOn/> : <PipeIcon/>}
                 </TouchableOpacity>
             </View>
 
@@ -160,11 +202,13 @@ export function Explore(): JSX.Element {
                 keyboardDismissMode="on-drag"
                 keyboardShouldPersistTaps={'handled'}
                 renderItem={renderInstitution}
-                estimatedItemSize={width - 20}
+                estimatedItemSize={184}
+                estimatedListSize={{ height: 184, width: width-40 }}
                 keyExtractor={(item) => 'Institutions-' + item.name}
                 showsVerticalScrollIndicator={false}
                 ListEmptyComponent={renderEmptyContainer}
             />
+
         </Animated.ScrollView>
     );
 }
@@ -173,7 +217,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    headerContainer: {
+    rowContainer: {
         padding: 20,
         width: width,
         flexDirection: 'row',
@@ -187,13 +231,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.lightPink,
         borderRadius: 20,
     },
-    searchContainer: {
-        padding: 20,
-        width: width,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
+
     searchButtonContainer: {
         marginLeft: -50,
         alignItems: 'center',
@@ -203,13 +241,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         borderRadius: 10,
     },
-    filterContainer: {
-        padding: 20,
-        width: width,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
+
     filterIconContainer: {
         width: '20%',
         alignItems: 'center',

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {
     View,
-    Platform,KeyboardAvoidingView
+    Platform, KeyboardAvoidingView, Text
 } from 'react-native';
 import {screenStyles} from "../../theme/globalStyles";
 import SignUpBanner from "../../assets/signUpBanner.svg";
@@ -33,7 +33,10 @@ export function SignUp() {
 
             <View style={screenStyles.bottomButtons}>
                 <Button onPress={()=>navigation.push('GradeSelection')} title={'Sign up'}/>
-                <Button backgroundColor={false} title={'You have account? Sign in'}/>
+                <View style={{flexDirection:'row',width:200,alignItems:'center',alignSelf:'center'}}>
+                    <Text>You have account?</Text>
+                    <Button style={{minWidth:30,paddingHorizontal:3}} onPress={() => navigation.push('SignIn')} backgroundColor={false} title={'Sign in'}/>
+                </View>
             </View>
 
 
