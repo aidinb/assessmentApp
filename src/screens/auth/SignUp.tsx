@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import InputWithLabel from "../../components/InputWithLabel";
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { useKeyboard } from '@react-native-community/hooks'
 
 export function SignUp() {
     const navigation = useNavigation();
@@ -15,6 +16,7 @@ export function SignUp() {
     const [name, onChangeName] = useState('');
     const [email, onChangeEmail] = useState('');
     const [pasword, onChangePassword] = useState('');
+    const keyboardHook = useKeyboard()
 
     return (
         <View style={screenStyles.container}>
@@ -25,7 +27,7 @@ export function SignUp() {
                 showsVerticalScrollIndicator={false}
                 extraScrollHeight={20}
                 contentContainerStyle={{
-                    alignItems: 'center', justifyContent: 'center'
+                    alignItems: 'center', justifyContent: 'center',paddingBottom:200
                 }}
             >
                 <SignUpBanner/>
@@ -33,14 +35,14 @@ export function SignUp() {
                 <InputWithLabel title='Email' onChangeText={onChangeEmail} value={email}/>
                 <InputWithLabel title='Password' onChangeText={onChangePassword} value={pasword} secureKeyboard/>
             </KeyboardAwareScrollView>
-            <View style={screenStyles.bottomButtons}>
+            {!keyboardHook.keyboardShown ?<View style={screenStyles.bottomButtons}>
                 <Button onPress={() => navigation.push('GradeSelection')} title={'Sign up'}/>
                 <View style={{flexDirection: 'row', width: 200, alignItems: 'center', alignSelf: 'center'}}>
                     <Text>You have account?</Text>
                     <Button style={{minWidth: 30, paddingHorizontal: 3}} onPress={() => navigation.push('SignIn')}
                             backgroundColor={false} title={'Sign in'}/>
                 </View>
-            </View>
+            </View>:null}
         </View>
     );
 }

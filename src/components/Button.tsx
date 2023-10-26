@@ -19,6 +19,8 @@ const Button: React.FC<ButtonProps> = React.memo(({ style, onPress, title = 'Nex
         ...styles.text,
         color: backgroundColor ? colors.white : colors.primary,
         fontWeight: backgroundColor ? 'bold' : 'normal',
+        elevation: backgroundColor ? 5 : 0,
+
     };
 
     return (
@@ -35,7 +37,6 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 32,
         borderRadius: 12,
-        elevation: 3,
         minWidth: 267,
         height: 61,
     },

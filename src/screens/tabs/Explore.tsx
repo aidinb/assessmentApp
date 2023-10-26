@@ -37,7 +37,7 @@ export function Explore(): JSX.Element {
     const [subjectFilter, setSubjectFilter] = useState('');
     const { opacity:opacityHeader, size: sizeHeader, fadeIn: fadeInHeader, fadeOut: fadeOutHeader } = useFadeAnimation(1);
     const { opacity:opacityTeacherFilter, size: sizeTeacherFilter,
-        fadeIn: fadeInTeacherFilter, fadeOut: fadeOutTeacherFilter } = useFadeAnimation(0,areas.length + subjects.length *40);
+        fadeIn: fadeInTeacherFilter, fadeOut: fadeOutTeacherFilter } = useFadeAnimation(0,areas.length + subjects.length *45);
     const { opacity:opacityInstitutionsFilter, size: sizeInstitutionsFilter,
         fadeIn: fadeInInstitutionsFilter, fadeOut: fadeOutInstitutionsFilter } = useFadeAnimation(0,areas.length *30);
 
@@ -247,5 +247,6 @@ const styles = StyleSheet.create({
     },
     flashListContainer: {
         paddingVertical: 10,
+        paddingRight:30
     },
 });
