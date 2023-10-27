@@ -7,7 +7,7 @@ import {
     Pressable,
     Animated,
     StyleSheet,
-    Easing, Keyboard
+    Easing, Keyboard, Platform
 } from 'react-native';
 import { formStyles, typography } from '../../theme/globalStyles';
 import { colors } from '../../theme/colors';
@@ -27,6 +27,7 @@ const { width } = Dimensions.get('window');
 
 
 export function Explore(): JSX.Element {
+    const numberOfTeacherFilterItems = areas.length + subjects.length
 
     const [search, setSearch] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
@@ -37,9 +38,13 @@ export function Explore(): JSX.Element {
     const [subjectFilter, setSubjectFilter] = useState('');
     const { opacity:opacityHeader, size: sizeHeader, fadeIn: fadeInHeader, fadeOut: fadeOutHeader } = useFadeAnimation(1);
     const { opacity:opacityTeacherFilter, size: sizeTeacherFilter,
-        fadeIn: fadeInTeacherFilter, fadeOut: fadeOutTeacherFilter } = useFadeAnimation(0,areas.length + subjects.length *35);
-    const { opacity:opacityInstitutionsFilter, size: sizeInstitutionsFilter,
-        fadeIn: fadeInInstitutionsFilter, fadeOut: fadeOutInstitutionsFilter } = useFadeAnimation(0,areas.length *30);
+        fadeIn: fadeInTeacherFilter, fadeOut: fadeOutTeacherFilter } = useFadeAnimation(
+            0,
+        Platform.OS === 'web' ? numberOfTeacherFilterItems * 35 : numberOfTeacherFilterItems *27);
+    const {
+        opacity: opacityInstitutionsFilter, size: sizeInstitutionsFilter,
+        fadeIn: fadeInInstitutionsFilter, fadeOut: fadeOutInstitutionsFilter
+    } = useFadeAnimation(0, areas.length * 30);
 
     const renderTeachers = React.useCallback(
         ({ item }: { item: any }) => {
@@ -95,7 +100,7 @@ export function Explore(): JSX.Element {
             </Animated.View>
 
             <View style={[styles.rowContainer,{zIndex:1001}]}>
-                <View style={{width: '80%', flexDirection: 'row', alignItems: 'center', marginTop: -10}}>
+                <View style={{width: '85%', flexDirection: 'row', alignItems: 'center', marginTop: -10}}>
 
                     <TextInput
                         style={formStyles.input}

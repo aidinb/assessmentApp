@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 import { colors } from './colors';
 const {width} = Dimensions.get('window');
 import { DefaultTheme } from '@react-navigation/native';
@@ -56,8 +56,8 @@ export const formStyles = StyleSheet.create({
         alignItems: 'flex-start',
     },
     input: {
-        width: '95%',
-        minWidth:400,
+        width: Platform.OS === 'web' ? 400 : '95%',
+        minWidth:Platform.OS === 'web' ? 400 : '80%',
         alignSelf:'center',
         backgroundColor:colors.white,
         height:50,

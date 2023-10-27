@@ -90,6 +90,7 @@ export function DashboardRoutes() {
 
 const styles = StyleSheet.create({
     tabLabel:{
-        fontSize: 12,marginBottom:3
+        fontSize: 12, marginBottom: Platform.OS === 'web' ? 3 : 0,
+
     }
 })

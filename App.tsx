@@ -12,12 +12,13 @@ import Loading from './src/components/Loading';
 
 export default function App() {
 
-    const [fontsLoaded] = useFonts({
+    const [fontsLoaded,fontError] = useFonts({
         Inter_400Regular,
         Inter_600SemiBold,
         Inter_700Bold,
         Inter_800ExtraBold,
     });
+    console.log(fontError)
 
     if (!fontsLoaded) {
         return <Loading />;
