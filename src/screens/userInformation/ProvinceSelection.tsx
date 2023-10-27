@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, NativeModules, StyleSheet } from 'react-native';
+import {View, Text, ScrollView, NativeModules, StyleSheet, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { screenStyles, typography } from '../../theme/globalStyles';
@@ -16,7 +16,11 @@ export function ProvinceSelection() {
     const saveUser = async () => {
         try {
             await AsyncStorage.setItem('user', 'test');
-            NativeModules.DevSettings.reload();
+            if(Platform.OS === 'web'){
+                location.reload()
+            }else{
+                NativeModules.DevSettings.reload();
+            }
         } catch (e) {
             // Handle error, possibly send it to analytics
         }

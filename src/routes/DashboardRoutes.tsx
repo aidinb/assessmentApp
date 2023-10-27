@@ -1,5 +1,5 @@
 import React from 'react';
-import {NativeModules, Text, Pressable, StyleSheet} from 'react-native';
+import {NativeModules, Text, Pressable, StyleSheet, Platform} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Explore } from '../screens/tabs/Explore';
@@ -34,7 +34,11 @@ const MyTabs = () => {
                     headerRight: props => (
                         <Pressable onPress={async ()=>{
                             await AsyncStorage.setItem('user', '');
-                            NativeModules.DevSettings.reload();
+                            if(Platform.OS === 'web'){
+                                location.reload()
+                            }else{
+                                NativeModules.DevSettings.reload();
+                            }
                         }} style={{flexDirection: 'row', paddingRight: 10}}>
                             <Ionicons
                                 name={'log-out-outline'}

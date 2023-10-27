@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { AuthRoutes } from './AuthRoutes';
 import { DashboardRoutes } from './DashboardRoutes';
 import { NavigationTheme } from '../theme/globalStyles';
