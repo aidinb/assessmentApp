@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Animated, Dimensions, View, ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import { Pressable, Animated, Dimensions, View, ViewStyle, TextStyle, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { typography } from '../theme/globalStyles';
 
@@ -20,7 +20,7 @@ const RenderFilter: React.FC<RenderFilterProps> = ({ title, items, onPress, sele
             <View style={styles.itemsContainer}>
                 {items.length > 0
                     ? items.map((item) => (
-                        <TouchableOpacity
+                        <Pressable
                             key={item}
                             onPress={() => onPress(item)}
                             style={[
@@ -29,7 +29,7 @@ const RenderFilter: React.FC<RenderFilterProps> = ({ title, items, onPress, sele
                             ]}
                         >
                             <AnimatedText>{item}</AnimatedText>
-                        </TouchableOpacity>
+                        </Pressable>
                     ))
                     : null}
             </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image, Text, View, ViewStyle, TextStyle, ImageStyle, StyleSheet } from 'react-native';
+import { Pressable, Image, Text, View, ViewStyle, TextStyle, ImageStyle, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { typography } from '../theme/globalStyles';
 
@@ -14,11 +14,11 @@ interface RenderTeachersProps {
 
 const RenderTeachers: React.FC<RenderTeachersProps> = ({ item, onPress }: RenderTeachersProps) => {
     return (
-        <TouchableOpacity onPress={onPress} style={styles.container}>
+        <Pressable onPress={onPress} style={styles.container}>
             <Image source={item.image} style={styles.image} />
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.field}>{item.field}</Text>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
 

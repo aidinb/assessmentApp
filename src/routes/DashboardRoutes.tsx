@@ -1,5 +1,5 @@
 import React from 'react';
-import {NativeModules, Text, TouchableOpacity} from 'react-native';
+import {NativeModules, Text, Pressable} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Explore } from '../screens/tabs/Explore';
@@ -31,7 +31,7 @@ const MyTabs = () => {
                         <Text style={{ color: focused ? colors.primary : colors.primaryDark, fontSize: 12 }}>Explore</Text>
                     ),
                     headerRight: props => (
-                        <TouchableOpacity onPress={async ()=>{
+                        <Pressable onPress={async ()=>{
                             await AsyncStorage.setItem('user', '');
                             NativeModules.DevSettings.reload();
                         }}
@@ -41,7 +41,7 @@ const MyTabs = () => {
                                 size={30}
                                 color={colors.primary}
                             />
-                        </TouchableOpacity>
+                        </Pressable>
                     )
                 }}
 

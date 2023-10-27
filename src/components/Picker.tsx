@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
     View,
     Text,
-    TouchableOpacity,
+    Pressable,
     StyleSheet,
     Animated,
     EasingFunction,
@@ -33,7 +33,7 @@ const Picker: React.FC<PickerProps> = ({ title, children, animationSize }: Picke
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
+            <Pressable
                 activeOpacity={0.9}
                 onPress={onPress}
                 style={styles.header}>
@@ -43,7 +43,7 @@ const Picker: React.FC<PickerProps> = ({ title, children, animationSize }: Picke
                     size={30}
                     color={colors.subTitle}
                 />
-            </TouchableOpacity>
+            </Pressable>
             <Animated.View style={[styles.containerStyle, {opacity, height: size}]}>
                 {children}
             </Animated.View>

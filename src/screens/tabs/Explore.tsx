@@ -4,7 +4,7 @@ import {
     TextInput,
     View,
     Text,
-    TouchableOpacity,
+    Pressable,
     Animated,
     StyleSheet,
     Easing, Keyboard
@@ -15,7 +15,7 @@ import ProPic from '../../assets/proPic.svg';
 import PipeIcon from '../../assets/pipeIcon.svg';
 import PipeOn from '../../assets/pipeOn.svg';
 import FilterIcon from '../../assets/filterIcon.svg';
-import SearchIcon from '../../assets/searchIcon';
+import SearchIcon from '../../assets/searchIcon.svg';
 import { FlashList } from '@shopify/flash-list';
 import RenderInstitution from '../../components/RenderInstitution';
 import RenderTeachers from '../../components/RenderTeachers';
@@ -104,23 +104,23 @@ export function Explore(): JSX.Element {
                         value={search}
                     />
 
-                    <TouchableOpacity
+                    <Pressable
                         onPress={pressSearch}
                         activeOpacity={0.7}
                         style={styles.searchButtonContainer}
                     >
                         <SearchIcon/>
-                    </TouchableOpacity>
+                    </Pressable>
                 </View>
-                <TouchableOpacity activeOpacity={0.5}
+                <Pressable activeOpacity={0.5}
                                   style={styles.filterIconContainer}>
                     <FilterIcon/>
-                </TouchableOpacity>
+                </Pressable>
             </View>
 
             <View style={styles.rowContainer}>
                 <Text style={typography.h3}>Popular Teachers</Text>
-                <TouchableOpacity
+                <Pressable
                     onPress={() => {
                         if (teacherFilter) {
                             fadeOutTeacherFilter()
@@ -133,7 +133,7 @@ export function Explore(): JSX.Element {
                     style={styles.filterIconContainer}
                 >
                     {teacherFilter ? <PipeOn/> : <PipeIcon/>}
-                </TouchableOpacity>
+                </Pressable>
             </View>
 
             <Animated.View
@@ -166,7 +166,7 @@ export function Explore(): JSX.Element {
 
             <View style={styles.rowContainer}>
                 <Text style={typography.h3}>Popular Institutions</Text>
-                <TouchableOpacity
+                <Pressable
                     onPress={() => {
                         if (institutionsFilter) {
                             fadeOutInstitutionsFilter()
@@ -179,7 +179,7 @@ export function Explore(): JSX.Element {
                     style={styles.filterIconContainer}
                 >
                     {institutionsFilter ? <PipeOn/> : <PipeIcon/>}
-                </TouchableOpacity>
+                </Pressable>
             </View>
 
             <Animated.View

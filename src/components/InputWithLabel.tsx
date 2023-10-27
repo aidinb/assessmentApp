@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, TextInput, View, TouchableOpacity} from 'react-native';
+import { Text, TextInput, View, Pressable} from 'react-native';
 import { formStyles } from '../theme/globalStyles';
 import {FontAwesome} from "@expo/vector-icons";
 
@@ -30,10 +30,10 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
                 value={value}
                 secureTextEntry={isSecure}
             />
-            {secureKeyboard ? <TouchableOpacity onPress={() => setIsSecure(!isSecure)}
+            {secureKeyboard ? <Pressable onPress={() => setIsSecure(!isSecure)}
                                                 style={{ position: 'absolute', right: 10 }}>
                 <FontAwesome name={isSecure ? 'eye-slash' : 'eye'} size={20} color="black" />
-            </TouchableOpacity>: null}
+            </Pressable>: null}
             </View>
         </View>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image, Text, View, Dimensions, ViewStyle, TextStyle, ImageStyle, StyleSheet } from 'react-native';
+import { Pressable, Image, Text, View, Dimensions, ViewStyle, TextStyle, ImageStyle, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { typography } from '../theme/globalStyles';
 
@@ -17,7 +17,7 @@ interface RenderInstitutionProps {
 
 const RenderInstitution: React.FC<RenderInstitutionProps> = ({ item, onPress }: RenderInstitutionProps) => {
     return (
-        <TouchableOpacity onPress={onPress} style={styles.container}>
+        <Pressable onPress={onPress} style={styles.container}>
             <Image
                 source={item.image}
                 style={styles.image}
@@ -27,7 +27,7 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = ({ item, onPress }: 
                 <Text style={styles.type}>{item.type}</Text>
                 <Text style={styles.description}>{item.description}</Text>
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
 

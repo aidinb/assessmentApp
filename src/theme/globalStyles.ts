@@ -57,6 +57,7 @@ export const formStyles = StyleSheet.create({
     },
     input: {
         width: '95%',
+        minWidth:400,
         alignSelf:'center',
         backgroundColor:colors.white,
         height:50,
@@ -91,7 +92,8 @@ export const screenStyles = StyleSheet.create({
         alignItems:'center',
         backgroundColor:colors.secondary,
         paddingVertical:15,
-        paddingBottom:50
+        paddingBottom:50,
+        flex:1
     }
 })
 

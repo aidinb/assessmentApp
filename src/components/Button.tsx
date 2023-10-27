@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, ViewStyle, TextStyle } from 'react-native';
+import {Text, StyleSheet, Pressable, ViewStyle, TextStyle} from 'react-native';
 import { colors } from '../theme/colors';
 
 interface ButtonProps {
@@ -24,9 +24,9 @@ const Button: React.FC<ButtonProps> = React.memo(({ style, onPress, title = 'Nex
     };
 
     return (
-        <TouchableOpacity style={[buttonStyle,{...style}]} onPress={onPress}>
+        <Pressable style={[buttonStyle,{...style}]} onPress={onPress}>
             <Text style={textStyle}>{title}</Text>
-        </TouchableOpacity>
+        </Pressable>
     );
 });
 

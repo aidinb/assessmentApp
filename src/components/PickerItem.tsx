@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 
 interface PickerItemProps {
@@ -11,12 +11,12 @@ interface PickerItemProps {
 
 const PickerItem: React.FC<PickerItemProps> = ({ icon, title, onPress, selected }: PickerItemProps) => {
     return (
-        <TouchableOpacity
+        <Pressable
             onPress={onPress}
             style={[styles.container, { backgroundColor: selected ? colors.primary : colors.grayDarker }]}>
             {icon ? icon() : null}
             <Text style={[styles.title, { color: selected ? colors.white : colors.subTitle }]}>{title}</Text>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
 
