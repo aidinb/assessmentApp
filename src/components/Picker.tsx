@@ -34,7 +34,6 @@ const Picker: React.FC<PickerProps> = ({ title, children, animationSize }: Picke
     return (
         <View style={styles.container}>
             <Pressable
-                activeOpacity={0.9}
                 onPress={onPress}
                 style={styles.header}>
                 <Text style={styles.title}>{title}</Text>
@@ -44,7 +43,7 @@ const Picker: React.FC<PickerProps> = ({ title, children, animationSize }: Picke
                     color={colors.subTitle}
                 />
             </Pressable>
-            <Animated.View style={[styles.containerStyle, {opacity, height: size}]}>
+            <Animated.View style={[styles.containerStyle, {opacity:opacity, height: size,pointerEvents:open ? 'auto' : 'none'}]}>
                 {children}
             </Animated.View>
         </View>
@@ -61,6 +60,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
+
     },
     containerStyle:{
         paddingHorizontal: 10,
@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
+        minHeight: 60,
+        zIndex:1001
     },
     title: {
         color: colors.subTitle,

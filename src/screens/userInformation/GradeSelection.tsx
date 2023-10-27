@@ -12,7 +12,7 @@ import { screenStyles, typography } from '../../theme/globalStyles';
 interface GradeItem {
     id: number;
     name: string;
-    icon: () => React.ReactNode;
+    icon: () => React.JSX.Element;
 }
 
 export function GradeSelection() {

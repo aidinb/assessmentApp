@@ -1,5 +1,5 @@
 import React from 'react';
-import {NativeModules, Text, Pressable} from 'react-native';
+import {NativeModules, Text, Pressable, StyleSheet} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Explore } from '../screens/tabs/Explore';
@@ -28,14 +28,14 @@ const MyTabs = () => {
                     tabBarIcon: ({ focused, color }) =>
                         focused ? <ExploreTab /> : <ExploreTabDisable />,
                     tabBarLabel: ({ focused }) => (
-                        <Text style={{ color: focused ? colors.primary : colors.primaryDark, fontSize: 12 }}>Explore</Text>
+                        <Text style={[styles.tabLabel,{color: focused ? colors.primary : colors.primaryDark}]}>Explore</Text>
                     ),
+                    tabBarLabelPosition: 'below-icon',
                     headerRight: props => (
                         <Pressable onPress={async ()=>{
                             await AsyncStorage.setItem('user', '');
                             NativeModules.DevSettings.reload();
-                        }}
-                            activeOpacity={0.6} style={{flexDirection: 'row', paddingRight: 10}}>
+                        }} style={{flexDirection: 'row', paddingRight: 10}}>
                             <Ionicons
                                 name={'log-out-outline'}
                                 size={30}
@@ -53,8 +53,9 @@ const MyTabs = () => {
                     title: 'Stream',
                     tabBarIcon: ({ focused, color }) => (focused ? <StreamTab /> : <StreamTabDisable />),
                     tabBarLabel: ({ focused }) => (
-                        <Text style={{ color: focused ? colors.primary : colors.primaryDark, fontSize: 12 }}>Stream</Text>
+                        <Text style={[styles.tabLabel,{color: focused ? colors.primary : colors.primaryDark}]}>Stream</Text>
                     ),
+                    tabBarLabelPosition: 'below-icon',
                 }}
             />
             <Tab.Screen
@@ -64,8 +65,9 @@ const MyTabs = () => {
                     title: 'ClassWork',
                     tabBarIcon: ({ focused, color }) => (focused ? <ClassWorkTab /> : <ClassWorkTabDisable />),
                     tabBarLabel: ({ focused }) => (
-                        <Text style={{ color: focused ? colors.primary : colors.primaryDark, fontSize: 12 }}>ClassWork</Text>
+                        <Text style={[styles.tabLabel,{color: focused ? colors.primary : colors.primaryDark}]}>ClassWork</Text>
                     ),
+                    tabBarLabelPosition: 'below-icon',
                 }}
             />
         </Tab.Navigator>
@@ -81,3 +83,9 @@ export function DashboardRoutes() {
         </Stack.Navigator>
     );
 }
+
+const styles = StyleSheet.create({
+    tabLabel:{
+        fontSize: 12,marginBottom:3
+    }
+})

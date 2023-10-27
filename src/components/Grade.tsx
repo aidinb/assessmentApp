@@ -7,7 +7,7 @@ interface GradeProps {
     selectedGrade: string;
     setSelectedGrade: (grade: string) => void;
     title: string;
-    items: { id: number; name: string; icon: string }[];
+    items: { id: number; name: string; icon: () => React.JSX.Element; }[];
 }
 
 const Grade: React.FC<GradeProps> = ({ selectedGrade, setSelectedGrade, title, items = [] }: GradeProps) => {

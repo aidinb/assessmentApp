@@ -37,7 +37,7 @@ export function Explore(): JSX.Element {
     const [subjectFilter, setSubjectFilter] = useState('');
     const { opacity:opacityHeader, size: sizeHeader, fadeIn: fadeInHeader, fadeOut: fadeOutHeader } = useFadeAnimation(1);
     const { opacity:opacityTeacherFilter, size: sizeTeacherFilter,
-        fadeIn: fadeInTeacherFilter, fadeOut: fadeOutTeacherFilter } = useFadeAnimation(0,areas.length + subjects.length *45);
+        fadeIn: fadeInTeacherFilter, fadeOut: fadeOutTeacherFilter } = useFadeAnimation(0,areas.length + subjects.length *35);
     const { opacity:opacityInstitutionsFilter, size: sizeInstitutionsFilter,
         fadeIn: fadeInInstitutionsFilter, fadeOut: fadeOutInstitutionsFilter } = useFadeAnimation(0,areas.length *30);
 
@@ -94,7 +94,7 @@ export function Explore(): JSX.Element {
                 </View>
             </Animated.View>
 
-            <View style={styles.rowContainer}>
+            <View style={[styles.rowContainer,{zIndex:1001}]}>
                 <View style={{width: '80%', flexDirection: 'row', alignItems: 'center', marginTop: -10}}>
 
                     <TextInput
@@ -106,19 +106,18 @@ export function Explore(): JSX.Element {
 
                     <Pressable
                         onPress={pressSearch}
-                        activeOpacity={0.7}
                         style={styles.searchButtonContainer}
                     >
                         <SearchIcon/>
                     </Pressable>
                 </View>
-                <Pressable activeOpacity={0.5}
+                <Pressable
                                   style={styles.filterIconContainer}>
                     <FilterIcon/>
                 </Pressable>
             </View>
 
-            <View style={styles.rowContainer}>
+            <View style={[styles.rowContainer,{zIndex:1001}]}>
                 <Text style={typography.h3}>Popular Teachers</Text>
                 <Pressable
                     onPress={() => {
@@ -129,7 +128,6 @@ export function Explore(): JSX.Element {
                         }
                         setTeacherFilter(!teacherFilter)
                     }}
-                    activeOpacity={0.5}
                     style={styles.filterIconContainer}
                 >
                     {teacherFilter ? <PipeOn/> : <PipeIcon/>}
@@ -140,7 +138,7 @@ export function Explore(): JSX.Element {
                 style={[styles.rowContainer,
                     {
                         opacity: opacityTeacherFilter, height: sizeTeacherFilter, paddingVertical: 0,
-                        backgroundColor: colors.secondary
+                        backgroundColor: colors.secondary,paddingTop:0
                     }]}>
                 <View>
                     <RenderFilter onPress={(item) => setAreaFilter(item)} selected={areaFilter} title="Area"
@@ -159,12 +157,12 @@ export function Explore(): JSX.Element {
                 keyExtractor={(item) => 'Teachers-' + item.name}
                 horizontal
                 estimatedItemSize={142}
-                estimatedListSize={{height: 176, width: 126}}
+                estimatedListSize={{height: 200, width: 126}}
                 showsHorizontalScrollIndicator={false}
                 ListEmptyComponent={renderEmptyContainer}
             />
 
-            <View style={styles.rowContainer}>
+            <View style={[styles.rowContainer,{zIndex:1001}]}>
                 <Text style={typography.h3}>Popular Institutions</Text>
                 <Pressable
                     onPress={() => {
@@ -175,7 +173,6 @@ export function Explore(): JSX.Element {
                         }
                         setInstitutionsFilter(!institutionsFilter);
                     }}
-                    activeOpacity={0.5}
                     style={styles.filterIconContainer}
                 >
                     {institutionsFilter ? <PipeOn/> : <PipeIcon/>}
@@ -184,7 +181,7 @@ export function Explore(): JSX.Element {
 
             <Animated.View
                 style={[styles.rowContainer,
-                    {opacity: opacityInstitutionsFilter, height: sizeInstitutionsFilter, paddingVertical: 0}]}>
+                    {opacity: opacityInstitutionsFilter, height: sizeInstitutionsFilter, paddingVertical: 0,paddingBottom:10}]}>
                 <RenderFilter
                     onPress={(item) => setAreaInstitutionsFilter(item)}
                     selected={areaInstitutionsFilter}
@@ -220,7 +217,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: colors.secondary,
-        paddingBottom:10
+        paddingBottom:10,
+
     },
     userInfoContainer: {
         width: '80%',
@@ -241,9 +239,9 @@ const styles = StyleSheet.create({
     },
 
     filterIconContainer: {
-        width: '20%',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
+        paddingRight:19
     },
     flashListContainer: {
         paddingVertical: 10,
