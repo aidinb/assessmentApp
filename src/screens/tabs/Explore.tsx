@@ -96,6 +96,7 @@ export function Explore() {
   // Define a function to handle text input changes
   const onChangeText = (text) => {
     setSearch(text);
+    // @ts-ignore
     if (text === "" && opacityHeader.__getValue() === 0) {
       fadeInHeader(Easing.exp);
       setSearchQuery("");
@@ -105,6 +106,7 @@ export function Explore() {
   // Define a function to handle the search button press
   const pressSearch = () => {
     Keyboard.dismiss();
+    // @ts-ignore
     if (search !== "" && opacityHeader.__getValue() === 1) {
       setSearchQuery(search);
       fadeOutHeader(Easing.exp);

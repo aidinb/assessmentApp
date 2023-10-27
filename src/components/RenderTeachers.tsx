@@ -21,7 +21,10 @@ const RenderTeachers: React.FC<RenderTeachersProps> = ({
 }: RenderTeachersProps) => {
   return (
     <Pressable onPress={onPress} style={styles.container}>
-      <Image source={item.image} style={styles.image} />
+      <Image
+        // @ts-ignore
+          source={item.image}
+          style={styles.image} />
       <Text style={typography.h4}>{item.name}</Text>
       <Text style={styles.field}>{item.field}</Text>
     </Pressable>

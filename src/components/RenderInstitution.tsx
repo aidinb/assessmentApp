@@ -31,7 +31,11 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = ({
 }: RenderInstitutionProps) => {
   return (
     <Pressable onPress={onPress} style={styles.container}>
-      <Image source={item.image} style={styles.image} />
+
+      <Image
+          // @ts-ignore
+          source={item.image}
+          style={styles.image} />
       <View style={styles.infoContainer}>
         <Text style={typography.h3}>{item.name}</Text>
         <Text style={styles.type}>{item.type}</Text>

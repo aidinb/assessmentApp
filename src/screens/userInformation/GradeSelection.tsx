@@ -10,6 +10,7 @@ import ScienceIcon from "../../assets/scienceIcon.svg"; // Import ScienceIcon SV
 import Button from "../../components/Button"; // Import Button component
 import Grade from "../../components/Grade"; // Import Grade component
 import { screenStyles, typography } from "../../theme/globalStyles"; // Import global styles
+import type { StackNavigationProp } from '@react-navigation/stack';
 
 // Define an interface for a GradeItem
 interface GradeItem {
@@ -20,7 +21,7 @@ interface GradeItem {
 
 // Define the GradeSelection component
 export function GradeSelection() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>()
 
   // Define state variables to track selected grades
   const [selectedGrade1To5, setSelectedGrade1To5] = useState<string>("");
@@ -54,6 +55,8 @@ export function GradeSelection() {
   ];
 
   // Render the component
+  // @ts-ignore
+  // @ts-ignore
   return (
     <View style={screenStyles.container}>
       <Text style={[typography.h1, styles.title]}>What's your grade?</Text>

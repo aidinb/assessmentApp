@@ -5,9 +5,10 @@ import { View, Text } from "react-native";
 import WelcomeScreenBanner from "../../assets/welcomeScreenBanner.svg";
 import Button from "../../components/Button";
 import { screenStyles, typography } from "../../theme/globalStyles";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 export function WelcomeScreen() {
-  const navigation = useNavigation();
+    const navigation = useNavigation<StackNavigationProp<any>>()
 
   return (
     <View style={[screenStyles.container, { alignItems: "center" }]}>

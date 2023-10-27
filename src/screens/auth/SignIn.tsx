@@ -7,9 +7,10 @@ import SignInBanner from "../../assets/signInBanner.svg";
 import Button from "../../components/Button";
 import InputWithLabel from "../../components/InputWithLabel";
 import { screenStyles } from "../../theme/globalStyles";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 export function SignIn() {
-  const navigation = useNavigation();
+    const navigation = useNavigation<StackNavigationProp<any>>()
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
 

@@ -7,9 +7,10 @@ import SignUpBanner from "../../assets/signUpBanner.svg";
 import Button from "../../components/Button";
 import InputWithLabel from "../../components/InputWithLabel";
 import { screenStyles } from "../../theme/globalStyles";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 export function SignUp() {
-  const navigation = useNavigation();
+    const navigation = useNavigation<StackNavigationProp<any>>()
   const [name, onChangeName] = useState("");
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
