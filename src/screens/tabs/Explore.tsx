@@ -25,10 +25,11 @@ import useFadeAnimation from "../../hooks/useFadeAnimation";
 
 const { width } = Dimensions.get('window');
 
+// Define the Explore function component
+export function Explore() {
+    // Initialize state variables using useState
 
-export function Explore(): JSX.Element {
     const numberOfTeacherFilterItems = areas.length + subjects.length
-
     const [search, setSearch] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [teacherFilter, setTeacherFilter] = useState(false);
@@ -40,12 +41,13 @@ export function Explore(): JSX.Element {
     const { opacity:opacityTeacherFilter, size: sizeTeacherFilter,
         fadeIn: fadeInTeacherFilter, fadeOut: fadeOutTeacherFilter } = useFadeAnimation(
             0,
-        Platform.OS === 'web' ? numberOfTeacherFilterItems * 35 : numberOfTeacherFilterItems *27);
+        Platform.OS === 'web' ? numberOfTeacherFilterItems * 21 : numberOfTeacherFilterItems *27);
     const {
         opacity: opacityInstitutionsFilter, size: sizeInstitutionsFilter,
         fadeIn: fadeInInstitutionsFilter, fadeOut: fadeOutInstitutionsFilter
     } = useFadeAnimation(0, areas.length * 30);
 
+    // Define a callback function to render teachers
     const renderTeachers = React.useCallback(
         ({ item }: { item: any }) => {
             return <RenderTeachers item={item} onPress={() => alert(`${item.name} Press!`)} />;
@@ -53,6 +55,7 @@ export function Explore(): JSX.Element {
         []
     );
 
+    // Define a callback function to render institutions
     const renderInstitution = React.useCallback(
         ({ item }: { item: any }) => {
             return <RenderInstitution item={item} onPress={() => alert(`${item.name} Press!`)} />;
@@ -60,6 +63,8 @@ export function Explore(): JSX.Element {
         []
     );
 
+
+    // Define a function to render an empty container when there are no search results
     const renderEmptyContainer = () => {
         return (
             <View style={{ width: width, alignItems: 'center', justifyContent: 'center' }}>
@@ -68,6 +73,7 @@ export function Explore(): JSX.Element {
         );
     };
 
+    // Define a function to handle text input changes
     const onChangeText = (text)=>{
         setSearch(text);
         if (text === '' && opacityHeader.__getValue() === 0) {
@@ -76,6 +82,7 @@ export function Explore(): JSX.Element {
         }
     }
 
+    // Define a function to handle the search button press
     const pressSearch = () =>{
         Keyboard.dismiss()
         if(search !== '' && opacityHeader.__getValue() === 1){

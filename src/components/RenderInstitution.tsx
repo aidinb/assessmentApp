@@ -1,20 +1,22 @@
 import React from 'react';
-import { Pressable, Image, Text, View, Dimensions, ViewStyle, TextStyle, ImageStyle, StyleSheet } from 'react-native';
+import { Pressable, Image, Text, View, Dimensions, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { typography } from '../theme/globalStyles';
 
 const { width } = Dimensions.get('window');
 
+// Define the properties that can be passed to the RenderInstitution component.
 interface RenderInstitutionProps {
     item: {
-        image: string;
-        name: string;
-        type: string;
-        description: string;
+        image: string; // URL or path to the institution's image.
+        name: string; // The name of the institution.
+        type: string; // The type or category of the institution.
+        description: string; // A description or additional information about the institution.
     };
-    onPress: () => void;
+    onPress: () => void; // Function to handle the press event on the institution item.
 }
 
+// Define the RenderInstitution component as a React functional component.
 const RenderInstitution: React.FC<RenderInstitutionProps> = ({ item, onPress }: RenderInstitutionProps) => {
     return (
         <Pressable onPress={onPress} style={styles.container}>
@@ -23,7 +25,7 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = ({ item, onPress }: 
                 style={styles.image}
             />
             <View style={styles.infoContainer}>
-                <Text style={styles.name}>{item.name}</Text>
+                <Text style={typography.h3}>{item.name}</Text>
                 <Text style={styles.type}>{item.type}</Text>
                 <Text style={styles.description}>{item.description}</Text>
             </View>
@@ -31,6 +33,7 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = ({ item, onPress }: 
     );
 };
 
+// Define the styles for the RenderInstitution component.
 const styles = StyleSheet.create({
     container: {
         marginBottom: 20,
@@ -61,9 +64,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 5,
     },
-    name: {
-        ...typography.h3,
-    },
     type: {
         fontSize: 14,
         color: colors.black,
@@ -76,4 +76,5 @@ const styles = StyleSheet.create({
     },
 });
 
+// Export the RenderInstitution component as the default export of this module.
 export default RenderInstitution;

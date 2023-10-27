@@ -1,28 +1,33 @@
+// Import required modules and components
 import React, { useState } from 'react';
 import { View, Text, ScrollView, Animated, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Grade from '../../components/Grade';
-import Button from '../../components/Button';
-import Arts from '../../assets/arts.svg';
-import ScienceIcon from '../../assets/scienceIcon.svg';
-import MathsIcon from '../../assets/mathsIcon.svg';
-import CommerceIcon from '../../assets/commerceIcon.svg';
-import { screenStyles, typography } from '../../theme/globalStyles';
+import Grade from '../../components/Grade'; // Import Grade component
+import Button from '../../components/Button'; // Import Button component
+import Arts from '../../assets/arts.svg'; // Import Arts SVG
+import ScienceIcon from '../../assets/scienceIcon.svg'; // Import ScienceIcon SVG
+import MathsIcon from '../../assets/mathsIcon.svg'; // Import MathsIcon SVG
+import CommerceIcon from '../../assets/commerceIcon.svg'; // Import CommerceIcon SVG
+import { screenStyles, typography } from '../../theme/globalStyles'; // Import global styles
 
+// Define an interface for a GradeItem
 interface GradeItem {
     id: number;
     name: string;
     icon: () => React.JSX.Element;
 }
 
+// Define the GradeSelection component
 export function GradeSelection() {
     const navigation = useNavigation();
 
+    // Define state variables to track selected grades
     const [selectedGrade1To5, setSelectedGrade1To5] = useState<string>('');
     const [selectedGrade6To9, setSelectedGrade6To9] = useState<string>('');
     const [selectedGrade10To11, setSelectedGrade10To11] = useState<string>('');
     const [selectedGrade12To13, setSelectedGrade12To13] = useState<string>('');
 
+    // Define GradeItem arrays for different grade ranges
     const Grade1To5Items: GradeItem[] = [
         { id: 1, name: 'Arts', icon: () => <Arts /> },
         { id: 2, name: 'Science', icon: () => <ScienceIcon /> },
@@ -47,10 +52,12 @@ export function GradeSelection() {
         { id: 12, name: 'Commerce', icon: () => <CommerceIcon /> },
     ];
 
+    // Render the component
     return (
         <View style={screenStyles.container}>
             <Text style={[typography.h1, styles.title]}>What's your grade?</Text>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
+                {/* Render Grade components for different grade ranges */}
                 <Grade
                     title="Grade 1-5"
                     items={Grade1To5Items}
@@ -80,6 +87,7 @@ export function GradeSelection() {
                 />
             </ScrollView>
 
+            {/* Render navigation buttons */}
             <View style={screenStyles.bottomButtons}>
                 <Button onPress={() => navigation.push('ProvinceSelection')} title="Next" />
                 <Button onPress={() => navigation.push('ProvinceSelection')} backgroundColor={false} title="Skip" />
@@ -88,6 +96,7 @@ export function GradeSelection() {
     );
 }
 
+// Define styles for the component
 const styles = StyleSheet.create({
     title: {
         marginTop: 20,

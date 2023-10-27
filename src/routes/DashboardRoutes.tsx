@@ -17,6 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 
+// Define the tabs and their configuration for the bottom tab navigator.
 const MyTabs = () => {
     return (
         <Tab.Navigator>
@@ -48,7 +49,6 @@ const MyTabs = () => {
                         </Pressable>
                     )
                 }}
-
             />
             <Tab.Screen
                 name="Stream"
@@ -80,6 +80,7 @@ const MyTabs = () => {
 
 const Stack = createNativeStackNavigator();
 
+// Define the stack navigator that wraps the bottom tab navigator.
 export function DashboardRoutes() {
     return (
         <Stack.Navigator initialRouteName="Explore">
@@ -91,6 +92,5 @@ export function DashboardRoutes() {
 const styles = StyleSheet.create({
     tabLabel:{
         fontSize: 12, marginBottom: Platform.OS === 'web' ? 3 : 0,
-
     }
-})
+});

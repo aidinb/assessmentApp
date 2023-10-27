@@ -1,5 +1,6 @@
+// Import necessary modules and components
 import React, { useState } from 'react';
-import {View, Text, ScrollView, NativeModules, StyleSheet, Platform} from 'react-native';
+import { View, Text, ScrollView, NativeModules, StyleSheet, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { screenStyles, typography } from '../../theme/globalStyles';
@@ -8,17 +9,26 @@ import { colors } from '../../theme/colors';
 import PickerItem from '../../components/PickerItem';
 import { sriLanka } from '../../utils/data';
 
+// Define the ProvinceSelection component
 export function ProvinceSelection() {
     const navigation = useNavigation();
     const [selectedProvince, setSelectedProvince] = useState<string>('');
 
+    /*
+    * Note that this should be fixed after the real authentication system implemented
+    * */
     // Function to save user data and trigger a reload
     const saveUser = async () => {
         try {
+            // Save user data to AsyncStorage
             await AsyncStorage.setItem('user', 'test');
-            if(Platform.OS === 'web'){
-                location.reload()
-            }else{
+
+            // Reload the application based on the platform
+            if (Platform.OS === 'web') {
+                // Reload the web application
+                location.reload();
+            } else {
+                // Reload the mobile application
                 NativeModules.DevSettings.reload();
             }
         } catch (e) {
@@ -26,6 +36,7 @@ export function ProvinceSelection() {
         }
     }
 
+    // Render the component
     return (
         <View style={screenStyles.container}>
             <Text style={[typography.h1, styles.title]}>What's your province?</Text>
@@ -55,6 +66,7 @@ export function ProvinceSelection() {
     );
 }
 
+// Define styles for the component
 const styles = StyleSheet.create({
     title: {
         marginTop: 20,

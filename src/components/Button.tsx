@@ -1,37 +1,23 @@
 import React from 'react';
-import {Text, StyleSheet, Pressable, ViewStyle, TextStyle} from 'react-native';
+import { Text, StyleSheet, Pressable, ViewStyle, TextStyle } from 'react-native';
 import { colors } from '../theme/colors';
 
+// Define the properties that can be passed to the Button component.
 interface ButtonProps {
-    onPress: () => void;
-    title?: string;
-    backgroundColor?: boolean;
-    style?: object;
+    onPress: () => void;         // Function to be called when the button is pressed.
+    title?: string;              // Optional button title text (default is 'Next').
+    backgroundColor?: boolean;   // Optional flag to determine if the button should have a background color (default is true).
+    style?: object;              // Additional styles to be applied to the button.
 }
 
-const Button: React.FC<ButtonProps> = React.memo(({ style, onPress, title = 'Next', backgroundColor = true }: ButtonProps) => {
+// Define the Button component as a React functional component.
+const Button: React.FC<ButtonProps> = React.memo(
+    ({ style, onPress, title = 'Next', backgroundColor = true
+    }: ButtonProps) => {
+
+    // Define the button's style properties.
     const buttonStyle: ViewStyle = {
-        ...styles.button,
         backgroundColor: backgroundColor ? colors.primary : colors.transparent,
-    };
-
-    const textStyle: TextStyle = {
-        ...styles.text,
-        color: backgroundColor ? colors.white : colors.primary,
-        fontWeight: backgroundColor ? 'bold' : 'normal',
-        elevation: backgroundColor ? 5 : 0,
-
-    };
-
-    return (
-        <Pressable style={[buttonStyle,{...style}]} onPress={onPress}>
-            <Text style={textStyle}>{title}</Text>
-        </Pressable>
-    );
-});
-
-const styles = StyleSheet.create({
-    button: {
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 12,
@@ -39,13 +25,25 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         minWidth: 267,
         height: 61,
-    },
-    text: {
+    };
+
+    // Define the text style properties.
+    const textStyle: TextStyle = {
+        color: backgroundColor ? colors.white : colors.primary,
+        fontWeight: backgroundColor ? 'bold' : 'normal',
+        elevation: backgroundColor ? 5 : 0,
         fontSize: 16,
         lineHeight: 21,
         letterSpacing: 0.25,
-        color: 'white',
-    },
+    };
+
+    // Render the Button component with a Pressable wrapper.
+    return (
+        <Pressable style={[buttonStyle, { ...style }]} onPress={onPress}>
+            <Text style={textStyle}>{title}</Text>
+        </Pressable>
+    );
 });
 
+// Export the Button component as the default export of this module.
 export default Button;

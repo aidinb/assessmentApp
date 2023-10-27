@@ -1,8 +1,14 @@
-import {Dimensions, Platform, StyleSheet} from 'react-native';
+// Import necessary modules and components
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 import { colors } from './colors';
-const {width} = Dimensions.get('window');
+
+// Get the width of the device's screen
+const { width } = Dimensions.get('window');
+
+// Import the default theme from React Navigation
 import { DefaultTheme } from '@react-navigation/native';
 
+// Define styles for typography
 export const typography = StyleSheet.create({
     h1: {
         fontSize: 28,
@@ -41,13 +47,14 @@ export const typography = StyleSheet.create({
     },
 });
 
+// Define styles for forms
 export const formStyles = StyleSheet.create({
     label: {
         fontSize: 16,
         fontFamily: 'Inter_400Regular',
         color: colors.black,
-        marginLeft:8,
-        marginBottom:10
+        marginLeft: 8,
+        marginBottom: 10,
     },
     inputWrapper: {
         paddingHorizontal: 20,
@@ -56,13 +63,13 @@ export const formStyles = StyleSheet.create({
         alignItems: 'flex-start',
     },
     input: {
-        width: Platform.OS === 'web' ? 400 : '95%',
-        minWidth:Platform.OS === 'web' ? 400 : '80%',
-        alignSelf:'center',
-        backgroundColor:colors.white,
-        height:50,
-        borderRadius:8,
-        paddingLeft:10,
+        width: Platform.OS === 'web' ? 500 : '95%',
+        minWidth: Platform.OS === 'web' ? 500 : '80%',
+        alignSelf: 'center',
+        backgroundColor: colors.white,
+        height: 50,
+        borderRadius: 8,
+        paddingLeft: 10,
         shadowOffset: {
             width: 1,
             height: 2,
@@ -71,36 +78,38 @@ export const formStyles = StyleSheet.create({
         shadowColor: colors.shadow,
         shadowRadius: 3,
         elevation: 7, // Android-specific elevation for a shadow effect
-
-
     },
-
 });
+
+// Define styles for screens
 export const screenStyles = StyleSheet.create({
     container: {
         flex: 1,
     },
     centerContainer: {
-      width:width,
-        alignItems:'center',
+        width: width,
+        alignItems: 'center',
         justifyContent: 'center',
-
     },
-    bottomButtons:{
-        position:'absolute',bottom:0,height:160,justifyContent: 'space-between',
-        width:width,
-        alignItems:'center',
-        backgroundColor:colors.secondary,
-        paddingVertical:15,
-        paddingBottom:50,
-        flex:1
-    }
-})
+    bottomButtons: {
+        position: 'absolute',
+        bottom: 0,
+        height: 160,
+        justifyContent: 'space-between',
+        width: width,
+        alignItems: 'center',
+        backgroundColor: colors.secondary,
+        paddingVertical: 15,
+        paddingBottom: 50,
+        flex: 1,
+    },
+});
 
+// Define a custom navigation theme by extending the default theme
 export const NavigationTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: colors.secondary
+        background: colors.secondary,
     },
 };

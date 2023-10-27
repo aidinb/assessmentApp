@@ -1,22 +1,24 @@
 import React from 'react';
-import { Pressable, Animated, Dimensions, View, ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import { Pressable, Animated, Dimensions, View, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { typography } from '../theme/globalStyles';
 
 const { width } = Dimensions.get('window');
 const AnimatedText = Animated.Text;
 
+// Define the properties that can be passed to the RenderFilter component.
 interface RenderFilterProps {
-    title: string;
-    items: string[];
-    onPress: (item: string) => void;
-    selected: string | null;
+    title: string; // The title for the filter section.
+    items: string[]; // An array of filter items to be displayed.
+    onPress: (item: string) => void; // Function to handle item selection.
+    selected: string | null; // The currently selected filter item (if any).
 }
 
+// Define the RenderFilter component as a React functional component.
 const RenderFilter: React.FC<RenderFilterProps> = ({ title, items, onPress, selected }: RenderFilterProps) => {
     return (
         <Animated.View style={styles.container}>
-            <AnimatedText style={styles.title}>{title}</AnimatedText>
+            <AnimatedText style={typography.subTitle}>{title}</AnimatedText>
             <View style={styles.itemsContainer}>
                 {items.length > 0
                     ? items.map((item) => (
@@ -37,6 +39,7 @@ const RenderFilter: React.FC<RenderFilterProps> = ({ title, items, onPress, sele
     );
 };
 
+// Define the styles for the RenderFilter component.
 const styles = StyleSheet.create({
     container: {
         width: width,
@@ -44,10 +47,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: 3,
         marginBottom: 15,
-        paddingRight:20
-    },
-    title: {
-        ...typography.subTitle,
+        paddingRight: 20,
     },
     itemsContainer: {
         width: '100%',
@@ -63,4 +63,5 @@ const styles = StyleSheet.create({
     },
 });
 
+// Export the RenderFilter component as the default export of this module.
 export default RenderFilter;

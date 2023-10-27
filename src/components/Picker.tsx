@@ -5,30 +5,34 @@ import {
     Pressable,
     StyleSheet,
     Animated,
-    EasingFunction,
     Easing
 } from 'react-native';
 import { colors } from '../theme/colors';
 import { Ionicons } from '@expo/vector-icons';
 import useFadeAnimation from "../hooks/useFadeAnimation";
 
+// Define the properties that can be passed to the Picker component.
 interface PickerProps {
-    title: string;
-    children: React.ReactNode;
-    animationSize: number;
+    title: string; // The title displayed in the picker header.
+    children: React.ReactNode; // The content that is revealed when the picker is opened.
+    animationSize: number; // The size used for animation (e.g., height) when opening/closing.
 }
 
+// Define the Picker component as a React functional component.
 const Picker: React.FC<PickerProps> = ({ title, children, animationSize }: PickerProps) => {
+    // State to control whether the picker is open or closed.
     const [open, setOpen] = useState(false);
-    const { opacity, size, fadeIn, fadeOut } = useFadeAnimation(0,animationSize);
+    // Custom hook for managing fade animations.
+    const { opacity, size, fadeIn, fadeOut } = useFadeAnimation(0, animationSize);
 
-    const onPress = () =>{
-        if(open) {
-            fadeOut(Easing.exp)
-        }else {
-            fadeIn(Easing.exp)
+    // Function to handle the press event and toggle the picker open/closed.
+    const onPress = () => {
+        if (open) {
+            fadeOut(Easing.exp); // Fade out the content when closing.
+        } else {
+            fadeIn(Easing.exp); // Fade in the content when opening.
         }
-        setOpen(!open)
+        setOpen(!open); // Toggle the open state.
     }
 
     return (
@@ -43,13 +47,14 @@ const Picker: React.FC<PickerProps> = ({ title, children, animationSize }: Picke
                     color={colors.subTitle}
                 />
             </Pressable>
-            <Animated.View style={[styles.containerStyle, {opacity:opacity, height: size,pointerEvents:open ? 'auto' : 'none'}]}>
+            <Animated.View style={[styles.containerStyle, { opacity: opacity, height: size, pointerEvents: open ? 'auto' : 'none' }]}>
                 {children}
             </Animated.View>
         </View>
     );
 };
 
+// Define the styles for the Picker component.
 const styles = StyleSheet.create({
     container: {
         width: '90%',
@@ -60,9 +65,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
-
     },
-    containerStyle:{
+    containerStyle: {
         paddingHorizontal: 10,
         width: '100%',
         flexDirection: 'row',
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         minHeight: 60,
-        zIndex:1001
+        zIndex: 1001,
     },
     title: {
         color: colors.subTitle,
@@ -87,4 +91,5 @@ const styles = StyleSheet.create({
     },
 });
 
+// Export the Picker component as the default export of this module.
 export default Picker;

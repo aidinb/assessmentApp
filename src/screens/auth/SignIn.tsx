@@ -8,16 +8,15 @@ import Button from "../../components/Button";
 import { useNavigation } from '@react-navigation/native';
 import InputWithLabel from "../../components/InputWithLabel";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-// import { useKeyboard } from '@react-native-community/hooks'
 
 export function SignIn() {
     const navigation = useNavigation();
     const [email, onChangeEmail] = useState('');
     const [password, onChangePassword] = useState('');
-    // const keyboardHook = useKeyboard()
 
     return (
         <View style={screenStyles.container}>
+            {/* Create a scrollable view that handles keyboard interactions */}
             <KeyboardAwareScrollView
                 style={screenStyles.container}
                 keyboardShouldPersistTaps="handled"
@@ -29,21 +28,22 @@ export function SignIn() {
                 }}
             >
                 <SignInBanner/>
+                {/* Input fields for email and password */}
                 <InputWithLabel title='Email' onChangeText={onChangeEmail} value={email}/>
                 <InputWithLabel title='Password' onChangeText={onChangePassword} value={password} secureKeyboard/>
 
             </KeyboardAwareScrollView>
-            {/*{!keyboardHook.keyboardShown ? */}
-                <View style={screenStyles.bottomButtons}>
+
+            <View style={screenStyles.bottomButtons}>
+                {/* "Sign in" button to navigate to the GradeSelection screen */}
                 <Button onPress={() => navigation.push('GradeSelection')} title={'Sign in'}/>
                 <View style={{flexDirection: 'row', width: 200, alignItems: 'center', alignSelf: 'center'}}>
                     <Text>Dont have account?</Text>
+                    {/* "Sign Up" button to navigate to the SignUp screen */}
                     <Button style={{minWidth: 30, paddingHorizontal: 3}} onPress={() => navigation.push('SignUp')}
                             backgroundColor={false} title={'Sign Up'}/>
                 </View>
             </View>
-                {/*// : null}*/}
         </View>
     );
 }
-
