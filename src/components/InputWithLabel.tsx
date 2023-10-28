@@ -1,6 +1,7 @@
-import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { Text, TextInput, View, Pressable } from "react-native";
+import { View } from "react-native";
+import { TextInput } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 
 import { formStyles } from "../theme/globalStyles";
 
@@ -22,32 +23,29 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
   // State to control whether the input is in secure mode (e.g., for password input).
   const [isSecure, setIsSecure] = useState(secureKeyboard);
 
+  const renderRightIcon = () =>{
+    if(secureKeyboard){
+      return (
+          !isSecure
+              ? <TextInput.Icon icon='eye' onPress={() => setIsSecure(!isSecure)}/>
+              : <TextInput.Icon icon='eye-off' onPress={() => setIsSecure(!isSecure)}/>
+      )
+    }}
+
   return (
-    <View style={formStyles.inputWrapper}>
-      <Text style={formStyles.label}>{title}</Text>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View style={formStyles.inputWrapper}>
+        <Text variant={'bodyLarge'} style={{
+          marginLeft: 8,
+          marginBottom: 10,
+        }}>{title}</Text>
         <TextInput
-          style={formStyles.input}
-          onChangeText={onChangeText}
-          placeholder={title}
-          value={value}
-          secureTextEntry={isSecure} // Enable secure text entry if isSecure is true.
-        />
-        {secureKeyboard ? (
-          // Render an icon to toggle secure input if secureKeyboard is true.
-          <Pressable
-            onPress={() => setIsSecure(!isSecure)}
-            style={{ position: "absolute", right: 10 }}
-          >
-            <FontAwesome
-              name={isSecure ? "eye-slash" : "eye"}
-              size={20}
-              color="black"
-            />
-          </Pressable>
-        ) : null}
+            style={formStyles.input}
+            onChangeText={onChangeText}
+            secureTextEntry={isSecure}
+            placeholder={title}
+            value={value}
+            right={renderRightIcon()}/>
       </View>
-    </View>
   );
 };
 

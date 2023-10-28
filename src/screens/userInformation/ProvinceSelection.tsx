@@ -10,7 +10,7 @@ import {
   Platform,
 } from "react-native";
 
-import Button from "../../components/Button";
+import MyButton from "../../components/MyButton";
 import PickerItem from "../../components/PickerItem";
 import { colors } from "../../theme/colors";
 import { screenStyles, typography } from "../../theme/globalStyles";
@@ -70,8 +70,8 @@ export function ProvinceSelection() {
         </View>
       </ScrollView>
       <View style={screenStyles.bottomButtons}>
-        <Button onPress={saveUser} title="Next" />
-        <Button onPress={saveUser} backgroundColor={false} title="Skip" />
+        <MyButton onPress={saveUser} title="Next" />
+        <MyButton onPress={saveUser} backgroundColor={false} title="Skip" />
       </View>
     </View>
   );

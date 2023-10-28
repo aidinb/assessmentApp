@@ -2,15 +2,16 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
   View,
-  Text,
-  Pressable,
   StyleSheet,
   Animated,
-  Easing,
+  Easing, Dimensions,
 } from "react-native";
 
 import useFadeAnimation from "../hooks/useFadeAnimation";
 import { colors } from "../theme/colors";
+import {Button} from "react-native-paper";
+import {useAppTheme} from "../theme/globalStyles";
+const { width } = Dimensions.get("window");
 
 // Define the properties that can be passed to the Picker component.
 interface PickerProps {
@@ -28,7 +29,10 @@ const Picker: React.FC<PickerProps> = ({
   // State to control whether the picker is open or closed.
   const [open, setOpen] = useState(false);
   // Custom hook for managing fade animations.
-  const { opacity, size, fadeIn, fadeOut } = useFadeAnimation(0, animationSize);
+    const {
+        opacity, size,
+        fadeIn, fadeOut
+    } = useFadeAnimation(0, animationSize);
 
   // Function to handle the press event and toggle the picker open/closed.
   const onPress = () => {
@@ -39,17 +43,34 @@ const Picker: React.FC<PickerProps> = ({
     }
     setOpen(!open); // Toggle the open state.
   };
+  const theme  = useAppTheme();
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={onPress} style={styles.header}>
-        <Text style={styles.title}>{title}</Text>
-        <Ionicons
-          name={open ? "chevron-up" : "chevron-down"}
-          size={30}
-          color={colors.subTitle}
-        />
-      </Pressable>
+      <Button onPress={onPress}
+              labelStyle={styles.title}
+              contentStyle={{
+                width: width-40,
+                minHeight: 40,
+                alignSelf:'center',
+                borderRadius: 8,
+                justifyContent:'space-between',
+                flexDirection:'row-reverse',
+              }}
+              rippleColor={theme.colors.transparent}
+              style={{
+                paddingVertical: 10,
+                zIndex: 1001,
+              }}
+              icon={() => (
+                  <Ionicons
+                      name={open ? "chevron-up" : "chevron-down"}
+                      size={30}
+                      color={colors.subTitle}
+                  />
+              )}>
+        {title}
+      </Button>
       <Animated.View
         style={[
           styles.containerStyle,
@@ -69,14 +90,14 @@ const Picker: React.FC<PickerProps> = ({
 // Define the styles for the Picker component.
 const styles = StyleSheet.create({
   container: {
-    width: "90%",
-    minHeight: 60,
-    backgroundColor: colors.gray,
+    width: width-40,
+    minHeight: 40,
+      backgroundColor: colors.gray,
     borderRadius: 8,
     alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
     marginTop: 20,
+    alignItems:'flex-start',
+    justifyContent:'flex-start'
   },
   containerStyle: {
     paddingHorizontal: 10,
@@ -86,16 +107,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexWrap: "wrap",
     marginTop: -10,
-  },
-  header: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    minHeight: 60,
-    zIndex: 1001,
   },
   title: {
     color: colors.subTitle,

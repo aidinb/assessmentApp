@@ -1,13 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import SignUpBanner from "../../assets/signUpBanner.svg";
-import Button from "../../components/Button";
+import MyButton from "../../components/MyButton";
 import InputWithLabel from "../../components/InputWithLabel";
 import { screenStyles } from "../../theme/globalStyles";
 import {StackNavigationProp} from "@react-navigation/stack";
+import { Text } from 'react-native-paper';
 
 export function SignUp() {
     const navigation = useNavigation<StackNavigationProp<any>>()
@@ -48,7 +49,7 @@ export function SignUp() {
 
       <View style={screenStyles.bottomButtons}>
         {/* "Sign up" button to navigate to the GradeSelection screen */}
-        <Button
+        <MyButton
           onPress={() => navigation.push("GradeSelection")}
           title="Sign up"
         />
@@ -62,8 +63,8 @@ export function SignUp() {
         >
           <Text>You have an account?</Text>
           {/* "Sign in" button to navigate to the SignIn screen */}
-          <Button
-            style={{ minWidth: 30, paddingHorizontal: 3 }}
+          <MyButton
+              style={{ minWidth: 30,marginLeft:-15 }}
             onPress={() => navigation.push("SignIn")}
             backgroundColor={false}
             title="Sign in"

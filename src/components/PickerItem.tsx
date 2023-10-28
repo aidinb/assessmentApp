@@ -1,7 +1,8 @@
 import React from "react";
-import { Pressable, Text, StyleSheet } from "react-native";
+import {StyleSheet, Dimensions} from "react-native";
 
-import { colors } from "../theme/colors";
+import {Button} from "react-native-paper";
+import {useAppTheme} from "../theme/globalStyles";
 
 // Define the properties that can be passed to the PickerItem component.
 interface PickerItemProps {
@@ -10,7 +11,7 @@ interface PickerItemProps {
   onPress: () => void; // Function to handle the press event.
   selected: boolean; // Flag indicating if the item is selected.
 }
-
+const { width } = Dimensions.get("window");
 // Define the PickerItem component as a React functional component.
 const PickerItem: React.FC<PickerItemProps> = ({
   icon,
@@ -18,24 +19,22 @@ const PickerItem: React.FC<PickerItemProps> = ({
   onPress,
   selected,
 }: PickerItemProps) => {
+  const theme  = useAppTheme();
+
   return (
-    <Pressable
-      onPress={onPress}
-      style={[
-        styles.container,
-        { backgroundColor: selected ? colors.primary : colors.grayDarker },
-      ]}
-    >
-      {icon ? icon() : null}
-      <Text
-        style={[
-          styles.title,
-          { color: selected ? colors.white : colors.subTitle },
-        ]}
+      <Button
+          mode="contained"
+          buttonColor={selected ? theme.colors.primary : theme.colors.grayDarker}
+          textColor={selected ? theme.colors.white : theme.colors.subTitle}
+          onPress={onPress}
+          contentStyle={styles.contentStyle}
+          style={styles.container}
+          icon={() => (
+              icon ? icon() : null
+          )}
       >
         {title}
-      </Text>
-    </Pressable>
+      </Button>
   );
 };
 
@@ -43,19 +42,19 @@ const PickerItem: React.FC<PickerItemProps> = ({
 const styles = StyleSheet.create({
   container: {
     borderRadius: 10.48,
-    paddingLeft: 5,
-    flexDirection: "row",
     height: 53,
-    width: "48%",
-    justifyContent: "space-around",
-    alignItems: "center",
+    width: width/2-50,
     marginTop: 15,
   },
-  title: {
-    textAlign: "center",
-    fontSize: 16.5,
-    width: "70%",
+  contentStyle: {
+    height: 53,
+    width: width / 2 - 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: 15,
   },
+
 });
 
 // Export the PickerItem component as the default export of this module.

@@ -1,16 +1,17 @@
 // Import required modules and components
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 
 import Arts from "../../assets/arts.svg"; // Import Arts SVG
 import CommerceIcon from "../../assets/commerceIcon.svg"; // Import CommerceIcon SVG
 import MathsIcon from "../../assets/mathsIcon.svg"; // Import MathsIcon SVG
 import ScienceIcon from "../../assets/scienceIcon.svg"; // Import ScienceIcon SVG
-import Button from "../../components/Button"; // Import Button component
+import MyButton from "../../components/MyButton"; // Import MyButton component
 import Grade from "../../components/Grade"; // Import Grade component
 import { screenStyles, typography } from "../../theme/globalStyles"; // Import global styles
 import type { StackNavigationProp } from '@react-navigation/stack';
+import { Text } from 'react-native-paper';
 
 // Define an interface for a GradeItem
 interface GradeItem {
@@ -59,7 +60,7 @@ export function GradeSelection() {
   // @ts-ignore
   return (
     <View style={screenStyles.container}>
-      <Text style={[typography.h1, styles.title]}>What's your grade?</Text>
+      <Text variant={'headlineMedium'} style={styles.title}>What's your grade?</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {/* Render Grade components for different grade ranges */}
         <Grade
@@ -93,11 +94,11 @@ export function GradeSelection() {
 
       {/* Render navigation buttons */}
       <View style={screenStyles.bottomButtons}>
-        <Button
+        <MyButton
           onPress={() => navigation.push("ProvinceSelection")}
           title="Next"
         />
-        <Button
+        <MyButton
           onPress={() => navigation.push("ProvinceSelection")}
           backgroundColor={false}
           title="Skip"

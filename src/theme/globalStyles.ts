@@ -3,6 +3,7 @@ import { DefaultTheme } from "@react-navigation/native";
 import { Dimensions, Platform, StyleSheet } from "react-native";
 
 import { colors } from "./colors";
+import { MD3LightTheme, useTheme} from "react-native-paper";
 
 // Import the default theme from React Navigation
 
@@ -51,26 +52,20 @@ export const typography = StyleSheet.create({
 // Define styles for forms
 export const formStyles = StyleSheet.create({
   label: {
-    fontSize: 16,
-    fontFamily: "Inter_400Regular",
-    color: colors.black,
     marginLeft: 8,
     marginBottom: 10,
   },
   inputWrapper: {
-    paddingHorizontal: 20,
     paddingVertical: 8,
     justifyContent: "center",
     alignItems: "flex-start",
   },
   input: {
     width: Platform.OS === "web" ? 500 : "95%",
-    minWidth: Platform.OS === "web" ? 500 : "80%",
+    minWidth: Platform.OS === "web" ? 500 : "90%",
     alignSelf: "center",
     backgroundColor: colors.white,
-    height: 50,
     borderRadius: 8,
-    paddingLeft: 10,
     shadowOffset: {
       width: 1,
       height: 2,
@@ -114,3 +109,17 @@ export const NavigationTheme = {
     background: colors.secondary,
   },
 };
+
+export const theme = {
+  ...MD3LightTheme, // or MD2DarkTheme
+
+  // Specify a custom property
+  myOwnProperty: true,
+
+  colors: colors,
+}
+
+export type AppTheme = typeof theme;
+
+export const useAppTheme = () => useTheme<AppTheme>();
+
