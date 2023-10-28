@@ -12,6 +12,7 @@ import Grade from "../../components/Grade"; // Import Grade component
 import { screenStyles, typography } from "../../theme/globalStyles"; // Import global styles
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { Text } from 'react-native-paper';
+import Footer from "../../components/Footer";
 
 // Define an interface for a GradeItem
 interface GradeItem {
@@ -93,7 +94,7 @@ export function GradeSelection() {
       </ScrollView>
 
       {/* Render navigation buttons */}
-      <View style={screenStyles.bottomButtons}>
+      <Footer>
         <MyButton
           onPress={() => navigation.push("ProvinceSelection")}
           title="Next"
@@ -103,7 +104,7 @@ export function GradeSelection() {
           backgroundColor={false}
           title="Skip"
         />
-      </View>
+      </Footer>
     </View>
   );
 }

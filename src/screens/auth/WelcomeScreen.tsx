@@ -7,6 +7,7 @@ import {screenStyles, typography, useAppTheme} from "../../theme/globalStyles";
 import {StackNavigationProp} from "@react-navigation/stack";
 import MyButton from "../../components/MyButton";
 import { Text } from 'react-native-paper';
+import Footer from "../../components/Footer";
 
 export function WelcomeScreen() {
     const navigation = useNavigation<StackNavigationProp<any>>()
@@ -23,7 +24,7 @@ export function WelcomeScreen() {
         Please Sign in to view personalized recommendations
       </Text>
 
-      <View style={screenStyles.bottomButtons}>
+     <Footer>
         {/* "Sign in" button to navigate to the SignIn screen */}
         <MyButton onPress={() => navigation.push("SignIn")} title="Sign in" />
         {/* "Skip" button to navigate to the GradeSelection screen without signing in */}
@@ -32,7 +33,7 @@ export function WelcomeScreen() {
           backgroundColor={false}
           title="Skip"
         />
-      </View>
+     </Footer>
     </View>
   );
 }

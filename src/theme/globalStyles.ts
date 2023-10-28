@@ -87,18 +87,6 @@ export const screenStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  bottomButtons: {
-    position: "absolute",
-    bottom: 0,
-    height: 160,
-    justifyContent: "space-between",
-    width,
-    alignItems: "center",
-    backgroundColor: colors.secondary,
-    paddingVertical: 15,
-    paddingBottom: 50,
-    flex: 1,
-  },
 });
 
 // Define a custom navigation theme by extending the default theme

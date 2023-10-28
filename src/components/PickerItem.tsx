@@ -27,7 +27,7 @@ const PickerItem: React.FC<PickerItemProps> = ({
           buttonColor={selected ? theme.colors.primary : theme.colors.grayDarker}
           textColor={selected ? theme.colors.white : theme.colors.subTitle}
           onPress={onPress}
-          contentStyle={styles.contentStyle}
+          contentStyle={[styles.contentStyle,{justifyContent: icon ? 'space-between' : 'center',}]}
           style={styles.container}
           icon={() => (
               icon ? icon() : null
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     width: width / 2 - 50,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     paddingRight: 15,
   },
 

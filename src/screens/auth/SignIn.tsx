@@ -8,6 +8,7 @@ import InputWithLabel from "../../components/InputWithLabel";
 import { screenStyles } from "../../theme/globalStyles";
 import {StackNavigationProp} from "@react-navigation/stack";
 import { Text } from 'react-native-paper';
+import Footer from "../../components/Footer";
 
 export function SignIn() {
     const navigation = useNavigation<StackNavigationProp<any>>()
@@ -44,7 +45,7 @@ export function SignIn() {
         />
       </KeyboardAwareScrollView>
 
-      <View style={screenStyles.bottomButtons}>
+      <Footer>
         {/* "Sign in" button to navigate to the GradeSelection screen */}
         <MyButton
           onPress={() => navigation.push("GradeSelection")}
@@ -67,7 +68,7 @@ export function SignIn() {
             title="Sign Up"
           />
         </View>
-      </View>
+      </Footer>
     </View>
   );
 }

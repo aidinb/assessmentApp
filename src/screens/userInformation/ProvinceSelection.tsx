@@ -3,7 +3,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import {
   View,
-  Text,
   ScrollView,
   NativeModules,
   StyleSheet,
@@ -13,12 +12,15 @@ import {
 import MyButton from "../../components/MyButton";
 import PickerItem from "../../components/PickerItem";
 import { colors } from "../../theme/colors";
-import { screenStyles, typography } from "../../theme/globalStyles";
+import {screenStyles, typography, useAppTheme} from "../../theme/globalStyles";
 import { sriLanka } from "../../utils/data";
+import { Text } from 'react-native-paper';
+import Footer from "../../components/Footer";
 
 // Define the ProvinceSelection component
 export function ProvinceSelection() {
   const [selectedProvince, setSelectedProvince] = useState<string>("");
+  const theme  = useAppTheme();
 
   /*
    * Note that this should be fixed after the real authentication system implemented
@@ -46,10 +48,10 @@ export function ProvinceSelection() {
   // Render the component
   return (
     <View style={screenStyles.container}>
-      <Text style={[typography.h1, styles.title]}>What's your province?</Text>
+      <Text variant={'headlineMedium'} style={styles.title}>What's your province?</Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.provinceContainer}>
-          <Text style={[typography.h3, styles.provinceTitle]}>
+          <Text variant={'titleLarge'} style={{color: colors.subTitle}}>
             Provinces of Sri Lanka
           </Text>
           <View style={styles.provinceList}>
@@ -69,10 +71,10 @@ export function ProvinceSelection() {
           </View>
         </View>
       </ScrollView>
-      <View style={screenStyles.bottomButtons}>
+      <Footer>
         <MyButton onPress={saveUser} title="Next" />
         <MyButton onPress={saveUser} backgroundColor={false} title="Skip" />
-      </View>
+      </Footer>
     </View>
   );
 }
@@ -82,7 +84,6 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 20,
     marginLeft: 15,
-    marginBottom: 10,
   },
   scrollViewContent: {
     paddingBottom: 200,
@@ -96,9 +97,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     padding: 10,
-  },
-  provinceTitle: {
-    color: colors.subTitle,
   },
   provinceList: {
     paddingHorizontal: 10,
