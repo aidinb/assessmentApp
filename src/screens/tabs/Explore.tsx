@@ -2,9 +2,7 @@ import { FlashList } from "@shopify/flash-list";
 import React, { useState } from "react";
 import {
   Dimensions,
-  TextInput,
   View,
-  Text,
   Pressable,
   Animated,
   StyleSheet,
@@ -23,8 +21,9 @@ import RenderInstitution from "../../components/RenderInstitution";
 import RenderTeachers from "../../components/RenderTeachers";
 import useFadeAnimation from "../../hooks/useFadeAnimation";
 import { colors } from "../../theme/colors";
-import { formStyles, typography } from "../../theme/globalStyles";
+import {formStyles, typography, useAppTheme} from "../../theme/globalStyles";
 import { areas, institutions, subjects, teachers } from "../../utils/data";
+import {Button, Text, TextInput} from 'react-native-paper';
 
 const { width } = Dimensions.get("window");
 
@@ -112,6 +111,9 @@ export function Explore() {
       fadeOutHeader(Easing.exp);
     }
   };
+
+  const theme  = useAppTheme();
+
   return (
     <Animated.ScrollView
       keyboardDismissMode="on-drag"
@@ -127,54 +129,57 @@ export function Explore() {
         ]}
       >
         <View style={styles.userInfoContainer}>
-          <Text style={typography.h1}>Good evening!</Text>
-          <Text style={[typography.h2, { marginTop: 7 }]}>Hardline Scott</Text>
+          <Text variant={'headlineMedium'}>Good evening!</Text>
+          <Text variant={'titleLarge'} style={ { marginTop: 7,color:theme.colors.subTitle }}>Hardline Scott</Text>
         </View>
         <View style={styles.profilePicContainer}>
           <ProPic />
         </View>
       </Animated.View>
 
-      <View style={[styles.rowContainer, { zIndex: 1001 }]}>
+      <View style={[styles.rowContainer, { zIndex: 1001,paddingTop:10 }]}>
         <View
           style={{
-            width: "85%",
+            width: width-120,
             flexDirection: "row",
             alignItems: "center",
-            marginTop: -10,
+            justifyContent:'center',
           }}
         >
           <TextInput
-            style={formStyles.input}
-            onChangeText={(text) => onChangeText(text)}
-            placeholder="Search"
-            value={search}
+              style={[formStyles.input,{minWidth:width-120}]}
+              onChangeText={onChangeText}
+              placeholder={"Search"}
+              value={search}
           />
+          <Button onPress={pressSearch} style={styles.searchButtonContainer}
+                  icon={() => (
+                      <SearchIcon />
+                  )}>
 
-          <Pressable onPress={pressSearch} style={styles.searchButtonContainer}>
-            <SearchIcon />
-          </Pressable>
+          </Button>
         </View>
-        <Pressable style={styles.filterIconContainer}>
-          <FilterIcon />
-        </Pressable>
+        <Button onPress={pressSearch} contentStyle={{width:44,height:44,paddingLeft:10}} style={styles.filterIconContainer}
+                icon={() => (
+                    <FilterIcon />
+                )}>
+        </Button>
       </View>
 
       <View style={[styles.rowContainer, { zIndex: 1001 }]}>
-        <Text style={typography.h3}>Popular Teachers</Text>
-        <Pressable
-          onPress={() => {
-            if (teacherFilter) {
-              fadeOutTeacherFilter();
-            } else {
-              fadeInTeacherFilter();
-            }
-            setTeacherFilter(!teacherFilter);
-          }}
-          style={styles.filterIconContainer}
-        >
-          {teacherFilter ? <PipeOn /> : <PipeIcon />}
-        </Pressable>
+        <Text variant={'titleLarge'}>Popular Teachers</Text>
+        <Button  onPress={() => {
+          if (teacherFilter) {
+            fadeOutTeacherFilter();
+          } else {
+            fadeInTeacherFilter();
+          }
+          setTeacherFilter(!teacherFilter);
+        }} contentStyle={{width:44,height:44,paddingLeft:10}} style={styles.filterIconContainer}
+                icon={() => (
+                    teacherFilter ? <PipeOn /> : <PipeIcon />
+                )}>
+        </Button>
       </View>
 
       <Animated.View
@@ -226,20 +231,20 @@ export function Explore() {
       />
 
       <View style={[styles.rowContainer, { zIndex: 1001 }]}>
-        <Text style={typography.h3}>Popular Institutions</Text>
-        <Pressable
-          onPress={() => {
-            if (institutionsFilter) {
-              fadeOutInstitutionsFilter();
-            } else {
-              fadeInInstitutionsFilter();
-            }
-            setInstitutionsFilter(!institutionsFilter);
-          }}
-          style={styles.filterIconContainer}
-        >
-          {institutionsFilter ? <PipeOn /> : <PipeIcon />}
-        </Pressable>
+        <Text variant={'titleLarge'}>Popular Institutions</Text>
+        <Button onPress={() => {
+          if (institutionsFilter) {
+            fadeOutInstitutionsFilter();
+          } else {
+            fadeInInstitutionsFilter();
+
+          }
+          setInstitutionsFilter(!institutionsFilter);
+        }} contentStyle={{width:44,height:44,paddingLeft:10}} style={styles.filterIconContainer}
+                 icon={() => (
+                     institutionsFilter ? <PipeOn /> : <PipeIcon />
+                 )}>
+        </Button>
       </View>
 
       <Animated.View
@@ -304,21 +309,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightPink,
     borderRadius: 20,
   },
-
   searchButtonContainer: {
     marginLeft: -50,
-    alignItems: "center",
-    justifyContent: "center",
     width: 44,
+    minWidth:44,
     height: 44,
     backgroundColor: colors.primary,
     borderRadius: 10,
-  },
-
-  filterIconContainer: {
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "center",
-    paddingRight: 19,
+    paddingLeft:10
+  },
+  filterIconContainer: {
+    width: 44,
+    minWidth:44,
+    height: 44,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight:10
   },
   flashListContainer: {
     paddingVertical: 10,

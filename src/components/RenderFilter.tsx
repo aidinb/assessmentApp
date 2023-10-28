@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Pressable,
   Animated,
   Dimensions,
   View,
@@ -8,10 +7,10 @@ import {
 } from "react-native";
 
 import { colors } from "../theme/colors";
-import { typography } from "../theme/globalStyles";
+import { useAppTheme} from "../theme/globalStyles";
+import {Button, Text} from "react-native-paper";
 
 const { width } = Dimensions.get("window");
-const AnimatedText = Animated.Text;
 
 // Define the properties that can be passed to the RenderFilter component.
 interface RenderFilterProps {
@@ -28,25 +27,33 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
   onPress,
   selected,
 }: RenderFilterProps) => {
+  const theme  = useAppTheme();
+
   return (
     <Animated.View style={styles.container}>
-      <AnimatedText style={typography.subTitle}>{title}</AnimatedText>
+      <Text variant={'titleMedium'} style={{color:theme.colors.subTitle}}>{title}</Text>
       <View style={styles.itemsContainer}>
         {items.length > 0
           ? items.map((item) => (
-              <Pressable
-                key={item}
-                onPress={() => onPress(item)}
-                style={[
-                  styles.item,
-                  {
-                    backgroundColor:
-                      selected === item ? colors.primary : colors.white,
-                  },
-                ]}
-              >
-                <AnimatedText>{item}</AnimatedText>
-              </Pressable>
+                <Button
+                    mode="contained"
+                    buttonColor={selected === item ? colors.primary : colors.white}
+                    textColor={selected === item ? colors.white : colors.black}
+                    onPress={() => onPress(item)}
+                    contentStyle={{justifyContent: 'center',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      }}
+                    style={[
+                      styles.item,
+                      {
+                        backgroundColor:
+                            selected === item ? colors.primary : colors.white,
+                      },
+                    ]}
+                >
+                  {item}
+                </Button>
             ))
           : null}
       </View>
@@ -61,20 +68,18 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
     paddingHorizontal: 3,
-    marginBottom: 15,
+    marginBottom: 10,
     paddingRight: 20,
   },
   itemsContainer: {
-    width: "100%",
+    width: width,
     flexDirection: "row",
     flexWrap: "wrap",
   },
   item: {
     marginTop: 10,
     borderRadius: 8,
-    padding: 7,
-    marginRight: 5,
-    paddingHorizontal: 15,
+    marginRight: 10,
   },
 });
 

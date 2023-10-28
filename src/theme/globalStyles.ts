@@ -70,6 +70,7 @@ export const formStyles = StyleSheet.create({
       width: 1,
       height: 2,
     },
+    minHeight:50,
     shadowOpacity: 0.3,
     shadowColor: colors.shadow,
     shadowRadius: 3,

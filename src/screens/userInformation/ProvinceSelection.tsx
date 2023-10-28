@@ -20,7 +20,6 @@ import Footer from "../../components/Footer";
 // Define the ProvinceSelection component
 export function ProvinceSelection() {
   const [selectedProvince, setSelectedProvince] = useState<string>("");
-  const theme  = useAppTheme();
 
   /*
    * Note that this should be fixed after the real authentication system implemented
