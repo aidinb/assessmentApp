@@ -56,6 +56,15 @@ export function GradeSelection() {
     { id: 12, name: "Commerce", icon: () => <CommerceIcon /> },
   ];
 
+  const grades = [
+    {
+      title:"Grade 1-5",
+      items:{Grade1To5Items},
+      selectedGrade:selectedGrade1To5,
+      setSelectedGrade:setSelectedGrade1To5,
+    }
+  ]
+
   // Render the component
   // @ts-ignore
   // @ts-ignore

@@ -40,9 +40,11 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
                     buttonColor={selected === item ? colors.primary : colors.white}
                     textColor={selected === item ? colors.white : colors.black}
                     onPress={() => onPress(item)}
+                    labelStyle={{ marginHorizontal: 10 }}
                     contentStyle={{justifyContent: 'center',
                       flexDirection: 'row',
                       alignItems: 'center',
+
                       }}
                     style={[
                       styles.item,
@@ -64,21 +66,21 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
 // Define the styles for the RenderFilter component.
 const styles = StyleSheet.create({
   container: {
-    width,
+    width:width-40,
     alignItems: "flex-start",
     justifyContent: "center",
-    paddingHorizontal: 3,
-    marginBottom: 10,
-    paddingRight: 20,
+    marginBottom: 5,
   },
   itemsContainer: {
-    width: width,
+    width: width-40,
     flexDirection: "row",
     flexWrap: "wrap",
+    paddingVertical:5,
+
   },
   item: {
     marginTop: 10,
-    borderRadius: 8,
+    borderRadius: 9,
     marginRight: 10,
   },
 });

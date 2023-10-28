@@ -53,8 +53,8 @@ export function Explore() {
   } = useFadeAnimation(
     0,
     Platform.OS === "web"
-      ? numberOfTeacherFilterItems * 21
-      : numberOfTeacherFilterItems * 27,
+      ? numberOfTeacherFilterItems * 25
+      : numberOfTeacherFilterItems * 30,
   );
   const {
     opacity: opacityInstitutionsFilter,
