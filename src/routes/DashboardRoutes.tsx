@@ -4,11 +4,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import {
-  NativeModules,
-  Text,
-  Pressable,
-  StyleSheet,
-  Platform,
+    NativeModules,
+    Text,
+    Pressable,
+    StyleSheet,
+    Platform,
 } from "react-native";
 
 import ClassWorkTab from "../assets/classWorkTab.svg";
@@ -22,113 +22,123 @@ import { Explore } from "../screens/tabs/Explore";
 import { Stream } from "../screens/tabs/Stream";
 import { colors } from "../theme/colors";
 
+type TabProps = {
+    name: string;
+    component: React.ComponentType<any>;
+    options: {
+        title: string;
+        tabBarIcon: (props: { focused: boolean; color: string }) => JSX.Element;
+        tabBarLabel: (props: { focused: boolean }) => JSX.Element;
+        tabBarLabelPosition?: "below-icon";
+        headerRight?: (props: any) => JSX.Element;
+    };
+};
+
 const Tab = createBottomTabNavigator();
 
-// Define the tabs and their configuration for the bottom tab navigator.
-const MyTabs = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Explore"
-        component={Explore}
-        options={{
-          title: "Explore",
-          tabBarIcon: ({ focused, color }) =>
-            focused ? <ExploreTab /> : <ExploreTabDisable />,
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={[
-                styles.tabLabel,
-                { color: focused ? colors.primary : colors.primaryDark },
-              ]}
-            >
-              Explore
-            </Text>
-          ),
-          tabBarLabelPosition: "below-icon",
-          headerRight: (props) => (
-            <Pressable
-              onPress={async () => {
-                await AsyncStorage.setItem("user", "");
-                if (Platform.OS === "web") {
-                  location.reload();
-                } else {
-                  NativeModules.DevSettings.reload();
-                }
-              }}
-              style={{ flexDirection: "row", paddingRight: 10 }}
-            >
-              <Ionicons
-                name="log-out-outline"
-                size={30}
-                color={colors.primary}
-              />
-            </Pressable>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Stream"
-        component={Stream}
-        options={{
-          title: "Stream",
-          tabBarIcon: ({ focused, color }) =>
-            focused ? <StreamTab /> : <StreamTabDisable />,
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={[
-                styles.tabLabel,
-                { color: focused ? colors.primary : colors.primaryDark },
-              ]}
-            >
-              Stream
-            </Text>
-          ),
-          tabBarLabelPosition: "below-icon",
-        }}
-      />
-      <Tab.Screen
-        name="ClassWork"
-        component={ClassWork}
-        options={{
-          title: "ClassWork",
-          tabBarIcon: ({ focused, color }) =>
-            focused ? <ClassWorkTab /> : <ClassWorkTabDisable />,
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={[
-                styles.tabLabel,
-                { color: focused ? colors.primary : colors.primaryDark },
-              ]}
-            >
-              ClassWork
-            </Text>
-          ),
-          tabBarLabelPosition: "below-icon",
-        }}
-      />
-    </Tab.Navigator>
-  );
+const MyTabs: React.FC = () => {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen
+                name="Explore"
+                component={Explore}
+                options={{
+                    title: "Explore",
+                    tabBarIcon: ({ focused, color }) =>
+                        focused ? <ExploreTab /> : <ExploreTabDisable />,
+                    tabBarLabel: ({ focused }) => (
+                        <Text
+                            style={[
+                                styles.tabLabel,
+                                { color: focused ? colors.primary : colors.primaryDark },
+                            ]}
+                        >
+                            Explore
+                        </Text>
+                    ),
+                    tabBarLabelPosition: "below-icon",
+                    headerRight: (props) => (
+                        <Pressable
+                            onPress={async () => {
+                                await AsyncStorage.setItem("user", "");
+                                if (Platform.OS === "web") {
+                                    location.reload();
+                                } else {
+                                    NativeModules.DevSettings.reload();
+                                }
+                            }}
+                            style={{ flexDirection: "row", paddingRight: 10 }}
+                        >
+                            <Ionicons
+                                name="log-out-outline"
+                                size={30}
+                                color={colors.primary}
+                            />
+                        </Pressable>
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Stream"
+                component={Stream}
+                options={{
+                    title: "Stream",
+                    tabBarIcon: ({ focused, color }) =>
+                        focused ? <StreamTab /> : <StreamTabDisable />,
+                    tabBarLabel: ({ focused }) => (
+                        <Text
+                            style={[
+                                styles.tabLabel,
+                                { color: focused ? colors.primary : colors.primaryDark },
+                            ]}
+                        >
+                            Stream
+                        </Text>
+                    ),
+                    tabBarLabelPosition: "below-icon",
+                }}
+            />
+            <Tab.Screen
+                name="ClassWork"
+                component={ClassWork}
+                options={{
+                    title: "ClassWork",
+                    tabBarIcon: ({ focused, color }) =>
+                        focused ? <ClassWorkTab /> : <ClassWorkTabDisable />,
+                    tabBarLabel: ({ focused }) => (
+                        <Text
+                            style={[
+                                styles.tabLabel,
+                                { color: focused ? colors.primary : colors.primaryDark },
+                            ]}
+                        >
+                            ClassWork
+                        </Text>
+                    ),
+                    tabBarLabelPosition: "below-icon",
+                }}
+            />
+        </Tab.Navigator>
+    );
 };
 
 const Stack = createNativeStackNavigator();
 
-// Define the stack navigator that wraps the bottom tab navigator.
-export function DashboardRoutes() {
-  return (
-    <Stack.Navigator initialRouteName="Explore">
-      <Stack.Screen
-        name="MyTabs"
-        component={MyTabs}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
+export function DashboardRoutes(): JSX.Element {
+    return (
+        <Stack.Navigator initialRouteName="Explore">
+            <Stack.Screen
+                name="MyTabs"
+                component={MyTabs}
+                options={{ headerShown: false }}
+            />
+        </Stack.Navigator>
+    );
 }
 
 const styles = StyleSheet.create({
-  tabLabel: {
-    fontSize: 12,
-    marginBottom: Platform.OS === "web" ? 3 : 0,
-  },
+    tabLabel: {
+        fontSize: 12,
+        marginBottom: Platform.OS === "web" ? 3 : 0,
+    },
 });
