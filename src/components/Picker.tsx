@@ -41,6 +41,7 @@ const Picker: React.FC<PickerProps> = React.memo(
           labelStyle={{
             color: theme.colors.grayText,
             fontSize: 18,
+              fontFamily:'Inter_600SemiBold'
           }}
           contentStyle={styles.buttonContentStyle}
           rippleColor={theme.colors.transparent}

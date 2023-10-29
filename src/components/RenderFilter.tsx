@@ -3,6 +3,7 @@ import { Animated, View, StyleSheet } from "react-native";
 import { Button, Text } from "react-native-paper";
 
 import { useAppTheme } from "../theme/globalStyles";
+import {Inter_400Regular} from "@expo-google-fonts/inter";
 
 // Define the properties that can be passed to the RenderFilter component.
 interface RenderFilterProps {
@@ -23,7 +24,7 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
 
   return (
     <Animated.View style={styles.container}>
-      <Text variant="titleMedium" style={{ color: theme.colors.grayText }}>
+      <Text variant="titleMedium" style={{ color: theme.colors.grayText,fontFamily: 'Inter_600SemiBold' }}>
         {title}
       </Text>
       <View style={styles.itemsContainer}>
@@ -39,7 +40,7 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
                   selected === item ? theme.colors.white : theme.colors.black
                 }
                 onPress={() => onPress(item)}
-                labelStyle={{ marginHorizontal: 10 }}
+                labelStyle={{ marginHorizontal: 10, fontFamily: 'Inter_400Regular' }}
                 contentStyle={styles.buttonContentStyle}
                 style={[
                   styles.item,

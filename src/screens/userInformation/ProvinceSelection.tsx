@@ -51,7 +51,7 @@ export function ProvinceSelection() {
       </Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.provinceContainer}>
-          <Text variant="titleLarge" style={{ color: colors.grayText }}>
+          <Text variant="titleLarge" style={{ color: colors.grayText,fontFamily:'Inter_600SemiBold' }}>
             Provinces of Sri Lanka
           </Text>
           <View style={styles.provinceList}>
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 20,
     marginLeft: 15,
+    fontFamily:'Inter_600SemiBold'
   },
   scrollViewContent: {
     paddingBottom: 200,

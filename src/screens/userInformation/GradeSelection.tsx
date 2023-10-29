@@ -82,7 +82,7 @@ export function GradeSelection() {
 
   return (
     <View style={screenStyles.container}>
-      <Text variant="headlineMedium" style={styles.title}>
+      <Text variant="headlineMedium" style={styles.mainTitle}>
         What's your grade?
       </Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -118,10 +118,11 @@ export function GradeSelection() {
 
 // Define styles for the component
 const styles = StyleSheet.create({
-  title: {
+  mainTitle: {
     marginTop: 20,
     marginLeft: 15,
     marginBottom: 10,
+    fontFamily:'Inter_600SemiBold'
   },
   scrollViewContent: {
     paddingBottom: 200,

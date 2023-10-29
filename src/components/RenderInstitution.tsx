@@ -4,6 +4,7 @@ import { Card, Text } from "react-native-paper";
 import StarRating from "react-native-star-rating-widget";
 
 import { theme, useAppTheme } from "../theme/globalStyles";
+import {Inter_400Regular} from "@expo-google-fonts/inter";
 
 // Define the properties that can be passed to the RenderInstitution component.
 interface RenderInstitutionProps {
@@ -41,7 +42,7 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = React.memo(
         <Card.Content>
           <Text
             numberOfLines={1}
-            style={{ width: "37%" }}
+            style={{ width: "37%",fontFamily: 'Inter_600SemiBold' }}
             variant="titleMedium"
           >
             {item.name}
@@ -66,20 +67,20 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = React.memo(
             />
             <Text
               numberOfLines={1}
-              style={{ color: theme.colors.grayText }}
+              style={{ color: theme.colors.grayText,fontFamily: 'Inter_400Regular' }}
               variant="bodySmall"
             >{`${item.rate} (${item.numberOfRates})`}</Text>
           </View>
           <Text
             numberOfLines={1}
-            style={{ width: "37%" }}
+            style={{ width: "37%", fontFamily: 'Inter_600SemiBold' }}
             variant="labelMedium"
           >
             {item.type}
           </Text>
           <Text
             variant="bodySmall"
-            style={{ marginTop: 5, color: theme.colors.grayText, width: "37%" }}
+            style={{ marginTop: 5, color: theme.colors.grayText, width: "37%",fontFamily: 'Inter_400Regular' }}
           >
             {item.description}
           </Text>
