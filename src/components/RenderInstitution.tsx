@@ -1,16 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import {
-  Pressable,
-  Image,
-  Text,
-  View,
-  Dimensions,
-  StyleSheet,
+  Dimensions, Platform,
+  StyleSheet, View,
 } from "react-native";
 
 import { colors } from "../theme/colors";
-import { typography } from "../theme/globalStyles";
-
+import {typography, useAppTheme} from "../theme/globalStyles";
+import {Card} from "react-native-paper";
+import { Text} from "react-native-paper";
+import StarRating from 'react-native-star-rating-widget';
 const { width } = Dimensions.get("window");
 
 // Define the properties that can be passed to the RenderInstitution component.
@@ -19,6 +17,8 @@ interface RenderInstitutionProps {
     image: string; // URL or path to the institution's image.
     name: string; // The name of the institution.
     type: string; // The type or category of the institution.
+    rate: number; // The rate or category of the institution.
+    numberOfRates: number; // The number of rate or category of the institution.
     description: string; // A description or additional information about the institution.
   };
   onPress: () => void; // Function to handle the press event on the institution item.
@@ -29,19 +29,31 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = ({
   item,
   onPress,
 }: RenderInstitutionProps) => {
-  return (
-    <Pressable onPress={onPress} style={styles.container}>
+  const theme  = useAppTheme();
 
-      <Image
-          // @ts-ignore
-          source={item.image}
-          style={styles.image} />
-      <View style={styles.infoContainer}>
-        <Text style={typography.h3}>{item.name}</Text>
-        <Text style={styles.type}>{item.type}</Text>
-        <Text style={styles.description}>{item.description}</Text>
-      </View>
-    </Pressable>
+  return (
+      <Card contentStyle={{flexDirection:'row'}} onPress={onPress} style={styles.container}>
+        <Card.Cover source={item.image} style={styles.image}/>
+        <Card.Content>
+          <Text numberOfLines={1}  variant="titleLarge">{item.name}</Text>
+          <View style={{flexDirection:'row',marginTop:10,marginBottom:10,alignItems:'center'}}>
+          <StarRating
+              onChange={(rating)=>{
+                console.log(rating)
+              }}
+              maxStars={5}
+              rating={item.rate}
+              starSize={15}
+              starStyle={{marginHorizontal:1}}
+              style={{width:80,marginRight:10}}
+          />
+            <Text numberOfLines={1} style={{color:theme.colors.subTitle}}  variant="bodySmall">{`${item.rate} (${item.numberOfRates})`}</Text>
+
+          </View>
+          <Text numberOfLines={1}  variant="labelMedium">{item.type}</Text>
+          <Text variant="bodySmall" style={{marginTop:5,color: theme.colors.subTitle,width:(width - 50)/2}}>{item.description}</Text>
+        </Card.Content>
+      </Card>
   );
 };
 
@@ -53,13 +65,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 10,
     justifyContent: "flex-start",
-    shadowOffset: {
-      width: 1,
-      height: 2,
-    },
-    shadowOpacity: 0.3,
-    shadowColor: colors.shadow,
-    shadowRadius: 3,
     alignItems: "flex-start",
     width: width - 40,
     flexDirection: "row",

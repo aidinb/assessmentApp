@@ -6,6 +6,7 @@ export const institutions = [
       "Studying how CBD awareness and availability as it related to pain management alternatives.",
     image: require("../assets/victory.png"),
     rate: 4.5,
+    numberOfRates:413
   },
   {
     name: "New Montana",
@@ -14,6 +15,8 @@ export const institutions = [
       "Montana Higher Educational Institute. Gampaha montana.gampaha@gmail.com",
     image: require("../assets/newMontana.png"),
     rate: 4.1,
+    numberOfRates:354
+
   },
   {
     name: "Susipwan Institute",
@@ -22,6 +25,8 @@ export const institutions = [
       "This is a private higher education center which conducting classes for GCE AL Students.",
     image: require("../assets/susipwan.png"),
     rate: 3.0,
+    numberOfRates:745
+
   },
 ];
 

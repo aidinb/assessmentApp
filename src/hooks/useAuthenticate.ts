@@ -9,8 +9,6 @@ export function useAuthenticate() {
       try {
         // Read data from AsyncStorage
         const storedData = await AsyncStorage.getItem("user");
-        console.log("storedData", storedData);
-
         // Check if the data is available and set the authenticated state accordingly
         if (storedData === "test") {
           setAuthenticated(true);

@@ -36,6 +36,7 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
         {items.length > 0
           ? items.map((item) => (
                 <Button
+                    key={item}
                     mode="contained"
                     buttonColor={selected === item ? colors.primary : colors.white}
                     textColor={selected === item ? colors.white : colors.black}

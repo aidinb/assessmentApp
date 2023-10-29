@@ -150,6 +150,8 @@ export function Explore() {
               style={[formStyles.input,{minWidth:width-120}]}
               onChangeText={onChangeText}
               placeholder={"Search"}
+              underlineColor={theme.colors.transparent}
+              activeUnderlineColor={theme.colors.primary}
               value={search}
           />
           <Button onPress={pressSearch} style={styles.searchButtonContainer}

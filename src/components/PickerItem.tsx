@@ -29,6 +29,7 @@ const PickerItem: React.FC<PickerItemProps> = ({
           onPress={onPress}
           contentStyle={[styles.contentStyle,{justifyContent: icon ? 'space-between' : 'center',}]}
           style={styles.container}
+          labelStyle={{marginHorizontal:2}}
           icon={() => (
               icon ? icon() : null
           )}
