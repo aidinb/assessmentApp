@@ -1,16 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Animated,
-  Easing,
-} from "react-native";
+import { View, StyleSheet, Animated, Easing } from "react-native";
+import { Button } from "react-native-paper";
 
 import useFadeAnimation from "../hooks/useFadeAnimation";
 import { colors } from "../theme/colors";
-import {Button} from "react-native-paper";
-import {useAppTheme} from "../theme/globalStyles";
+import { useAppTheme } from "../theme/globalStyles";
 
 // Define the properties that can be passed to the Picker component.
 interface PickerProps {
@@ -28,10 +23,7 @@ const Picker: React.FC<PickerProps> = ({
   // State to control whether the picker is open or closed.
   const [open, setOpen] = useState(false);
   // Custom hook for managing fade animations.
-    const {
-        opacity, size,
-        fadeIn, fadeOut
-    } = useFadeAnimation(0, animationSize);
+  const { opacity, size, fadeIn, fadeOut } = useFadeAnimation(0, animationSize);
 
   // Function to handle the press event and toggle the picker open/closed.
   const onPress = () => {
@@ -42,33 +34,35 @@ const Picker: React.FC<PickerProps> = ({
     }
     setOpen(!open); // Toggle the open state.
   };
-  const theme  = useAppTheme();
+  const theme = useAppTheme();
 
   return (
     <View style={styles.container}>
-      <Button onPress={onPress}
-              labelStyle={styles.title}
-              contentStyle={{
-                width: "100%",
-                minHeight: 40,
-                alignSelf:'center',
-                borderRadius: 8,
-                justifyContent:'space-between',
-                  paddingVertical:10,
-                flexDirection:'row-reverse',
-              }}
-              rippleColor={theme.colors.transparent}
-              style={{
-                  width:"100%",
-                zIndex: 1001,
-              }}
-              icon={() => (
-                  <Ionicons
-                      name={open ? "chevron-up" : "chevron-down"}
-                      size={30}
-                      color={colors.subTitle}
-                  />
-              )}>
+      <Button
+        onPress={onPress}
+        labelStyle={styles.title}
+        contentStyle={{
+          width: "100%",
+          minHeight: 40,
+          alignSelf: "center",
+          borderRadius: 8,
+          justifyContent: "space-between",
+          paddingVertical: 10,
+          flexDirection: "row-reverse",
+        }}
+        rippleColor={theme.colors.transparent}
+        style={{
+          width: "100%",
+          zIndex: 1001,
+        }}
+        icon={() => (
+          <Ionicons
+            name={open ? "chevron-up" : "chevron-down"}
+            size={30}
+            color={colors.subTitle}
+          />
+        )}
+      >
         {title}
       </Button>
       <Animated.View
@@ -92,12 +86,12 @@ const styles = StyleSheet.create({
   container: {
     width: "95%",
     minHeight: 40,
-      backgroundColor: colors.gray,
+    backgroundColor: colors.gray,
     borderRadius: 8,
     alignSelf: "center",
     marginTop: 20,
-    alignItems:'flex-start',
-    justifyContent:'flex-start'
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
   },
   containerStyle: {
     paddingHorizontal: 10,

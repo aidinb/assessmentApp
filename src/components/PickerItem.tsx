@@ -1,8 +1,8 @@
 import React from "react";
-import {StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
+import { Button } from "react-native-paper";
 
-import {Button} from "react-native-paper";
-import {useAppTheme} from "../theme/globalStyles";
+import { useAppTheme } from "../theme/globalStyles";
 
 // Define the properties that can be passed to the PickerItem component.
 interface PickerItemProps {
@@ -18,23 +18,24 @@ const PickerItem: React.FC<PickerItemProps> = ({
   onPress,
   selected,
 }: PickerItemProps) => {
-  const theme  = useAppTheme();
+  const theme = useAppTheme();
 
   return (
-      <Button
-          mode="contained"
-          buttonColor={selected ? theme.colors.primary : theme.colors.grayDarker}
-          textColor={selected ? theme.colors.white : theme.colors.subTitle}
-          onPress={onPress}
-          contentStyle={[styles.contentStyle,{justifyContent: icon ? 'space-between' : 'center',}]}
-          style={styles.container}
-          labelStyle={{marginHorizontal:2}}
-          icon={() => (
-              icon ? icon() : null
-          )}
-      >
-        {title}
-      </Button>
+    <Button
+      mode="contained"
+      buttonColor={selected ? theme.colors.primary : theme.colors.grayDarker}
+      textColor={selected ? theme.colors.white : theme.colors.subTitle}
+      onPress={onPress}
+      contentStyle={[
+        styles.contentStyle,
+        { justifyContent: icon ? "space-between" : "center" },
+      ]}
+      style={styles.container}
+      labelStyle={{ marginHorizontal: 2 }}
+      icon={() => (icon ? icon() : null)}
+    >
+      {title}
+    </Button>
   );
 };
 
@@ -49,11 +50,10 @@ const styles = StyleSheet.create({
   contentStyle: {
     height: 53,
     width: "100%",
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingRight: 15,
   },
-
 });
 
 // Export the PickerItem component as the default export of this module.

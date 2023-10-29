@@ -8,14 +8,14 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
+import { Text } from "react-native-paper";
 
+import Footer from "../../components/Footer";
 import MyButton from "../../components/MyButton";
 import PickerItem from "../../components/PickerItem";
 import { colors } from "../../theme/colors";
-import {screenStyles, typography, useAppTheme} from "../../theme/globalStyles";
+import { screenStyles } from "../../theme/globalStyles";
 import { sriLanka } from "../../utils/data";
-import { Text } from 'react-native-paper';
-import Footer from "../../components/Footer";
 
 // Define the ProvinceSelection component
 export function ProvinceSelection() {
@@ -47,10 +47,12 @@ export function ProvinceSelection() {
   // Render the component
   return (
     <View style={screenStyles.container}>
-      <Text variant={'headlineMedium'} style={styles.title}>What's your province?</Text>
+      <Text variant="headlineMedium" style={styles.title}>
+        What's your province?
+      </Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.provinceContainer}>
-          <Text variant={'titleLarge'} style={{color: colors.subTitle}}>
+          <Text variant="titleLarge" style={{ color: colors.subTitle }}>
             Provinces of Sri Lanka
           </Text>
           <View style={styles.provinceList}>

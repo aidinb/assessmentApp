@@ -1,9 +1,8 @@
 import React from "react";
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Card, Text } from "react-native-paper";
 
 import { colors } from "../theme/colors";
-import {Card} from "react-native-paper";
-import { Text} from "react-native-paper";
 
 // Define the properties that can be passed to the RenderTeachers component.
 interface RenderTeachersProps {
@@ -21,13 +20,17 @@ const RenderTeachers: React.FC<RenderTeachersProps> = ({
   onPress,
 }: RenderTeachersProps) => {
   return (
-      <Card onPress={onPress} style={styles.container}>
-        <Card.Cover source={item.image} style={styles.image}/>
-        <Card.Content>
-          <Text numberOfLines={1}  variant="labelLarge">{item.name}</Text>
-          <Text variant="bodyMedium" style={{color: colors.subTitle,}}>{item.field}</Text>
-        </Card.Content>
-      </Card>
+    <Card onPress={onPress} style={styles.container}>
+      <Card.Cover source={item.image} style={styles.image} />
+      <Card.Content>
+        <Text numberOfLines={1} variant="labelLarge">
+          {item.name}
+        </Text>
+        <Text variant="bodyMedium" style={{ color: colors.subTitle }}>
+          {item.field}
+        </Text>
+      </Card.Content>
+    </Card>
   );
 };
 
@@ -38,16 +41,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     padding: 10,
     justifyContent: "center",
-    width:130,
-    height:180,
-    paddingHorizontal:0
-
+    width: 130,
+    height: 180,
+    paddingHorizontal: 0,
   },
   image: {
     width: 110,
     height: 115,
     marginBottom: 10,
-    alignSelf:'center'
+    alignSelf: "center",
   },
 });
 

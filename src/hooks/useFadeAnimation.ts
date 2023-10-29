@@ -43,7 +43,7 @@ const useFadeAnimation = (
   // Create an interpolation for controlling size based on opacity
   const size = opacity.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, boxSize]
+    outputRange: [0, boxSize],
   });
 
   // Return the animated values and functions

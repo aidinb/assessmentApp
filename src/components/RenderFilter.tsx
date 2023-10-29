@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  Animated,
-  View,
-  StyleSheet,
-} from "react-native";
+import { Animated, View, StyleSheet } from "react-native";
+import { Button, Text } from "react-native-paper";
 
 import { colors } from "../theme/colors";
-import { useAppTheme} from "../theme/globalStyles";
-import {Button, Text} from "react-native-paper";
-
+import { useAppTheme } from "../theme/globalStyles";
 
 // Define the properties that can be passed to the RenderFilter component.
 interface RenderFilterProps {
@@ -25,36 +20,38 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
   onPress,
   selected,
 }: RenderFilterProps) => {
-  const theme  = useAppTheme();
+  const theme = useAppTheme();
 
   return (
     <Animated.View style={styles.container}>
-      <Text variant={'titleMedium'} style={{color:theme.colors.subTitle}}>{title}</Text>
+      <Text variant="titleMedium" style={{ color: theme.colors.subTitle }}>
+        {title}
+      </Text>
       <View style={styles.itemsContainer}>
         {items.length > 0
           ? items.map((item) => (
-                <Button
-                    key={item}
-                    mode="contained"
-                    buttonColor={selected === item ? colors.primary : colors.white}
-                    textColor={selected === item ? colors.white : colors.black}
-                    onPress={() => onPress(item)}
-                    labelStyle={{ marginHorizontal: 10 }}
-                    contentStyle={{justifyContent: 'center',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-
-                      }}
-                    style={[
-                      styles.item,
-                      {
-                        backgroundColor:
-                            selected === item ? colors.primary : colors.white,
-                      },
-                    ]}
-                >
-                  {item}
-                </Button>
+              <Button
+                key={item}
+                mode="contained"
+                buttonColor={selected === item ? colors.primary : colors.white}
+                textColor={selected === item ? colors.white : colors.black}
+                onPress={() => onPress(item)}
+                labelStyle={{ marginHorizontal: 10 }}
+                contentStyle={{
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+                style={[
+                  styles.item,
+                  {
+                    backgroundColor:
+                      selected === item ? colors.primary : colors.white,
+                  },
+                ]}
+              >
+                {item}
+              </Button>
             ))
           : null}
       </View>
@@ -68,14 +65,13 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "flex-start",
     justifyContent: "center",
-    marginBottom:10
+    marginBottom: 10,
   },
   itemsContainer: {
     width: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
-    paddingVertical:5,
-
+    paddingVertical: 5,
   },
   item: {
     marginTop: 10,

@@ -1,18 +1,18 @@
 // Import required modules and components
 import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 
 import Arts from "../../assets/arts.svg"; // Import Arts SVG
 import CommerceIcon from "../../assets/commerceIcon.svg"; // Import CommerceIcon SVG
 import MathsIcon from "../../assets/mathsIcon.svg"; // Import MathsIcon SVG
 import ScienceIcon from "../../assets/scienceIcon.svg"; // Import ScienceIcon SVG
-import MyButton from "../../components/MyButton"; // Import MyButton component
-import Grade from "../../components/Grade"; // Import Grade component
-import { screenStyles, typography } from "../../theme/globalStyles"; // Import global styles
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { Text } from 'react-native-paper';
 import Footer from "../../components/Footer";
+import Grade from "../../components/Grade"; // Import Grade component
+import MyButton from "../../components/MyButton"; // Import MyButton component
+import { screenStyles } from "../../theme/globalStyles"; // Import global styles
 
 // Define an interface for a GradeItem
 interface GradeItem {
@@ -23,7 +23,7 @@ interface GradeItem {
 
 // Define the GradeSelection component
 export function GradeSelection() {
-  const navigation = useNavigation<StackNavigationProp<any>>()
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   // Define state variables to track selected grades
   const [selectedGrade1To5, setSelectedGrade1To5] = useState<string>("");
@@ -61,7 +61,9 @@ export function GradeSelection() {
   // @ts-ignore
   return (
     <View style={screenStyles.container}>
-      <Text variant={'headlineMedium'} style={styles.title}>What's your grade?</Text>
+      <Text variant="headlineMedium" style={styles.title}>
+        What's your grade?
+      </Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {/* Render Grade components for different grade ranges */}
         <Grade

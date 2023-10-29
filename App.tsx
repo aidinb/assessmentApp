@@ -5,12 +5,11 @@ import {
   Inter_700Bold,
   Inter_800ExtraBold,
 } from "@expo-google-fonts/inter";
-import { View } from "react-native";
+import { PaperProvider } from "react-native-paper";
 
 import Loading from "./src/components/Loading";
 import { Routes } from "./src/routes";
-import {  PaperProvider, useTheme} from "react-native-paper";
-import {theme} from "./src/theme/globalStyles";
+import { theme } from "./src/theme/globalStyles";
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
@@ -26,8 +25,8 @@ export default function App() {
   }
 
   return (
-      <PaperProvider theme={theme}>
-        <Routes/>
-      </PaperProvider>
+    <PaperProvider theme={theme}>
+      <Routes />
+    </PaperProvider>
   );
 }

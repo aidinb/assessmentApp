@@ -1,13 +1,10 @@
 import React from "react";
-import {
-  StyleSheet, View,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Card, Text } from "react-native-paper";
+import StarRating from "react-native-star-rating-widget";
 
 import { colors } from "../theme/colors";
-import { useAppTheme} from "../theme/globalStyles";
-import {Card} from "react-native-paper";
-import { Text} from "react-native-paper";
-import StarRating from 'react-native-star-rating-widget';
+import { useAppTheme } from "../theme/globalStyles";
 
 // Define the properties that can be passed to the RenderInstitution component.
 interface RenderInstitutionProps {
@@ -27,33 +24,54 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = ({
   item,
   onPress,
 }: RenderInstitutionProps) => {
-  const theme  = useAppTheme();
+  const theme = useAppTheme();
 
   return (
-      <Card contentStyle={{flexDirection:'row'}} onPress={onPress} style={styles.container}>
-        <Card.Cover
-            source={item.image}
-            style={styles.image}/>
-        <Card.Content>
-          <Text numberOfLines={1} style={{width:"40%"}}  variant="titleMedium">{item.name}</Text>
-          <View style={{flexDirection:'row',marginTop:10,marginBottom:10,alignItems:'center'}}>
+    <Card
+      contentStyle={{ flexDirection: "row" }}
+      onPress={onPress}
+      style={styles.container}
+    >
+      <Card.Cover source={item.image} style={styles.image} />
+      <Card.Content>
+        <Text numberOfLines={1} style={{ width: "40%" }} variant="titleMedium">
+          {item.name}
+        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            marginTop: 10,
+            marginBottom: 10,
+            alignItems: "center",
+          }}
+        >
           <StarRating
-              onChange={(rating)=>{
-                console.log(rating)
-              }}
-              maxStars={5}
-              rating={item.rate}
-              starSize={15}
-              starStyle={{marginHorizontal:1}}
-              style={{width:80,marginRight:10}}
+            onChange={(rating) => {
+              console.log(rating);
+            }}
+            maxStars={5}
+            rating={item.rate}
+            starSize={15}
+            starStyle={{ marginHorizontal: 1 }}
+            style={{ width: 80, marginRight: 10 }}
           />
-            <Text numberOfLines={1} style={{color:theme.colors.subTitle,}}  variant="bodySmall">{`${item.rate} (${item.numberOfRates})`}</Text>
-
-          </View>
-          <Text numberOfLines={1} style={{width:"40%"}}  variant="labelMedium">{item.type}</Text>
-          <Text variant="bodySmall" style={{marginTop:5,color: theme.colors.subTitle,width:"40%"}}>{item.description}</Text>
-        </Card.Content>
-      </Card>
+          <Text
+            numberOfLines={1}
+            style={{ color: theme.colors.subTitle }}
+            variant="bodySmall"
+          >{`${item.rate} (${item.numberOfRates})`}</Text>
+        </View>
+        <Text numberOfLines={1} style={{ width: "40%" }} variant="labelMedium">
+          {item.type}
+        </Text>
+        <Text
+          variant="bodySmall"
+          style={{ marginTop: 5, color: theme.colors.subTitle, width: "40%" }}
+        >
+          {item.description}
+        </Text>
+      </Card.Content>
+    </Card>
   );
 };
 

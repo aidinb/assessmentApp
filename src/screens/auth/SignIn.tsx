@@ -1,17 +1,18 @@
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Text } from "react-native-paper";
+
 import SignInBanner from "../../assets/signInBanner.svg";
-import MyButton from "../../components/MyButton";
-import InputWithLabel from "../../components/InputWithLabel";
-import { screenStyles } from "../../theme/globalStyles";
-import {StackNavigationProp} from "@react-navigation/stack";
-import { Text } from 'react-native-paper';
 import Footer from "../../components/Footer";
+import InputWithLabel from "../../components/InputWithLabel";
+import MyButton from "../../components/MyButton";
+import { screenStyles } from "../../theme/globalStyles";
 
 export function SignIn() {
-    const navigation = useNavigation<StackNavigationProp<any>>()
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
 
@@ -54,14 +55,14 @@ export function SignIn() {
         <View
           style={{
             flexDirection: "row",
-           alignItems: "center",
+            alignItems: "center",
             alignSelf: "center",
           }}
         >
           <Text>Dont have account?</Text>
           {/* "Sign Up" button to navigate to the SignUp screen */}
           <MyButton
-            style={{ minWidth: 30,marginLeft:-18 }}
+            style={{ minWidth: 30, marginLeft: -18 }}
             onPress={() => navigation.push("SignUp")}
             backgroundColor={false}
             title="Sign Up"

@@ -1,15 +1,7 @@
 import { FlashList } from "@shopify/flash-list";
 import React, { useState } from "react";
-import {
-  Dimensions,
-  View,
-  Pressable,
-  Animated,
-  StyleSheet,
-  Easing,
-  Keyboard,
-  Platform,
-} from "react-native";
+import { View, Animated, StyleSheet, Easing, Keyboard } from "react-native";
+import { Button, Text, TextInput } from "react-native-paper";
 
 import FilterIcon from "../../assets/filterIcon.svg";
 import PipeIcon from "../../assets/pipeIcon.svg";
@@ -21,11 +13,8 @@ import RenderInstitution from "../../components/RenderInstitution";
 import RenderTeachers from "../../components/RenderTeachers";
 import useFadeAnimation from "../../hooks/useFadeAnimation";
 import { colors } from "../../theme/colors";
-import {formStyles, typography, useAppTheme} from "../../theme/globalStyles";
+import { formStyles, typography, useAppTheme } from "../../theme/globalStyles";
 import { areas, institutions, subjects, teachers } from "../../utils/data";
-import {Button, Text, TextInput} from 'react-native-paper';
-
-const { width } = Dimensions.get("window");
 
 // Define the Explore function component
 export function Explore() {
@@ -50,10 +39,7 @@ export function Explore() {
     size: sizeTeacherFilter,
     fadeIn: fadeInTeacherFilter,
     fadeOut: fadeOutTeacherFilter,
-  } = useFadeAnimation(
-    0,
-      numberOfTeacherFilterItems * 28,
-  );
+  } = useFadeAnimation(0, numberOfTeacherFilterItems * 28);
   const {
     opacity: opacityInstitutionsFilter,
     size: sizeInstitutionsFilter,
@@ -84,7 +70,13 @@ export function Explore() {
   // Define a function to render an empty container when there are no search results
   const renderEmptyContainer = () => {
     return (
-      <View style={{ width:"100%", alignItems: "center", justifyContent: "center" }}>
+      <View
+        style={{
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Text style={typography.h4}>No Result.</Text>
       </View>
     );
@@ -110,7 +102,7 @@ export function Explore() {
     }
   };
 
-  const theme  = useAppTheme();
+  const theme = useAppTheme();
 
   return (
     <Animated.ScrollView
@@ -127,59 +119,64 @@ export function Explore() {
         ]}
       >
         <View style={styles.userInfoContainer}>
-          <Text variant={'headlineMedium'}>Good evening!</Text>
-          <Text variant={'titleLarge'} style={ { marginTop: 7,color:theme.colors.subTitle }}>Hardline Scott</Text>
+          <Text variant="headlineMedium">Good evening!</Text>
+          <Text
+            variant="titleLarge"
+            style={{ marginTop: 7, color: theme.colors.subTitle }}
+          >
+            Hardline Scott
+          </Text>
         </View>
         <View style={styles.profilePicContainer}>
           <ProPic />
         </View>
       </Animated.View>
 
-      <View style={[styles.rowContainer, { zIndex: 1001,paddingTop:10 }]}>
+      <View style={[styles.rowContainer, { zIndex: 1001, paddingTop: 10 }]}>
         <View
           style={{
             width: "80%",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent:'flex-start',
+            justifyContent: "flex-start",
           }}
         >
           <TextInput
-              style={[formStyles.input,{minWidth:"80%",width: "80%"}]}
-              onChangeText={onChangeSearch}
-              placeholder={"Search"}
-              underlineColor={theme.colors.transparent}
-              activeUnderlineColor={theme.colors.primary}
-              value={search}
+            style={[formStyles.input, { minWidth: "80%", width: "80%" }]}
+            onChangeText={onChangeSearch}
+            placeholder="Search"
+            underlineColor={theme.colors.transparent}
+            activeUnderlineColor={theme.colors.primary}
+            value={search}
           />
-          <Button onPress={pressSearch} style={styles.searchButtonContainer}
-                  icon={() => (
-                      <SearchIcon />
-                  )}>
-
-          </Button>
+          <Button
+            onPress={pressSearch}
+            style={styles.searchButtonContainer}
+            icon={() => <SearchIcon />}
+          />
         </View>
-        <Button contentStyle={{width:44,height:44,paddingLeft:10}} style={styles.filterIconContainer}
-                icon={() => (
-                    <FilterIcon />
-                )}>
-        </Button>
+        <Button
+          contentStyle={{ width: 44, height: 44, paddingLeft: 10 }}
+          style={styles.filterIconContainer}
+          icon={() => <FilterIcon />}
+        />
       </View>
 
       <View style={[styles.rowContainer, { zIndex: 1001 }]}>
-        <Text variant={'titleLarge'}>Popular Teachers</Text>
-        <Button  onPress={() => {
-          if (teacherFilter) {
-            fadeOutTeacherFilter();
-          } else {
-            fadeInTeacherFilter();
-          }
-          setTeacherFilter(!teacherFilter);
-        }} contentStyle={{width:44,height:44,paddingLeft:10}} style={styles.filterIconContainer}
-                icon={() => (
-                    teacherFilter ? <PipeOn /> : <PipeIcon />
-                )}>
-        </Button>
+        <Text variant="titleLarge">Popular Teachers</Text>
+        <Button
+          onPress={() => {
+            if (teacherFilter) {
+              fadeOutTeacherFilter();
+            } else {
+              fadeInTeacherFilter();
+            }
+            setTeacherFilter(!teacherFilter);
+          }}
+          contentStyle={{ width: 44, height: 44, paddingLeft: 10 }}
+          style={styles.filterIconContainer}
+          icon={() => (teacherFilter ? <PipeOn /> : <PipeIcon />)}
+        />
       </View>
 
       <Animated.View
@@ -187,23 +184,23 @@ export function Explore() {
           opacity: opacityTeacherFilter,
           height: sizeTeacherFilter,
           backgroundColor: colors.secondary,
-          flexDirection:'column',
-          width:'100%',
-          paddingHorizontal:20,
+          flexDirection: "column",
+          width: "100%",
+          paddingHorizontal: 20,
         }}
       >
-          <RenderFilter
-            onPress={(item) => setAreaFilter(item)}
-            selected={areaFilter}
-            title="Area"
-            items={areas}
-          />
-          <RenderFilter
-            onPress={(item) => setSubjectFilter(item)}
-            selected={subjectFilter}
-            title="Subject"
-            items={subjects}
-          />
+        <RenderFilter
+          onPress={(item) => setAreaFilter(item)}
+          selected={areaFilter}
+          title="Area"
+          items={areas}
+        />
+        <RenderFilter
+          onPress={(item) => setSubjectFilter(item)}
+          selected={subjectFilter}
+          title="Subject"
+          items={subjects}
+        />
       </Animated.View>
 
       <FlashList
@@ -227,20 +224,20 @@ export function Explore() {
       />
 
       <View style={[styles.rowContainer, { zIndex: 1001 }]}>
-        <Text variant={'titleLarge'}>Popular Institutions</Text>
-        <Button onPress={() => {
-          if (institutionsFilter) {
-            fadeOutInstitutionsFilter();
-          } else {
-            fadeInInstitutionsFilter();
-
-          }
-          setInstitutionsFilter(!institutionsFilter);
-        }} contentStyle={{width:44,height:44,paddingLeft:10}} style={styles.filterIconContainer}
-                 icon={() => (
-                     institutionsFilter ? <PipeOn /> : <PipeIcon />
-                 )}>
-        </Button>
+        <Text variant="titleLarge">Popular Institutions</Text>
+        <Button
+          onPress={() => {
+            if (institutionsFilter) {
+              fadeOutInstitutionsFilter();
+            } else {
+              fadeInInstitutionsFilter();
+            }
+            setInstitutionsFilter(!institutionsFilter);
+          }}
+          contentStyle={{ width: 44, height: 44, paddingLeft: 10 }}
+          style={styles.filterIconContainer}
+          icon={() => (institutionsFilter ? <PipeOn /> : <PipeIcon />)}
+        />
       </View>
 
       <Animated.View
@@ -291,7 +288,7 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     padding: 20,
-    width:'100%',
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -308,22 +305,22 @@ const styles = StyleSheet.create({
   searchButtonContainer: {
     marginLeft: -50,
     width: 44,
-    minWidth:44,
+    minWidth: 44,
     height: 44,
     backgroundColor: colors.primary,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    paddingLeft:10
+    paddingLeft: 10,
   },
   filterIconContainer: {
     width: 44,
-    minWidth:44,
+    minWidth: 44,
     height: 44,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    marginRight:10
+    marginRight: 10,
   },
   flashListContainer: {
     paddingVertical: 10,

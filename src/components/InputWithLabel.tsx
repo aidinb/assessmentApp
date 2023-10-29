@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { TextInput } from 'react-native-paper';
-import { Text } from 'react-native-paper';
+import { TextInput, Text } from "react-native-paper";
 
 import { formStyles } from "../theme/globalStyles";
 
@@ -23,29 +22,36 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
   // State to control whether the input is in secure mode (e.g., for password input).
   const [isSecure, setIsSecure] = useState(secureKeyboard);
 
-  const renderRightIcon = () =>{
-    if(secureKeyboard){
-      return (
-          !isSecure
-              ? <TextInput.Icon icon='eye' onPress={() => setIsSecure(!isSecure)}/>
-              : <TextInput.Icon icon='eye-off' onPress={() => setIsSecure(!isSecure)}/>
-      )
-    }}
+  const renderRightIcon = () => {
+    if (secureKeyboard) {
+      return !isSecure ? (
+        <TextInput.Icon icon="eye" onPress={() => setIsSecure(!isSecure)} />
+      ) : (
+        <TextInput.Icon icon="eye-off" onPress={() => setIsSecure(!isSecure)} />
+      );
+    }
+  };
 
   return (
-      <View style={formStyles.inputWrapper}>
-        <Text variant={'bodyLarge'} style={{
+    <View style={formStyles.inputWrapper}>
+      <Text
+        variant="bodyLarge"
+        style={{
           marginLeft: 8,
           marginBottom: 10,
-        }}>{title}</Text>
-        <TextInput
-            style={formStyles.input}
-            onChangeText={onChangeText}
-            secureTextEntry={isSecure}
-            placeholder={title}
-            value={value}
-            right={renderRightIcon()}/>
-      </View>
+        }}
+      >
+        {title}
+      </Text>
+      <TextInput
+        style={formStyles.input}
+        onChangeText={onChangeText}
+        secureTextEntry={isSecure}
+        placeholder={title}
+        value={value}
+        right={renderRightIcon()}
+      />
+    </View>
   );
 };
 

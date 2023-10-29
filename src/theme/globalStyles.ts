@@ -1,9 +1,9 @@
 // Import necessary modules and components
 import { DefaultTheme } from "@react-navigation/native";
 import { Dimensions, Platform, StyleSheet } from "react-native";
+import { MD3LightTheme, useTheme } from "react-native-paper";
 
 import { colors } from "./colors";
-import { MD3LightTheme, useTheme} from "react-native-paper";
 
 // Import the default theme from React Navigation
 
@@ -70,7 +70,7 @@ export const formStyles = StyleSheet.create({
       width: 1,
       height: 2,
     },
-    minHeight:50,
+    minHeight: 50,
     shadowOpacity: 0.3,
     shadowColor: colors.shadow,
     shadowRadius: 3,
@@ -105,10 +105,9 @@ export const theme = {
   // Specify a custom property
   myOwnProperty: true,
 
-  colors: colors,
-}
+  colors,
+};
 
 export type AppTheme = typeof theme;
 
 export const useAppTheme = () => useTheme<AppTheme>();
-
