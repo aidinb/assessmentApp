@@ -31,6 +31,7 @@ const MyButton: React.FC<ButtonProps> = React.memo(
               contentStyle={buttonStyle}
               buttonColor={backgroundColor ? theme.colors.primary : theme.colors.transparent}
               labelStyle={{fontSize: 16}}
+              rippleColor={backgroundColor ? theme.colors.primary : theme.colors.transparent}
               onPress={onPress}
           >
               {title}

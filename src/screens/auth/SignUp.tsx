@@ -29,7 +29,7 @@ export function SignUp() {
         contentContainerStyle={{
           alignItems: "center",
           justifyContent: "center",
-          paddingBottom: 200,
+          paddingBottom: 150,
         }}
       >
         <SignUpBanner />
@@ -57,7 +57,6 @@ export function SignUp() {
         <View
           style={{
             flexDirection: "row",
-            width: 200,
             alignItems: "center",
             alignSelf: "center",
           }}

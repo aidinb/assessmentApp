@@ -61,8 +61,8 @@ export const formStyles = StyleSheet.create({
     alignItems: "flex-start",
   },
   input: {
-    width: Platform.OS === "web" ? 500 : "95%",
-    minWidth: Platform.OS === "web" ? 500 : "90%",
+    width: Platform.OS === "web" ? 400 : "95%",
+    minWidth: Platform.OS === "web" ? 400 : "90%",
     alignSelf: "center",
     backgroundColor: colors.white,
     borderRadius: 8,

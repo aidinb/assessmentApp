@@ -1,7 +1,6 @@
 import React from "react";
-import {Dimensions, StyleSheet, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import {colors} from "../theme/colors";
-const { width } = Dimensions.get("window");
 
 interface FooterProps {
     children: React.ReactNode
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         height: 160,
         justifyContent: "space-between",
-        width,
+        width:'100%',
         alignItems: "center",
         backgroundColor: colors.secondary,
         paddingVertical: 15,

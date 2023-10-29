@@ -4,14 +4,13 @@ import {
   View,
   StyleSheet,
   Animated,
-  Easing, Dimensions,
+  Easing,
 } from "react-native";
 
 import useFadeAnimation from "../hooks/useFadeAnimation";
 import { colors } from "../theme/colors";
 import {Button} from "react-native-paper";
 import {useAppTheme} from "../theme/globalStyles";
-const { width } = Dimensions.get("window");
 
 // Define the properties that can be passed to the Picker component.
 interface PickerProps {
@@ -50,16 +49,17 @@ const Picker: React.FC<PickerProps> = ({
       <Button onPress={onPress}
               labelStyle={styles.title}
               contentStyle={{
-                width: width-40,
+                width: "100%",
                 minHeight: 40,
                 alignSelf:'center',
                 borderRadius: 8,
                 justifyContent:'space-between',
+                  paddingVertical:10,
                 flexDirection:'row-reverse',
               }}
               rippleColor={theme.colors.transparent}
               style={{
-                paddingVertical: 10,
+                  width:"100%",
                 zIndex: 1001,
               }}
               icon={() => (
@@ -90,7 +90,7 @@ const Picker: React.FC<PickerProps> = ({
 // Define the styles for the Picker component.
 const styles = StyleSheet.create({
   container: {
-    width: width-40,
+    width: "95%",
     minHeight: 40,
       backgroundColor: colors.gray,
     borderRadius: 8,

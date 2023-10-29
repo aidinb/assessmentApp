@@ -25,7 +25,6 @@ export default function App() {
     return <Loading />;
   }
 
-
   return (
       <PaperProvider theme={theme}>
         <Routes/>

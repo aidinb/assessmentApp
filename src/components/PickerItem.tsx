@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Dimensions} from "react-native";
+import {StyleSheet} from "react-native";
 
 import {Button} from "react-native-paper";
 import {useAppTheme} from "../theme/globalStyles";
@@ -11,7 +11,6 @@ interface PickerItemProps {
   onPress: () => void; // Function to handle the press event.
   selected: boolean; // Flag indicating if the item is selected.
 }
-const { width } = Dimensions.get("window");
 // Define the PickerItem component as a React functional component.
 const PickerItem: React.FC<PickerItemProps> = ({
   icon,
@@ -44,12 +43,12 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 10.48,
     height: 53,
-    width: width/2-50,
+    width: "45%",
     marginTop: 15,
   },
   contentStyle: {
     height: 53,
-    width: width / 2 - 50,
+    width: "100%",
     flexDirection: 'row',
     alignItems: 'center',
     paddingRight: 15,

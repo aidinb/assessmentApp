@@ -52,16 +52,14 @@ export function Explore() {
     fadeOut: fadeOutTeacherFilter,
   } = useFadeAnimation(
     0,
-    Platform.OS === "web"
-      ? numberOfTeacherFilterItems * 25
-      : numberOfTeacherFilterItems * 30,
+      numberOfTeacherFilterItems * 28,
   );
   const {
     opacity: opacityInstitutionsFilter,
     size: sizeInstitutionsFilter,
     fadeIn: fadeInInstitutionsFilter,
     fadeOut: fadeOutInstitutionsFilter,
-  } = useFadeAnimation(0, areas.length * 30);
+  } = useFadeAnimation(0, areas.length * 32);
 
   // Define a callback function to render teachers
   const renderTeachers = React.useCallback(({ item }: { item: any }) => {
@@ -86,14 +84,14 @@ export function Explore() {
   // Define a function to render an empty container when there are no search results
   const renderEmptyContainer = () => {
     return (
-      <View style={{ width, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ width:"100%", alignItems: "center", justifyContent: "center" }}>
         <Text style={typography.h4}>No Result.</Text>
       </View>
     );
   };
 
   // Define a function to handle text input changes
-  const onChangeText = (text) => {
+  const onChangeSearch = (text) => {
     setSearch(text);
     // @ts-ignore
     if (text === "" && opacityHeader.__getValue() === 0) {
@@ -140,15 +138,15 @@ export function Explore() {
       <View style={[styles.rowContainer, { zIndex: 1001,paddingTop:10 }]}>
         <View
           style={{
-            width: width-120,
+            width: "80%",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent:'center',
+            justifyContent:'flex-start',
           }}
         >
           <TextInput
-              style={[formStyles.input,{minWidth:width-120}]}
-              onChangeText={onChangeText}
+              style={[formStyles.input,{minWidth:"80%",width: "80%"}]}
+              onChangeText={onChangeSearch}
               placeholder={"Search"}
               underlineColor={theme.colors.transparent}
               activeUnderlineColor={theme.colors.primary}
@@ -161,7 +159,7 @@ export function Explore() {
 
           </Button>
         </View>
-        <Button onPress={pressSearch} contentStyle={{width:44,height:44,paddingLeft:10}} style={styles.filterIconContainer}
+        <Button contentStyle={{width:44,height:44,paddingLeft:10}} style={styles.filterIconContainer}
                 icon={() => (
                     <FilterIcon />
                 )}>
@@ -185,18 +183,15 @@ export function Explore() {
       </View>
 
       <Animated.View
-        style={[
-          styles.rowContainer,
-          {
-            opacity: opacityTeacherFilter,
-            height: sizeTeacherFilter,
-            paddingVertical: 0,
-            backgroundColor: colors.secondary,
-            paddingTop: 0,
-          },
-        ]}
+        style={{
+          opacity: opacityTeacherFilter,
+          height: sizeTeacherFilter,
+          backgroundColor: colors.secondary,
+          flexDirection:'column',
+          width:'100%',
+          paddingHorizontal:20,
+        }}
       >
-        <View>
           <RenderFilter
             onPress={(item) => setAreaFilter(item)}
             selected={areaFilter}
@@ -209,7 +204,6 @@ export function Explore() {
             title="Subject"
             items={subjects}
           />
-        </View>
       </Animated.View>
 
       <FlashList
@@ -282,7 +276,7 @@ export function Explore() {
         keyboardShouldPersistTaps="handled"
         renderItem={renderInstitution}
         estimatedItemSize={184}
-        estimatedListSize={{ height: 184, width: width - 40 }}
+        estimatedListSize={{ height: 184, width: 300 }}
         keyExtractor={(item) => "Institutions-" + item.name}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={renderEmptyContainer}
@@ -297,7 +291,7 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     padding: 20,
-    width,
+    width:'100%',
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

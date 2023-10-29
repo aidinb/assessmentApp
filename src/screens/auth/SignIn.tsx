@@ -54,8 +54,7 @@ export function SignIn() {
         <View
           style={{
             flexDirection: "row",
-            width: 200,
-            alignItems: "center",
+           alignItems: "center",
             alignSelf: "center",
           }}
         >

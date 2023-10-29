@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Animated,
-  Dimensions,
   View,
   StyleSheet,
 } from "react-native";
@@ -10,7 +9,6 @@ import { colors } from "../theme/colors";
 import { useAppTheme} from "../theme/globalStyles";
 import {Button, Text} from "react-native-paper";
 
-const { width } = Dimensions.get("window");
 
 // Define the properties that can be passed to the RenderFilter component.
 interface RenderFilterProps {
@@ -67,13 +65,13 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
 // Define the styles for the RenderFilter component.
 const styles = StyleSheet.create({
   container: {
-    width:width-40,
+    width: "100%",
     alignItems: "flex-start",
     justifyContent: "center",
-    marginBottom: 5,
+    marginBottom:10
   },
   itemsContainer: {
-    width: width-40,
+    width: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
     paddingVertical:5,

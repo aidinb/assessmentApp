@@ -2,7 +2,6 @@ import React from "react";
 import {  StyleSheet } from "react-native";
 
 import { colors } from "../theme/colors";
-import { typography } from "../theme/globalStyles";
 import {Card} from "react-native-paper";
 import { Text} from "react-native-paper";
 
@@ -49,11 +48,6 @@ const styles = StyleSheet.create({
     height: 115,
     marginBottom: 10,
     alignSelf:'center'
-  },
-  field: {
-    fontSize: 14,
-    color: colors.subTitle,
-    marginTop: 5,
   },
 });
 

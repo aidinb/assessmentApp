@@ -1,15 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import {
-  Dimensions, Platform,
   StyleSheet, View,
 } from "react-native";
 
 import { colors } from "../theme/colors";
-import {typography, useAppTheme} from "../theme/globalStyles";
+import { useAppTheme} from "../theme/globalStyles";
 import {Card} from "react-native-paper";
 import { Text} from "react-native-paper";
 import StarRating from 'react-native-star-rating-widget';
-const { width } = Dimensions.get("window");
 
 // Define the properties that can be passed to the RenderInstitution component.
 interface RenderInstitutionProps {
@@ -33,9 +31,11 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = ({
 
   return (
       <Card contentStyle={{flexDirection:'row'}} onPress={onPress} style={styles.container}>
-        <Card.Cover source={item.image} style={styles.image}/>
+        <Card.Cover
+            source={item.image}
+            style={styles.image}/>
         <Card.Content>
-          <Text numberOfLines={1}  variant="titleLarge">{item.name}</Text>
+          <Text numberOfLines={1} style={{width:"40%"}}  variant="titleMedium">{item.name}</Text>
           <View style={{flexDirection:'row',marginTop:10,marginBottom:10,alignItems:'center'}}>
           <StarRating
               onChange={(rating)=>{
@@ -47,11 +47,11 @@ const RenderInstitution: React.FC<RenderInstitutionProps> = ({
               starStyle={{marginHorizontal:1}}
               style={{width:80,marginRight:10}}
           />
-            <Text numberOfLines={1} style={{color:theme.colors.subTitle}}  variant="bodySmall">{`${item.rate} (${item.numberOfRates})`}</Text>
+            <Text numberOfLines={1} style={{color:theme.colors.subTitle,}}  variant="bodySmall">{`${item.rate} (${item.numberOfRates})`}</Text>
 
           </View>
-          <Text numberOfLines={1}  variant="labelMedium">{item.type}</Text>
-          <Text variant="bodySmall" style={{marginTop:5,color: theme.colors.subTitle,width:(width - 50)/2}}>{item.description}</Text>
+          <Text numberOfLines={1} style={{width:"40%"}}  variant="labelMedium">{item.type}</Text>
+          <Text variant="bodySmall" style={{marginTop:5,color: theme.colors.subTitle,width:"40%"}}>{item.description}</Text>
         </Card.Content>
       </Card>
   );
@@ -66,30 +66,13 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    width: width - 40,
+    width: "95%",
     flexDirection: "row",
     alignSelf: "center",
   },
   image: {
     width: 145,
     height: 161,
-  },
-  infoContainer: {
-    width: "60%",
-    alignItems: "flex-start",
-    justifyContent: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  type: {
-    fontSize: 14,
-    color: colors.black,
-    marginTop: 15,
-  },
-  description: {
-    fontSize: 12,
-    color: colors.subTitle,
-    marginTop: 5,
   },
 });
 
