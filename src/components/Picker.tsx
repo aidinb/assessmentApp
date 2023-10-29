@@ -2,7 +2,6 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { View, StyleSheet, Animated, Easing } from "react-native";
 import { Button } from "react-native-paper";
-
 import useFadeAnimation from "../hooks/useFadeAnimation";
 import { useAppTheme } from "../theme/globalStyles";
 
