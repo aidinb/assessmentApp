@@ -44,7 +44,6 @@ export function ProvinceSelection() {
     }
   };
 
-  // Render the component
   return (
     <View style={screenStyles.container}>
       <Text variant="headlineMedium" style={styles.title}>
