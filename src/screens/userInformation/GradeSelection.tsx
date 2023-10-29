@@ -9,9 +9,9 @@ import Arts from "../../assets/arts.svg"; // Import Arts SVG
 import CommerceIcon from "../../assets/commerceIcon.svg"; // Import CommerceIcon SVG
 import MathsIcon from "../../assets/mathsIcon.svg"; // Import MathsIcon SVG
 import ScienceIcon from "../../assets/scienceIcon.svg"; // Import ScienceIcon SVG
+import AuthButton from "../../components/AuthButton"; // Import AuthButton component
 import Footer from "../../components/Footer";
 import Grade from "../../components/Grade"; // Import Grade component
-import MyButton from "../../components/MyButton"; // Import MyButton component
 import { screenStyles } from "../../theme/globalStyles"; // Import global styles
 
 // Define an interface for a GradeItem
@@ -97,11 +97,11 @@ export function GradeSelection() {
 
       {/* Render navigation buttons */}
       <Footer>
-        <MyButton
+        <AuthButton
           onPress={() => navigation.push("ProvinceSelection")}
           title="Next"
         />
-        <MyButton
+        <AuthButton
           onPress={() => navigation.push("ProvinceSelection")}
           backgroundColor={false}
           title="Skip"

@@ -12,32 +12,30 @@ interface PickerItemProps {
   selected: boolean; // Flag indicating if the item is selected.
 }
 // Define the PickerItem component as a React functional component.
-const PickerItem: React.FC<PickerItemProps> = ({
-  icon,
-  title,
-  onPress,
-  selected,
-}: PickerItemProps) => {
-  const theme = useAppTheme();
 
-  return (
-    <Button
-      mode="contained"
-      buttonColor={selected ? theme.colors.primary : theme.colors.grayDarker}
-      textColor={selected ? theme.colors.white : theme.colors.subTitle}
-      onPress={onPress}
-      contentStyle={[
-        styles.contentStyle,
-        { justifyContent: icon ? "space-between" : "center" },
-      ]}
-      style={styles.container}
-      labelStyle={{ marginHorizontal: 2 }}
-      icon={() => (icon ? icon() : null)}
-    >
-      {title}
-    </Button>
-  );
-};
+const PickerItem: React.FC<PickerItemProps> = React.memo(
+  ({ icon, title, onPress, selected }: PickerItemProps) => {
+    const theme = useAppTheme();
+
+    return (
+      <Button
+        mode="contained"
+        buttonColor={selected ? theme.colors.primary : theme.colors.grayDarker}
+        textColor={selected ? theme.colors.white : theme.colors.grayText}
+        onPress={onPress}
+        contentStyle={[
+          styles.contentStyle,
+          { justifyContent: icon ? "space-between" : "center" },
+        ]}
+        style={styles.container}
+        labelStyle={{ marginHorizontal: 2 }}
+        icon={() => (icon ? icon() : null)}
+      >
+        {title}
+      </Button>
+    );
+  },
+);
 
 // Define the styles for the PickerItem component.
 const styles = StyleSheet.create({

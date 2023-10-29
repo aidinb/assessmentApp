@@ -4,7 +4,7 @@ import { Button } from "react-native-paper";
 
 import { useAppTheme } from "../theme/globalStyles";
 
-// Define the properties that can be passed to the MyButton component.
+// Define the properties that can be passed to the AuthButton component.
 interface ButtonProps {
   onPress: () => void; // Function to be called when the button is pressed.
   title?: string; // Optional button title text (default is 'Next').
@@ -12,7 +12,7 @@ interface ButtonProps {
   style?: object; // Additional styles to be applied to the button.
 }
 
-const MyButton: React.FC<ButtonProps> = React.memo(
+const AuthButton: React.FC<ButtonProps> = React.memo(
   ({ style, onPress, title = "Next", backgroundColor = true }: ButtonProps) => {
     const theme = useAppTheme();
 
@@ -43,5 +43,5 @@ const MyButton: React.FC<ButtonProps> = React.memo(
   },
 );
 
-// Export the MyButton component as the default export of this module.
-export default MyButton;
+// Export the AuthButton component as the default export of this module.
+export default AuthButton;

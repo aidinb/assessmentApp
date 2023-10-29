@@ -1,14 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text } from "react-native-paper";
 
 import SignUpBanner from "../../assets/signUpBanner.svg";
+import AuthButton from "../../components/AuthButton";
 import Footer from "../../components/Footer";
 import InputWithLabel from "../../components/InputWithLabel";
-import MyButton from "../../components/MyButton";
+import { useKeyboard } from "../../hooks/useKeyboard";
 import { screenStyles } from "../../theme/globalStyles";
 
 export function SignUp() {
@@ -16,6 +17,7 @@ export function SignUp() {
   const [name, onChangeName] = useState("");
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
+  const keyboardHook = useKeyboard();
 
   return (
     <View style={screenStyles.container}>
@@ -26,11 +28,7 @@ export function SignUp() {
         keyboardDismissMode="none"
         showsVerticalScrollIndicator={false}
         extraScrollHeight={20}
-        contentContainerStyle={{
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 150,
-        }}
+        contentContainerStyle={styles.scrollContent}
       >
         <SignUpBanner />
         {/* Input fields for name, email, and password */}
@@ -48,29 +46,39 @@ export function SignUp() {
         />
       </KeyboardAwareScrollView>
 
-      <Footer>
-        {/* "Sign up" button to navigate to the GradeSelection screen */}
-        <MyButton
-          onPress={() => navigation.push("GradeSelection")}
-          title="Sign up"
-        />
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            alignSelf: "center",
-          }}
-        >
-          <Text>You have an account?</Text>
-          {/* "Sign in" button to navigate to the SignIn screen */}
-          <MyButton
-            style={{ minWidth: 30, marginLeft: -15 }}
-            onPress={() => navigation.push("SignIn")}
-            backgroundColor={false}
-            title="Sign in"
+      {!keyboardHook.keyboardShown ? (
+        <Footer>
+          {/* "Sign up" button to navigate to the GradeSelection screen */}
+          <AuthButton
+            onPress={() => navigation.push("GradeSelection")}
+            title="Sign up"
           />
-        </View>
-      </Footer>
+          <View style={styles.footerContainer}>
+            <Text>You have an account?</Text>
+            {/* "Sign in" button to navigate to the SignIn screen */}
+            <AuthButton
+              style={styles.authButton}
+              onPress={() => navigation.push("SignIn")}
+              backgroundColor={false}
+              title="Sign in"
+            />
+          </View>
+        </Footer>
+      ) : null}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollContent: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 200,
+  },
+  footerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  authButton: { minWidth: 30, marginLeft: -18 },
+});

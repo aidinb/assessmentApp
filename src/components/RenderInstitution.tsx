@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import StarRating from "react-native-star-rating-widget";
 
-import { colors } from "../theme/colors";
-import { useAppTheme } from "../theme/globalStyles";
+import { theme, useAppTheme } from "../theme/globalStyles";
 
 // Define the properties that can be passed to the RenderInstitution component.
 interface RenderInstitutionProps {
@@ -20,66 +19,81 @@ interface RenderInstitutionProps {
 }
 
 // Define the RenderInstitution component as a React functional component.
-const RenderInstitution: React.FC<RenderInstitutionProps> = ({
-  item,
-  onPress,
-}: RenderInstitutionProps) => {
-  const theme = useAppTheme();
+const RenderInstitution: React.FC<RenderInstitutionProps> = React.memo(
+  ({ item, onPress }: RenderInstitutionProps) => {
+    const theme = useAppTheme();
 
-  return (
-    <Card
-      contentStyle={{ flexDirection: "row" }}
-      onPress={onPress}
-      style={styles.container}
-    >
-      <Card.Cover source={item.image} style={styles.image} />
-      <Card.Content>
-        <Text numberOfLines={1} style={{ width: "40%" }} variant="titleMedium">
-          {item.name}
-        </Text>
-        <View
-          style={{
-            flexDirection: "row",
-            marginTop: 10,
-            marginBottom: 10,
-            alignItems: "center",
-          }}
-        >
-          <StarRating
-            onChange={(rating) => {
-              console.log(rating);
-            }}
-            maxStars={5}
-            rating={item.rate}
-            starSize={15}
-            starStyle={{ marginHorizontal: 1 }}
-            style={{ width: 80, marginRight: 10 }}
-          />
+    const memoizedOnPress = useCallback(() => {
+      onPress();
+    }, [onPress]);
+
+    return (
+      <Card
+        contentStyle={{ flexDirection: "row" }}
+        onPress={memoizedOnPress}
+        style={styles.container}
+      >
+        <Card.Cover
+          // @ts-ignore
+          source={item.image}
+          style={styles.image}
+        />
+        <Card.Content>
           <Text
             numberOfLines={1}
-            style={{ color: theme.colors.subTitle }}
+            style={{ width: "37%" }}
+            variant="titleMedium"
+          >
+            {item.name}
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: 10,
+              marginBottom: 10,
+              alignItems: "center",
+            }}
+          >
+            <StarRating
+              onChange={(rating) => {
+                console.log(rating);
+              }}
+              maxStars={5}
+              rating={item.rate}
+              starSize={15}
+              starStyle={{ marginHorizontal: 1 }}
+              style={{ width: 80, marginRight: 10 }}
+            />
+            <Text
+              numberOfLines={1}
+              style={{ color: theme.colors.grayText }}
+              variant="bodySmall"
+            >{`${item.rate} (${item.numberOfRates})`}</Text>
+          </View>
+          <Text
+            numberOfLines={1}
+            style={{ width: "37%" }}
+            variant="labelMedium"
+          >
+            {item.type}
+          </Text>
+          <Text
             variant="bodySmall"
-          >{`${item.rate} (${item.numberOfRates})`}</Text>
-        </View>
-        <Text numberOfLines={1} style={{ width: "40%" }} variant="labelMedium">
-          {item.type}
-        </Text>
-        <Text
-          variant="bodySmall"
-          style={{ marginTop: 5, color: theme.colors.subTitle, width: "40%" }}
-        >
-          {item.description}
-        </Text>
-      </Card.Content>
-    </Card>
-  );
-};
+            style={{ marginTop: 5, color: theme.colors.grayText, width: "37%" }}
+          >
+            {item.description}
+          </Text>
+        </Card.Content>
+      </Card>
+    );
+  },
+);
 
 // Define the styles for the RenderInstitution component.
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
-    backgroundColor: colors.white,
+    backgroundColor: theme.colors.white,
     borderRadius: 12,
     padding: 10,
     justifyContent: "flex-start",

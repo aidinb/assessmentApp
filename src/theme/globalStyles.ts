@@ -1,60 +1,12 @@
 // Import necessary modules and components
 import { DefaultTheme } from "@react-navigation/native";
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { MD3LightTheme, useTheme } from "react-native-paper";
 
 import { colors } from "./colors";
 
-// Import the default theme from React Navigation
-
-// Get the width of the device's screen
-const { width } = Dimensions.get("window");
-
-// Define styles for typography
-export const typography = StyleSheet.create({
-  h1: {
-    fontSize: 28,
-  },
-  h2: {
-    fontSize: 20,
-    color: colors.subTitle,
-    fontFamily: "Inter_600SemiBold",
-  },
-  h3: {
-    fontSize: 18,
-    fontFamily: "Inter_600SemiBold",
-  },
-  h4: {
-    fontSize: 16,
-    fontFamily: "Inter_600SemiBold",
-  },
-  paragraph: {
-    fontSize: 16,
-    fontFamily: "Inter_400Regular",
-    color: colors.black,
-    marginTop: 8,
-  },
-  title: {
-    fontSize: 20,
-    fontFamily: "Inter_700Bold",
-    color: colors.black,
-    textAlign: "center",
-  },
-  subTitle: {
-    fontSize: 18,
-    fontFamily: "Inter_400Regular",
-    color: colors.subTitle,
-    textAlign: "center",
-    marginTop: 15,
-  },
-});
-
 // Define styles for forms
 export const formStyles = StyleSheet.create({
-  label: {
-    marginLeft: 8,
-    marginBottom: 10,
-  },
   inputWrapper: {
     paddingVertical: 8,
     justifyContent: "center",
@@ -82,11 +34,6 @@ export const formStyles = StyleSheet.create({
 export const screenStyles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  centerContainer: {
-    width,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
 

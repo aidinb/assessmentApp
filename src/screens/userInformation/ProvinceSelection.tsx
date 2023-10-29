@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { Text } from "react-native-paper";
 
+import AuthButton from "../../components/AuthButton";
 import Footer from "../../components/Footer";
-import MyButton from "../../components/MyButton";
 import PickerItem from "../../components/PickerItem";
 import { colors } from "../../theme/colors";
 import { screenStyles } from "../../theme/globalStyles";
@@ -52,7 +52,7 @@ export function ProvinceSelection() {
       </Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.provinceContainer}>
-          <Text variant="titleLarge" style={{ color: colors.subTitle }}>
+          <Text variant="titleLarge" style={{ color: colors.grayText }}>
             Provinces of Sri Lanka
           </Text>
           <View style={styles.provinceList}>
@@ -73,8 +73,8 @@ export function ProvinceSelection() {
         </View>
       </ScrollView>
       <Footer>
-        <MyButton onPress={saveUser} title="Next" />
-        <MyButton onPress={saveUser} backgroundColor={false} title="Skip" />
+        <AuthButton onPress={saveUser} title="Next" />
+        <AuthButton onPress={saveUser} backgroundColor={false} title="Skip" />
       </Footer>
     </View>
   );

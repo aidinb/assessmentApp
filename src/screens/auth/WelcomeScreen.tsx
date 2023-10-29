@@ -5,8 +5,8 @@ import { View } from "react-native";
 import { Text } from "react-native-paper";
 
 import WelcomeScreenBanner from "../../assets/welcomeScreenBanner.svg";
+import AuthButton from "../../components/AuthButton";
 import Footer from "../../components/Footer";
-import MyButton from "../../components/MyButton";
 import { screenStyles, useAppTheme } from "../../theme/globalStyles";
 
 export function WelcomeScreen() {
@@ -20,15 +20,18 @@ export function WelcomeScreen() {
 
       <Text variant="headlineMedium">Let's find the "A" with us</Text>
 
-      <Text style={{ color: theme.colors.subTitle }} variant="titleMedium">
+      <Text
+        style={{ color: theme.colors.grayText, marginTop: 10 }}
+        variant="titleMedium"
+      >
         Please Sign in to view personalized recommendations
       </Text>
 
       <Footer>
         {/* "Sign in" button to navigate to the SignIn screen */}
-        <MyButton onPress={() => navigation.push("SignIn")} title="Sign in" />
+        <AuthButton onPress={() => navigation.push("SignIn")} title="Sign in" />
         {/* "Skip" button to navigate to the GradeSelection screen without signing in */}
-        <MyButton
+        <AuthButton
           onPress={() => navigation.push("GradeSelection")}
           backgroundColor={false}
           title="Skip"

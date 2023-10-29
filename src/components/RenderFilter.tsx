@@ -2,7 +2,6 @@ import React from "react";
 import { Animated, View, StyleSheet } from "react-native";
 import { Button, Text } from "react-native-paper";
 
-import { colors } from "../theme/colors";
 import { useAppTheme } from "../theme/globalStyles";
 
 // Define the properties that can be passed to the RenderFilter component.
@@ -24,7 +23,7 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
 
   return (
     <Animated.View style={styles.container}>
-      <Text variant="titleMedium" style={{ color: theme.colors.subTitle }}>
+      <Text variant="titleMedium" style={{ color: theme.colors.grayText }}>
         {title}
       </Text>
       <View style={styles.itemsContainer}>
@@ -33,20 +32,22 @@ const RenderFilter: React.FC<RenderFilterProps> = ({
               <Button
                 key={item}
                 mode="contained"
-                buttonColor={selected === item ? colors.primary : colors.white}
-                textColor={selected === item ? colors.white : colors.black}
+                buttonColor={
+                  selected === item ? theme.colors.primary : theme.colors.white
+                }
+                textColor={
+                  selected === item ? theme.colors.white : theme.colors.black
+                }
                 onPress={() => onPress(item)}
                 labelStyle={{ marginHorizontal: 10 }}
-                contentStyle={{
-                  justifyContent: "center",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
+                contentStyle={styles.buttonContentStyle}
                 style={[
                   styles.item,
                   {
                     backgroundColor:
-                      selected === item ? colors.primary : colors.white,
+                      selected === item
+                        ? theme.colors.primary
+                        : theme.colors.white,
                   },
                 ]}
               >
@@ -77,6 +78,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 9,
     marginRight: 10,
+  },
+  buttonContentStyle: {
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

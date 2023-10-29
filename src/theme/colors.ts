@@ -6,7 +6,7 @@ export const colors = {
   grayDarker: "#E6E6E6",
   white: "#fff",
   black: "#000",
-  subTitle: "#636D77",
+  grayText: "#636D77",
   transparent: "transparent",
   lightPink: "#E8DBDB",
   shadow: "rgba(0, 0, 0, 0.5)",

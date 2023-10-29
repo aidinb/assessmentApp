@@ -8,18 +8,17 @@ import PipeIcon from "../../assets/pipeIcon.svg";
 import PipeOn from "../../assets/pipeOn.svg";
 import ProPic from "../../assets/proPic.svg";
 import SearchIcon from "../../assets/searchIcon.svg";
+import RenderEmptyContainer from "../../components/RenderEmptyContainer";
 import RenderFilter from "../../components/RenderFilter";
 import RenderInstitution from "../../components/RenderInstitution";
 import RenderTeachers from "../../components/RenderTeachers";
 import useFadeAnimation from "../../hooks/useFadeAnimation";
 import { colors } from "../../theme/colors";
-import { formStyles, typography, useAppTheme } from "../../theme/globalStyles";
+import { formStyles, theme, useAppTheme } from "../../theme/globalStyles";
 import { areas, institutions, subjects, teachers } from "../../utils/data";
 
-// Define the Explore function component
 export function Explore() {
   // Initialize state variables using useState
-
   const numberOfTeacherFilterItems = areas.length + subjects.length;
   const [search, setSearch] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -47,41 +46,6 @@ export function Explore() {
     fadeOut: fadeOutInstitutionsFilter,
   } = useFadeAnimation(0, areas.length * 32);
 
-  // Define a callback function to render teachers
-  const renderTeachers = React.useCallback(({ item }: { item: any }) => {
-    return (
-      <RenderTeachers
-        item={item}
-        onPress={() => alert(`${item.name} Press!`)}
-      />
-    );
-  }, []);
-
-  // Define a callback function to render institutions
-  const renderInstitution = React.useCallback(({ item }: { item: any }) => {
-    return (
-      <RenderInstitution
-        item={item}
-        onPress={() => alert(`${item.name} Press!`)}
-      />
-    );
-  }, []);
-
-  // Define a function to render an empty container when there are no search results
-  const renderEmptyContainer = () => {
-    return (
-      <View
-        style={{
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Text style={typography.h4}>No Result.</Text>
-      </View>
-    );
-  };
-
   // Define a function to handle text input changes
   const onChangeSearch = (text) => {
     setSearch(text);
@@ -104,6 +68,9 @@ export function Explore() {
 
   const theme = useAppTheme();
 
+  // @ts-ignore
+  // @ts-ignore
+  // @ts-ignore
   return (
     <Animated.ScrollView
       keyboardDismissMode="on-drag"
@@ -120,10 +87,7 @@ export function Explore() {
       >
         <View style={styles.userInfoContainer}>
           <Text variant="headlineMedium">Good evening!</Text>
-          <Text
-            variant="titleLarge"
-            style={{ marginTop: 7, color: theme.colors.subTitle }}
-          >
+          <Text variant="titleLarge" style={styles.headerText}>
             Hardline Scott
           </Text>
         </View>
@@ -133,14 +97,7 @@ export function Explore() {
       </Animated.View>
 
       <View style={[styles.rowContainer, { zIndex: 1001, paddingTop: 10 }]}>
-        <View
-          style={{
-            width: "80%",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "flex-start",
-          }}
-        >
+        <View style={styles.searchContainer}>
           <TextInput
             style={[formStyles.input, { minWidth: "80%", width: "80%" }]}
             onChangeText={onChangeSearch}
@@ -149,14 +106,16 @@ export function Explore() {
             activeUnderlineColor={theme.colors.primary}
             value={search}
           />
+          {/* @ts-ignore */}
           <Button
             onPress={pressSearch}
             style={styles.searchButtonContainer}
             icon={() => <SearchIcon />}
           />
         </View>
+        {/* @ts-ignore */}
         <Button
-          contentStyle={{ width: 44, height: 44, paddingLeft: 10 }}
+          contentStyle={styles.filterButton}
           style={styles.filterIconContainer}
           icon={() => <FilterIcon />}
         />
@@ -164,6 +123,7 @@ export function Explore() {
 
       <View style={[styles.rowContainer, { zIndex: 1001 }]}>
         <Text variant="titleLarge">Popular Teachers</Text>
+        {/* @ts-ignore */}
         <Button
           onPress={() => {
             if (teacherFilter) {
@@ -173,21 +133,20 @@ export function Explore() {
             }
             setTeacherFilter(!teacherFilter);
           }}
-          contentStyle={{ width: 44, height: 44, paddingLeft: 10 }}
+          contentStyle={styles.filterButton}
           style={styles.filterIconContainer}
           icon={() => (teacherFilter ? <PipeOn /> : <PipeIcon />)}
         />
       </View>
 
       <Animated.View
-        style={{
-          opacity: opacityTeacherFilter,
-          height: sizeTeacherFilter,
-          backgroundColor: colors.secondary,
-          flexDirection: "column",
-          width: "100%",
-          paddingHorizontal: 20,
-        }}
+        style={[
+          styles.teacherFilterContainer,
+          {
+            opacity: opacityTeacherFilter,
+            height: sizeTeacherFilter,
+          },
+        ]}
       >
         <RenderFilter
           onPress={(item) => setAreaFilter(item)}
@@ -214,17 +173,27 @@ export function Explore() {
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.flashListContainer}
-        renderItem={renderTeachers}
+        renderItem={({ item }: { item: any }) => {
+          return (
+            <RenderTeachers
+              item={item}
+              onPress={() => alert(`${item.name} Press!`)}
+            />
+          );
+        }}
         keyExtractor={(item) => "Teachers-" + item.name}
         horizontal
         estimatedItemSize={142}
         estimatedListSize={{ height: 200, width: 126 }}
         showsHorizontalScrollIndicator={false}
-        ListEmptyComponent={renderEmptyContainer}
+        ListEmptyComponent={() => {
+          return <RenderEmptyContainer />;
+        }}
       />
 
       <View style={[styles.rowContainer, { zIndex: 1001 }]}>
         <Text variant="titleLarge">Popular Institutions</Text>
+        {/* @ts-ignore */}
         <Button
           onPress={() => {
             if (institutionsFilter) {
@@ -234,7 +203,7 @@ export function Explore() {
             }
             setInstitutionsFilter(!institutionsFilter);
           }}
-          contentStyle={{ width: 44, height: 44, paddingLeft: 10 }}
+          contentStyle={styles.filterButton}
           style={styles.filterIconContainer}
           icon={() => (institutionsFilter ? <PipeOn /> : <PipeIcon />)}
         />
@@ -271,12 +240,21 @@ export function Explore() {
         }
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="handled"
-        renderItem={renderInstitution}
+        renderItem={({ item }: { item: any }) => {
+          return (
+            <RenderInstitution
+              item={item}
+              onPress={() => alert(`${item.name} Press!`)}
+            />
+          );
+        }}
         estimatedItemSize={184}
         estimatedListSize={{ height: 184, width: 300 }}
         keyExtractor={(item) => "Institutions-" + item.name}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={renderEmptyContainer}
+        ListEmptyComponent={() => {
+          return <RenderEmptyContainer />;
+        }}
       />
     </Animated.ScrollView>
   );
@@ -292,14 +270,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: colors.secondary,
+    backgroundColor: theme.colors.secondary,
     paddingBottom: 10,
   },
   userInfoContainer: {
     width: "80%",
   },
   profilePicContainer: {
-    backgroundColor: colors.lightPink,
+    backgroundColor: theme.colors.lightPink,
     borderRadius: 20,
   },
   searchButtonContainer: {
@@ -307,7 +285,7 @@ const styles = StyleSheet.create({
     width: 44,
     minWidth: 44,
     height: 44,
-    backgroundColor: colors.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
@@ -325,5 +303,19 @@ const styles = StyleSheet.create({
   flashListContainer: {
     paddingVertical: 10,
     paddingRight: 30,
+  },
+  headerText: { marginTop: 7, color: theme.colors.grayText },
+  searchContainer: {
+    width: "80%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  filterButton: { width: 44, height: 44, paddingLeft: 10 },
+  teacherFilterContainer: {
+    backgroundColor: colors.secondary,
+    flexDirection: "column",
+    width: "100%",
+    paddingHorizontal: 20,
   },
 });
