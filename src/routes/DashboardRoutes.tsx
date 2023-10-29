@@ -27,10 +27,10 @@ type TabProps = {
     component: React.ComponentType<any>;
     options: {
         title: string;
-        tabBarIcon: (props: { focused: boolean; color: string }) => JSX.Element;
-        tabBarLabel: (props: { focused: boolean }) => JSX.Element;
+        tabBarIcon: (props: { focused: boolean; color: string }) => React.JSX.Element;
+        tabBarLabel: (props: { focused: boolean }) => React.JSX.Element;
         tabBarLabelPosition?: "below-icon";
-        headerRight?: (props: any) => JSX.Element;
+        headerRight?: (props: any) => React.JSX.Element;
     };
 };
 
