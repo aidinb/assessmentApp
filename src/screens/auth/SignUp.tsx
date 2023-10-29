@@ -54,7 +54,9 @@ export function SignUp() {
             title="Sign up"
           />
           <View style={styles.footerContainer}>
-            <Text style={{fontFamily:'Inter_400Regular'}}>You have an account?</Text>
+            <Text style={{ fontFamily: "Inter_400Regular" }}>
+              You have an account?
+            </Text>
             {/* "Sign in" button to navigate to the SignIn screen */}
             <AuthButton
               style={styles.authButton}

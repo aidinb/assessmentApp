@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { TextInput, Text } from "react-native-paper";
 
-import {formStyles, theme} from "../theme/globalStyles";
-import {Inter_400Regular} from "@expo-google-fonts/inter";
+import { formStyles, theme } from "../theme/globalStyles";
 
 // Define the properties that can be passed to the InputWithLabel component.
 interface InputWithLabelProps {
@@ -39,7 +38,8 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
         variant="bodyLarge"
         style={{
           marginLeft: 8,
-          marginBottom: 10,fontFamily:'Inter_400Regular'
+          marginBottom: 10,
+          fontFamily: "Inter_400Regular",
         }}
       >
         {title}

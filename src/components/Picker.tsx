@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { View, StyleSheet, Animated, Easing } from "react-native";
 import { Button } from "react-native-paper";
+
 import useFadeAnimation from "../hooks/useFadeAnimation";
 import { useAppTheme } from "../theme/globalStyles";
 
@@ -41,7 +42,7 @@ const Picker: React.FC<PickerProps> = React.memo(
           labelStyle={{
             color: theme.colors.grayText,
             fontSize: 18,
-              fontFamily:'Inter_600SemiBold'
+            fontFamily: "Inter_600SemiBold",
           }}
           contentStyle={styles.buttonContentStyle}
           rippleColor={theme.colors.transparent}

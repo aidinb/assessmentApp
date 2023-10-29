@@ -31,7 +31,7 @@ const AuthButton: React.FC<ButtonProps> = React.memo(
         buttonColor={
           backgroundColor ? theme.colors.primary : theme.colors.transparent
         }
-        labelStyle={{ fontSize: 16,fontFamily:'Inter_600SemiBold' }}
+        labelStyle={{ fontSize: 16, fontFamily: "Inter_600SemiBold" }}
         rippleColor={
           backgroundColor ? theme.colors.primary : theme.colors.transparent
         }

@@ -12,7 +12,9 @@ const RenderEmptyContainer: React.FC = () => {
         justifyContent: "center",
       }}
     >
-      <Text variant="bodyMedium" style={{fontFamily: 'Inter_400Regular'}}>No Result.</Text>
+      <Text variant="bodyMedium" style={{ fontFamily: "Inter_400Regular" }}>
+        No Result.
+      </Text>
     </View>
   );
 };

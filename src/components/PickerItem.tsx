@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 
 import { useAppTheme } from "../theme/globalStyles";
-import {Inter_400Regular} from "@expo-google-fonts/inter";
 
 // Define the properties that can be passed to the PickerItem component.
 interface PickerItemProps {
@@ -29,7 +28,7 @@ const PickerItem: React.FC<PickerItemProps> = React.memo(
           { justifyContent: icon ? "space-between" : "center" },
         ]}
         style={styles.container}
-        labelStyle={{ marginHorizontal: 2,fontFamily:'Inter_600SemiBold' }}
+        labelStyle={{ marginHorizontal: 2, fontFamily: "Inter_600SemiBold" }}
         icon={() => (icon ? icon() : null)}
       >
         {title}

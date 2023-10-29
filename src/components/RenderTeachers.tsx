@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import { Card, Text } from "react-native-paper";
 
 import { theme } from "../theme/globalStyles";
-import {Inter_400Regular} from "@expo-google-fonts/inter";
 
 // Define the properties that can be passed to the RenderTeachers component.
 interface RenderTeachersProps {
@@ -23,23 +22,33 @@ const RenderTeachers: React.FC<RenderTeachersProps> = React.memo(
       onPress();
     }, [onPress]);
 
-      return (
-          <Card onPress={memoizedOnPress} style={styles.container}>
-              <Card.Cover
-                  // @ts-ignore
-                  source={item.image}
-                  style={styles.image}
-              />
-              <Card.Content>
-                  <Text numberOfLines={1} variant="labelLarge" style={{fontFamily: 'Inter_600SemiBold'}}>
-                      {item.name}
-                  </Text>
-                  <Text variant="bodyMedium" style={{color: theme.colors.grayText, fontFamily: 'Inter_400Regular'}}>
-                      {item.field}
-                  </Text>
-              </Card.Content>
-          </Card>
-      );
+    return (
+      <Card onPress={memoizedOnPress} style={styles.container}>
+        <Card.Cover
+          // @ts-ignore
+          source={item.image}
+          style={styles.image}
+        />
+        <Card.Content>
+          <Text
+            numberOfLines={1}
+            variant="labelLarge"
+            style={{ fontFamily: "Inter_600SemiBold" }}
+          >
+            {item.name}
+          </Text>
+          <Text
+            variant="bodyMedium"
+            style={{
+              color: theme.colors.grayText,
+              fontFamily: "Inter_400Regular",
+            }}
+          >
+            {item.field}
+          </Text>
+        </Card.Content>
+      </Card>
+    );
   },
 );
 

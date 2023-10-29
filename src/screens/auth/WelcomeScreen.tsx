@@ -8,7 +8,6 @@ import WelcomeScreenBanner from "../../assets/welcomeScreenBanner.svg";
 import AuthButton from "../../components/AuthButton";
 import Footer from "../../components/Footer";
 import { screenStyles, useAppTheme } from "../../theme/globalStyles";
-import {Inter_400Regular} from "@expo-google-fonts/inter";
 
 export function WelcomeScreen() {
   const navigation = useNavigation<StackNavigationProp<any>>();
@@ -19,10 +18,19 @@ export function WelcomeScreen() {
       {/* Render a banner image on the WelcomeScreen */}
       <WelcomeScreenBanner />
 
-      <Text variant="headlineMedium" style={{fontFamily:'Inter_600SemiBold'}}>Let's find the "A" with us</Text>
+      <Text
+        variant="headlineMedium"
+        style={{ fontFamily: "Inter_600SemiBold" }}
+      >
+        Let's find the "A" with us
+      </Text>
 
       <Text
-        style={{ color: theme.colors.grayText, marginTop: 10, fontFamily:'Inter_400Regular' }}
+        style={{
+          color: theme.colors.grayText,
+          marginTop: 10,
+          fontFamily: "Inter_400Regular",
+        }}
         variant="titleMedium"
       >
         Please Sign in to view personalized recommendations

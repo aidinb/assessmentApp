@@ -4,6 +4,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
+
 import Arts from "../../assets/arts.svg"; // Import Arts SVG
 import CommerceIcon from "../../assets/commerceIcon.svg"; // Import CommerceIcon SVG
 import MathsIcon from "../../assets/mathsIcon.svg"; // Import MathsIcon SVG
@@ -55,30 +56,32 @@ export function GradeSelection() {
     { id: 12, name: "Commerce", icon: () => <CommerceIcon /> },
   ];
 
- const grades = [{
-   title:"Grade 1-5",
-   items:Grade1To5Items,
-   selectedGrade:selectedGrade1To5,
-   setSelectedGrade:setSelectedGrade1To5,
- },
-   {
-     title:"Grade 6-9",
-     items:Grade6To9Items,
-     selectedGrade:selectedGrade6To9,
-     setSelectedGrade:setSelectedGrade6To9,
-   },
-   {
-     title:"Grade 10-11",
-     items:Grade10To11Items,
-     selectedGrade:selectedGrade10To11,
-     setSelectedGrade:setSelectedGrade10To11,
-   },
-   {
-     title:"Grade 12-13",
-     items:Grade12To13Items,
-     selectedGrade:selectedGrade12To13,
-     setSelectedGrade:setSelectedGrade12To13,
-   }]
+  const grades = [
+    {
+      title: "Grade 1-5",
+      items: Grade1To5Items,
+      selectedGrade: selectedGrade1To5,
+      setSelectedGrade: setSelectedGrade1To5,
+    },
+    {
+      title: "Grade 6-9",
+      items: Grade6To9Items,
+      selectedGrade: selectedGrade6To9,
+      setSelectedGrade: setSelectedGrade6To9,
+    },
+    {
+      title: "Grade 10-11",
+      items: Grade10To11Items,
+      selectedGrade: selectedGrade10To11,
+      setSelectedGrade: setSelectedGrade10To11,
+    },
+    {
+      title: "Grade 12-13",
+      items: Grade12To13Items,
+      selectedGrade: selectedGrade12To13,
+      setSelectedGrade: setSelectedGrade12To13,
+    },
+  ];
 
   return (
     <View style={screenStyles.container}>
@@ -86,19 +89,19 @@ export function GradeSelection() {
         What's your grade?
       </Text>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-
-        {grades.length > 0 ?
-        grades.map((grade)=>{
-          return (
-              <Grade
+        {grades.length > 0
+          ? grades.map((grade) => {
+              return (
+                <Grade
                   key={grade.title}
                   title={grade.title}
                   items={grade.items}
                   selectedGrade={grade.selectedGrade}
                   setSelectedGrade={grade.setSelectedGrade}
-              />
-          )
-        }):null}
+                />
+              );
+            })
+          : null}
       </ScrollView>
 
       <Footer>
@@ -122,7 +125,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 15,
     marginBottom: 10,
-    fontFamily:'Inter_600SemiBold'
+    fontFamily: "Inter_600SemiBold",
   },
   scrollViewContent: {
     paddingBottom: 200,

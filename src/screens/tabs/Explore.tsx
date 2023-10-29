@@ -86,7 +86,12 @@ export function Explore() {
         ]}
       >
         <View style={styles.userInfoContainer}>
-          <Text variant="headlineMedium" style={{fontFamily:'Inter_600SemiBold'}}>Good evening!</Text>
+          <Text
+            variant="headlineMedium"
+            style={{ fontFamily: "Inter_600SemiBold" }}
+          >
+            Good evening!
+          </Text>
           <Text variant="titleLarge" style={styles.headerText}>
             Hardline Scott
           </Text>
@@ -123,7 +128,9 @@ export function Explore() {
       </View>
 
       <View style={[styles.rowContainer, { zIndex: 1001 }]}>
-        <Text variant="titleLarge" style={{fontFamily:'Inter_600SemiBold'}}>Popular Teachers</Text>
+        <Text variant="titleLarge" style={{ fontFamily: "Inter_600SemiBold" }}>
+          Popular Teachers
+        </Text>
         {/* @ts-ignore */}
         <Button
           onPress={() => {
@@ -193,7 +200,9 @@ export function Explore() {
       />
 
       <View style={[styles.rowContainer, { zIndex: 1001 }]}>
-        <Text variant="titleLarge" style={{fontFamily:'Inter_600SemiBold'}}>Popular Institutions</Text>
+        <Text variant="titleLarge" style={{ fontFamily: "Inter_600SemiBold" }}>
+          Popular Institutions
+        </Text>
         {/* @ts-ignore */}
         <Button
           onPress={() => {
@@ -311,7 +320,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    fontFamily:'Inter_600SemiBold'
+    fontFamily: "Inter_600SemiBold",
   },
   filterButton: { width: 44, height: 44, paddingLeft: 10 },
   teacherFilterContainer: {
