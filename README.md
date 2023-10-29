@@ -80,6 +80,13 @@ The project is structured as follows:
     - `screens/` - Individual screens of the application.
     - `theme/` - Theming and styling configurations for the app.
     - `utils/` - Utility functions and helper modules.
+## State Management
+
+The primary focus of this project was on design, and as a result, there is no complex backend or JavaScript logic. This is why we didn't employ any third-party state management technologies like React Query, Context, MobX, or Redux. Instead, we handle all states using React Native's built-in state management.
+
+## Authentication
+
+Since no backend authentication system was provided, all authentication logic in the app is simulated, which may result in the need to reload the app for authentication purposes.
 
 ## Testing
 
